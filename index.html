@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>purLEAD &mdash; AI-Powered Outbound That Books Calls While You Sleep</title>
+  <meta name="description" content="purLEAD deploys a fully done-for-you AI outbound system that fills your calendar with 10–20 qualified sales calls every month — without hiring a single SDR." />
+  <meta name="theme-color" content="#0B1F3A" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="purLEAD — AI-Powered Outbound That Books Calls While You Sleep" />
+  <meta property="og:description" content="purLEAD deploys a fully done-for-you AI outbound system that fills your calendar with 10–20 qualified sales calls every month." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230B1F3A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='15' fill='%2300D1FF'%3EpL%3C/text%3E%3C/svg%3E" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { display:['Syne','sans-serif'], body:['DM Sans','sans-serif'], mono:['JetBrains Mono','monospace'] }
+      }}
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg:     #0A1C35;
+      --surf:   #0D2444;
+      --elev:   #112B4E;
+      --border: rgba(255,255,255,0.09);
+      --bacc:   rgba(0,209,255,0.2);
+      --t1:     #FFFFFF;
+      --t2:     #94A3B8;
+      --t3:     rgba(148,163,184,0.5);
+      --acc:    #00D1FF;
+      --adim:   rgba(0,209,255,0.07);
+      --cta:    #22C55E;
+      --gold:   #E8B84B;
+      --gdim:   rgba(232,184,75,0.08);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t2);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    h1,h2,h3,h4,h5{font-family:'Syne',sans-serif;color:var(--t1)}
+
+    /* ── Grain ── */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.12}
+
+    /* ── Scroll progress bar ── */
+    #scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#E8B84B 0%,#22C55E 50%,#00D1FF 100%);z-index:9999;width:0%;transition:width 0.1s linear}
+
+    section,nav,footer,.z1{position:relative;z-index:1}
+
+    /* ── Section label ── */
+    .lbl{display:inline-flex;align-items:center;gap:.55rem;color:var(--acc);font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.1rem}
+    .lbl::before{content:'';display:block;width:2px;height:12px;background:var(--acc);border-radius:1px;flex-shrink:0}
+
+    /* ── Dividers ── */
+    .hdiv{height:1px;background:linear-gradient(to right,transparent,var(--border) 20%,var(--border) 80%,transparent);border:none;margin:0}
+    .adiv{height:1px;background:linear-gradient(to right,transparent,rgba(0,209,255,.35),transparent);border:none;margin:0}
+    .gdiv{height:1px;background:linear-gradient(to right,transparent,rgba(232,184,75,.4) 30%,rgba(232,184,75,.4) 70%,transparent);border:none;margin:0}
+
+    /* ── Cards ── */
+    .card{background:rgba(13,36,68,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,209,255,0.18);border-radius:14px;transition:all .3s cubic-bezier(.16,1,.3,1)}
+    .card:hover{border-color:rgba(0,209,255,0.55);transform:translateY(-7px);box-shadow:0 28px 56px rgba(0,0,0,.4)}
+    .tilt{transform-style:preserve-3d}
+
+    /* ── Icon box ── */
+    .ib{width:40px;height:40px;background:var(--adim);border:1px solid rgba(0,209,255,0.22);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--acc);flex-shrink:0;transition:all .3s ease}
+    .card:hover .ib{background:rgba(0,209,255,0.14);transform:scale(1.08)}
+
+    /* ── Buttons ── */
+    .btn-p{position:relative;overflow:hidden;background:linear-gradient(135deg,#27C962 0%,#16A34A 60%,#0D8A3C 100%);color:#fff;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
+    .btn-p:hover{background:linear-gradient(135deg,#2DD66A 0%,#16A34A 60%,#0F9842 100%);box-shadow:0 8px 24px rgba(0,0,0,.35);transform:scale(1.05) translateY(-3px)}
+    .btn-p::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:skewX(-20deg);animation:shimmer 3.5s infinite}
+    @keyframes shimmer{0%{left:-100%}55%{left:150%}100%{left:150%}}
+    .btn-g{background:transparent;color:var(--acc);border:1.5px solid var(--acc);border-radius:6px;font-family:'Syne',sans-serif;font-weight:600;transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
+    .btn-g:hover{background:var(--acc);color:var(--bg);box-shadow:0 6px 18px rgba(0,0,0,.3);transform:scale(1.05) translateY(-2px)}
+
+    /* Ripple */
+    .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.25);transform:scale(0);animation:rpl .5s linear;pointer-events:none}
+    @keyframes rpl{to{transform:scale(4);opacity:0}}
+
+    /* ── Hero canvas ── */
+    #hero-canvas{position:absolute;inset:0;z-index:0}
+    .hero-glow{display:none}
+
+    /* ── Word fade-in ── */
+    .word-in{opacity:0;transform:translateY(18px);display:inline-block;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+    .word-in.vis{opacity:1;transform:translateY(0)}
+
+    /* ── Ticker ── */
+    .ticker-track{display:flex;gap:3rem;animation:ticker 28s linear infinite;white-space:nowrap}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* ── Reveal ── */
+    .rev{opacity:0;transform:translateY(20px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .rev.vis{opacity:1;transform:translateY(0)}
+
+    /* ── Nav link ── */
+    .nl{position:relative;padding-bottom:2px;transition:color .2s}
+    .nl::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:var(--acc);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+    .nl:hover{color:var(--t1)}.nl:hover::after,.nl.active::after{transform:scaleX(1)}.nl.active{color:var(--acc)}
+
+    /* ── Step connector ── */
+    .sconn{position:absolute;top:19px;left:calc(50% + 28px);right:calc(-50% + 28px);height:1px;background:linear-gradient(to right,rgba(0,209,255,.25),rgba(0,209,255,.04))}
+
+    /* ── Featured pricing ── */
+    .pfwrap{position:relative;border-radius:10px;background:linear-gradient(135deg,rgba(232,184,75,.5) 0%,rgba(232,184,75,.18) 40%,rgba(0,209,255,.08) 100%);padding:1px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+    .pfwrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),rgba(232,184,75,.5));border-radius:10px 0 0 10px}
+    .pfinner{background:linear-gradient(160deg,#071829 0%,#0D2444 100%);border-radius:9px;height:100%}
+    @keyframes borderAnim{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+    /* ── Quote mark ── */
+    .qmark{font-family:'Syne',sans-serif;font-size:2rem;line-height:1;color:var(--acc);opacity:.5;font-weight:800;display:block}
+
+    /* ── FAQ ── */
+    .fa{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1),padding .3s}
+    .fa.open{max-height:400px}
+
+    /* ── Price item list separator ── */
+    .pi+.pi{border-top:1px solid rgba(255,255,255,.06);padding-top:.65rem;margin-top:.65rem}
+
+    /* ── Stat number ── */
+    .snum{font-family:'Syne',sans-serif;font-weight:800;color:var(--t1);line-height:1;font-size:1.75rem}
+    .sbar{width:24px;height:2px;background:var(--acc);border-radius:1px;margin:.5rem 0 .4rem}
+
+    /* ── Floating badge ── */
+    .fbadge{animation:fbob 3s ease-in-out infinite}
+    @keyframes fbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+    /* ── Dashboard live pulse ── */
+    .live-dot{animation:ldot 2s ease-in-out infinite}
+    @keyframes ldot{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* ── Glow ring on active dashboard item ── */
+    .ring-anim{}
+
+    /* ── Pricing toggle ── */
+    .tog-wrap{display:inline-flex;align-items:center;background:var(--surf);border:1px solid var(--border);border-radius:100px;padding:3px;gap:3px}
+    .tog-btn{padding:.35rem 1rem;border-radius:100px;font-size:.8rem;font-weight:600;font-family:'Syne',sans-serif;cursor:pointer;transition:background .25s,color .25s;border:none;color:var(--t3);background:transparent}
+    .tog-btn.active{background:var(--cta);color:#fff}
+    .save-badge{display:inline-block;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:var(--cta);font-size:.65rem;font-weight:700;letter-spacing:.08em;border-radius:100px;padding:.15rem .55rem;vertical-align:middle;margin-left:.4rem}
+
+    /* ── Integrations logos animation ── */
+    .int-row{display:flex;gap:1.5rem;animation:ticker 20s linear infinite;white-space:nowrap}
+
+    /* ── Modal ── */
+    .modal-overlay{position:fixed;inset:0;background:rgba(11,31,58,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+    .modal-overlay.open{opacity:1;pointer-events:all}
+    .modal-box{background:var(--surf);border:1px solid var(--border);border-radius:8px;padding:2rem;max-width:620px;width:100%;max-height:82vh;overflow-y:auto;transform:translateY(18px) scale(.98);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+    .modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+    .modal-box::-webkit-scrollbar{width:3px}.modal-box::-webkit-scrollbar-thumb{background:#132F52;border-radius:2px}
+
+    /* ── Back to top ── */
+    #btt{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;background:var(--surf);border:1px solid var(--border);color:var(--t3);border-radius:6px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .3s,transform .3s,color .2s,border-color .2s}
+    #btt:hover{color:var(--acc);border-color:var(--bacc)}#btt.show{opacity:1;pointer-events:all;transform:translateY(0)}
+
+    /* ── Scroll offset for fixed nav ── */
+    section[id]{scroll-margin-top:72px}
+
+    /* ── Skip link ── */
+    .skip-link{position:absolute;top:-100%;left:1rem;z-index:999;background:var(--cta);color:#fff;padding:.4rem .9rem;border-radius:0 0 6px 6px;font-weight:700;font-size:.8rem;text-decoration:none;transition:top .2s}
+    .skip-link:focus{top:0}
+
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#132F52;border-radius:2px}
+
+    /* ── Image cards ── */
+    .img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,31,58,.95) 0%,rgba(11,31,58,.4) 60%,transparent 100%);border-radius:7px}
+
+    /* ── Magnetic button ── */
+    .mag{display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+
+    /* ── Announcement bar ── */
+    #ann-bar{position:fixed;top:0;left:0;right:0;height:40px;z-index:201;display:flex;align-items:center;background:linear-gradient(90deg,#B8871E 0%,#E8B84B 35%,#F2C96A 65%,#D4A230 100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+    /* ── Gold label variant ── */
+    .lbl-gold{color:var(--gold)}
+    .lbl-gold::before{background:var(--gold)}
+    #ann-bar.gone{transform:translateY(-100%)}
+    body.has-ann nav{top:40px!important}
+    body.has-ann #main-content>section:first-child{padding-top:100px}
+
+    /* ── Toast notifications ── */
+    #toast-wrap{position:fixed;bottom:1.75rem;left:1.75rem;z-index:150;display:flex;flex-direction:column;gap:.6rem;pointer-events:none;width:300px}
+    .toast{background:var(--surf);border:1px solid var(--border);border-radius:8px;padding:.875rem 1rem .75rem;display:flex;gap:.75rem;align-items:flex-start;pointer-events:all;transform:translateX(calc(-100% - 2.5rem));opacity:0;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .35s;position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+    .toast.show{transform:translateX(0);opacity:1}
+    .toast-prog{position:absolute;bottom:0;left:0;height:2px;background:var(--acc);width:100%;transform-origin:left;border-radius:0 2px 2px 0}
+    .toast-prog.run{animation:tprog 5.5s linear forwards}
+    @keyframes tprog{to{transform:scaleX(0)}}
+
+    /* ── Custom cursor (desktop only) ── */
+    @media(pointer:fine){
+      body,a,button,[onclick],label,input,select,textarea{cursor:none!important}
+      #cur-ring{position:fixed;top:0;left:0;width:28px;height:28px;border:2px solid #00D1FF;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);background:rgba(0,209,255,.08);transition:width .22s cubic-bezier(.16,1,.3,1),height .22s cubic-bezier(.16,1,.3,1),background .2s,opacity .3s;will-change:transform}
+      #cur-ring.hov{width:44px;height:44px;background:rgba(0,209,255,.12)}
+      #cur-ring.click{width:18px;height:18px;background:rgba(0,209,255,.25)}
+      #cur-ring.hidden{opacity:0}
+    }
+
+    /* ── ROI slider ── */
+    .roi-range{-webkit-appearance:none;appearance:none;width:100%;height:3px;background:var(--border);border-radius:2px;outline:none;cursor:pointer;margin:.75rem 0 .25rem}
+    .roi-range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cta);border:2px solid var(--bg);cursor:pointer}
+    .roi-range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--cta);border:2px solid var(--bg);cursor:pointer;border:none}
+
+    /* ── Comparison table ── */
+    .cmp-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.8375rem}
+    .cmp-table th,.cmp-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle}
+    .cmp-table th:first-child,.cmp-table td:first-child{text-align:left;color:var(--t2)}
+    .cmp-table thead th{background:var(--elev);font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3)}
+    .cmp-table thead th.cmp-hl{background:rgba(0,209,255,.08);color:var(--acc);border-left:1px solid rgba(0,209,255,.2);border-right:1px solid rgba(0,209,255,.2)}
+    .cmp-table td.cmp-hl{background:rgba(0,209,255,.04);border-left:1px solid rgba(0,209,255,.1);border-right:1px solid rgba(0,209,255,.1)}
+    .cmp-table tr:last-child td{border-bottom:none}
+    .cmp-table tbody tr{transition:background .2s ease}
+    .cmp-table tbody tr:hover{background:rgba(0,209,255,.04)}
+    .cmp-yes{color:var(--cta);font-weight:600}
+    .cmp-no{color:var(--t3)}
+    .cmp-mid{color:var(--t2)}
+
+    /* ── Guarantee card (base — overridden below) ── */
+
+    /* ── ROI output ── */
+    .roi-out{background:var(--elev);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:center}
+    .roi-big{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--acc);line-height:1;margin-bottom:.25rem}
+    .roi-big.roi-green{color:var(--cta)}
+    .roi-big.roi-white{color:var(--t1)}
+
+    /* ── Email preview ── */
+    .email-tag{background:var(--adim);border-top:1px solid rgba(0,209,255,.12);padding:.625rem 1.25rem;display:flex;align-items:center;gap:.5rem}
+
+    /* ── Integration pill ── */
+    .int-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.375rem .875rem;background:var(--surf);border:1px solid var(--border);border-radius:100px;transition:border-color .2s,box-shadow .2s}
+    .int-pill:hover{border-color:rgba(0,209,255,.4)}
+
+    /* ── Light sections ── */
+    .light-section{
+      --bg:     #F8F7F5;
+      --surf:   #FFFFFF;
+      --elev:   #F0EEE9;
+      --border: rgba(0,0,0,0.08);
+      --t1:     #0F1E30;
+      --t2:     #44546A;
+      --t3:     #8A97A8;
+      --bacc:   rgba(0,209,255,0.14);
+      --adim:   rgba(0,209,255,0.06);
+      background: #F8F7F5;
+    }
+    .light-section .card{box-shadow:0 2px 16px rgba(0,0,0,.05)}
+    .light-section .card:hover{box-shadow:0 8px 36px rgba(0,0,0,.1),0 0 0 1px rgba(0,209,255,.12)}
+    .light-section .pi+.pi{border-top-color:rgba(0,0,0,.06)}
+    .light-section .int-pill{background:#FFFFFF}
+    .light-section .tog-wrap{background:#FFFFFF;border-color:rgba(0,0,0,.1)}
+    .light-section .roi-out{background:#FFFFFF;border-color:rgba(0,0,0,.08)}
+    .light-section .roi-range{background:rgba(0,0,0,.1)}
+    .light-section .roi-range::-webkit-slider-thumb{border-color:#F5F7FA}
+    .light-section .roi-range::-moz-range-thumb{border-color:#F5F7FA}
+    .light-section .fa{color:#4B5563}
+    .light-section .qmark{color:var(--acc)}
+    /* Light section card — disable glass, restore white */
+    .light-section .card{background:#FFFFFF;backdrop-filter:none;-webkit-backdrop-filter:none;border-color:rgba(0,0,0,0.07);box-shadow:0 2px 16px rgba(0,0,0,.06)}
+    .light-section .card:hover{box-shadow:0 16px 48px rgba(0,0,0,.12);border-color:rgba(0,209,255,.35)}
+
+    /* ── Depth radial overlays for dark sections ── */
+    .depth-dark{overflow:hidden}
+    .depth-dark::before{content:none}
+    .depth-gold::after{content:none}
+
+    /* ── Nav transparent → scrolled ── */
+    nav{transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+    nav.scrolled{background:rgba(11,31,58,.97)!important;border-color:rgba(0,209,255,.1)!important;backdrop-filter:saturate(1.4) blur(18px)!important;-webkit-backdrop-filter:saturate(1.4) blur(18px)!important;box-shadow:0 4px 32px rgba(0,0,0,.5)!important}
+
+    /* ── Stat number ── */
+    .snum{font-family:'Syne',sans-serif;font-weight:800;color:var(--t1);line-height:1;font-size:1.75rem}
+    /* ── Gold stat number ── */
+    .snum-gold{font-family:'Syne',sans-serif;font-weight:800;color:var(--gold);line-height:1;font-size:1.75rem}
+
+    /* ── Guarantee card ── */
+    .gtee{background:linear-gradient(160deg,rgba(232,184,75,.06) 0%,rgba(13,36,68,.6) 100%);border:1px solid rgba(232,184,75,.22);border-radius:14px;padding:1.5rem 1.75rem;transition:all .3s ease}
+    .gtee:hover{background:linear-gradient(160deg,rgba(232,184,75,.1) 0%,rgba(13,36,68,.7) 100%);border-color:rgba(232,184,75,.42);box-shadow:0 12px 40px rgba(0,0,0,.25);transform:translateY(-4px)}
+    .gtee-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.875rem;color:var(--gold);line-height:1}
+
+    /* ── Lbl pulse line ── */
+    .lbl::before{content:'';display:block;width:2px;height:12px;background:var(--acc);border-radius:1px;flex-shrink:0}
+
+    /* ── Int pill hover glow ── */
+    .int-pill:hover{border-color:rgba(0,209,255,.5);background:rgba(0,209,255,.04)}
+
+    /* ── Gold divider accent ── */
+    .gdiv{height:1px;background:linear-gradient(to right,transparent,rgba(232,184,75,.35),transparent);border:none;margin:0}
+
+    /* ── Hero badge gold ── */
+    .badge-gold{background:linear-gradient(135deg,rgba(232,184,75,.12),rgba(232,184,75,.06));border:1px solid rgba(232,184,75,.3);color:var(--gold)}
+
+    /* ── Pricing toggle active — gold tinted ── */
+    .tog-btn.active{background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff}
+
+    /* ── Save badge richer ── */
+    .save-badge{background:linear-gradient(135deg,rgba(232,184,75,.18),rgba(232,184,75,.08));border:1px solid rgba(232,184,75,.35);color:var(--gold)}
+
+    /* ── Qmark gold glow ── */
+    .qmark{font-family:'Syne',sans-serif;font-size:2rem;line-height:1;color:var(--gold);opacity:.7;font-weight:800;display:block}
+
+    /* ── Section subheading max-width ── */
+    .sec-sub{max-width:52ch;font-size:.9375rem;line-height:1.7;color:var(--t2);margin-top:.75rem}
+
+    /* ── Nav CTA gold shimmer on hover ── */
+    nav .btn-p:hover{box-shadow:0 8px 24px rgba(0,0,0,.3)}
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cur-ring"></div>
+
+<!-- Announcement bar -->
+<div id="ann-bar">
+  <div class="max-w-6xl mx-auto px-4 w-full flex items-center justify-between gap-3">
+    <div style="flex:1"></div>
+    <div class="flex items-center gap-3 text-center" style="color:#0B1F3A">
+      <span style="width:7px;height:7px;border-radius:50%;background:#0B1F3A;opacity:.6;animation:ldot 1.5s infinite;flex-shrink:0;display:inline-block"></span>
+      <span style="font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.01em">
+        Only <strong>3 client spots</strong> left this month &mdash;
+        <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
+           style="color:#0B1F3A;text-decoration:underline;text-underline-offset:2px;font-weight:800">Book your call now &rarr;</a>
+      </span>
+    </div>
+    <div style="flex:1;display:flex;justify-content:flex-end">
+      <button onclick="dismissAnn()" aria-label="Dismiss" style="background:rgba(11,31,58,.15);border:none;color:#0B1F3A;width:22px;height:22px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:none;flex-shrink:0;line-height:1">&#10005;</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-wrap"></div>
+
+<!-- Scroll progress -->
+<div id="scroll-progress"></div>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 border-b" style="background:transparent;border-color:transparent;backdrop-filter:none">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between" style="height:60px">
+    <a href="#" class="font-display font-extrabold tracking-tight" style="color:var(--t1);font-size:1.1rem">
+      pur<span style="color:var(--gold)">LEAD</span>
+    </a>
+    <div class="hidden md:flex items-center gap-7 text-sm font-medium" style="color:var(--t2)">
+      <a href="#how"     class="nl">How It Works</a>
+      <a href="#pricing" class="nl">Pricing</a>
+      <a href="#faq"     class="nl">FAQ</a>
+      <a href="#contact" class="nl">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
+         class="btn-p hidden md:inline-flex items-center gap-1.5 text-sm px-4 py-2.5">
+        Book a Call
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button id="nav-toggle" aria-label="Open menu" aria-expanded="false"
+              class="md:hidden flex flex-col justify-center gap-[5px] w-9 h-9 px-1.5 rounded"
+              style="border:1px solid var(--border)">
+        <span class="hb block w-full rounded" style="height:1.5px;background:var(--t2);transition:all .3s"></span>
+        <span class="hb block w-full rounded" style="height:1.5px;background:var(--t2);transition:all .3s"></span>
+        <span class="hb block w-full rounded" style="height:1.5px;background:var(--t2);transition:all .3s"></span>
+      </button>
+    </div>
+  </div>
+  <div id="mmenu" class="hidden border-t px-6 py-4 space-y-0.5" style="background:var(--bg);border-color:var(--border)">
+    <a href="#how"     class="block py-2.5 text-sm font-medium" style="color:var(--t2)" onclick="closeMob()">How It Works</a>
+    <a href="#pricing" class="block py-2.5 text-sm font-medium" style="color:var(--t2)" onclick="closeMob()">Pricing</a>
+    <a href="#faq"     class="block py-2.5 text-sm font-medium" style="color:var(--t2)" onclick="closeMob()">FAQ</a>
+    <a href="#contact" class="block py-2.5 text-sm font-medium" style="color:var(--t2)" onclick="closeMob()">Contact</a>
+    <div class="pt-2">
+      <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
+         class="btn-p block text-center text-sm px-5 py-3">Book a Free Call &rarr;</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="relative flex items-center overflow-hidden" style="min-height:100svh;padding-top:60px;background:linear-gradient(145deg,#060F1C 0%,#0A1C35 30%,#0D2448 60%,#0A1C35 85%,#060F1C 100%)">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow"></div>
+
+  <div class="relative z-1 max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+    <!-- Copy -->
+    <div>
+      <div class="lbl lbl-gold" style="margin-bottom:1.25rem">
+        AI-Powered Outbound System
+      </div>
+
+      <h1 id="hero-h1" class="font-display font-extrabold" style="font-size:clamp(1.75rem,3.6vw,2.75rem);line-height:1.08;letter-spacing:-.025em;color:var(--t1);margin-bottom:1.25rem">
+        Stop Waiting<br />for Referrals.<br />
+        <span style="color:var(--acc)" class="word-in">Start Booking</span><br />
+        <span class="word-in" style="transition-delay:.1s;color:var(--gold)">Calls on Demand.</span>
+      </h1>
+
+      <p class="rev" style="font-size:1rem;line-height:1.7;max-width:42ch;margin-bottom:2rem;color:var(--t2)">
+        purLEAD deploys a fully done-for-you AI outbound system that fills your calendar with
+        10&ndash;20 qualified sales calls every month &mdash; without hiring a single SDR.
+      </p>
+
+      <div class="rev flex flex-wrap gap-3" style="transition-delay:.1s">
+        <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
+           class="btn-p mag inline-flex items-center gap-2 text-sm px-7 py-3.5">
+          Book a Free Strategy Call
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#how" class="btn-g inline-flex items-center text-sm px-7 py-3.5">See How It Works</a>
+      </div>
+
+      <div class="rev flex items-center gap-4 flex-wrap" style="margin-top:1.75rem;transition-delay:.2s">
+        <div class="flex -space-x-2">
+          <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Client" width="32" height="32" class="rounded-full" style="border:2px solid var(--bg);object-fit:cover">
+          <img src="https://randomuser.me/api/portraits/women/60.jpg" alt="Client" width="32" height="32" class="rounded-full" style="border:2px solid var(--bg);object-fit:cover">
+          <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Client" width="32" height="32" class="rounded-full" style="border:2px solid var(--bg);object-fit:cover">
+          <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Client" width="32" height="32" class="rounded-full" style="border:2px solid var(--bg);object-fit:cover">
+        </div>
+        <p style="font-size:.85rem;color:var(--t2)">
+          <span style="color:var(--gold);font-weight:700">47 businesses</span> already booking calls
+        </p>
+        <!-- Live badge -->
+        <div class="fbadge flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full badge-gold">
+          <span class="live-dot" style="width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block"></span>
+          3 calls booked today
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="rev hidden md:block" style="transition-delay:.25s">
+      <div class="card ring-anim p-4" style="background:var(--surf)">
+        <!-- Chrome bar -->
+        <div class="flex items-center gap-1.5 mb-3 pb-3" style="border-bottom:1px solid var(--border)">
+          <div class="w-1.5 h-1.5 rounded-full" style="background:rgba(255,59,48,.5)"></div>
+          <div class="w-1.5 h-1.5 rounded-full" style="background:rgba(255,196,0,.5)"></div>
+          <div class="w-1.5 h-1.5 rounded-full" style="background:rgba(0,209,255,.5)"></div>
+          <span class="ml-2 font-mono" style="font-size:.62rem;color:var(--t3)">purLEAD &middot; Live Dashboard</span>
+          <span id="dash-clock" class="ml-auto font-mono" style="font-size:.62rem;color:var(--t3)"></span>
+        </div>
+        <!-- Stats row -->
+        <div class="grid grid-cols-3 gap-1.5 mb-3">
+          <div class="p-2" style="background:var(--elev);border:1px solid var(--border);border-radius:3px;text-align:center">
+            <div id="d-calls" class="font-display font-extrabold" style="font-size:1.1rem;color:var(--acc);line-height:1.2">18</div>
+            <div class="font-mono" style="font-size:.55rem;color:var(--t3);margin-top:.1rem">Calls</div>
+          </div>
+          <div class="p-2" style="background:var(--elev);border:1px solid var(--border);border-radius:3px;text-align:center">
+            <div class="font-display font-extrabold" style="font-size:1.1rem;color:var(--t1);line-height:1.2">4.2k</div>
+            <div class="font-mono" style="font-size:.55rem;color:var(--t3);margin-top:.1rem">Emails</div>
+          </div>
+          <div class="p-2" style="background:var(--elev);border:1px solid var(--border);border-radius:3px;text-align:center">
+            <div class="font-display font-extrabold" style="font-size:1.1rem;color:var(--acc);line-height:1.2">6.1%</div>
+            <div class="font-mono" style="font-size:.55rem;color:var(--t3);margin-top:.1rem">Reply</div>
+          </div>
+        </div>
+        <!-- Activity feed (10 fixed rows, updated in-place) -->
+        <div class="space-y-1" id="feed">
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:rgba(0,209,255,.06);border:1px solid rgba(0,209,255,.15)"><div class="live-dot w-1.5 h-1.5 rounded-full shrink-0" style="background:var(--acc);border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">Marcus T. booked &mdash; <span style="color:#00D1FF">30 min</span></span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">now</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:var(--elev);border:1px solid var(--border)"><div class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#818cf8;border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">Sequence launched &mdash; FinTech</span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">1m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:rgba(0,209,255,.06);border:1px solid rgba(0,209,255,.15)"><div class="live-dot w-1.5 h-1.5 rounded-full shrink-0" style="background:var(--acc);border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">Sofia M. booked &mdash; <span style="color:#00D1FF">45 min</span></span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">3m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:var(--elev);border:1px solid var(--border)"><div class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#fbbf24;border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">820 leads verified &amp; enriched</span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">5m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:var(--elev);border:1px solid var(--border)"><div class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#34d399;border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">A/B test winner identified</span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">8m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:rgba(0,209,255,.06);border:1px solid rgba(0,209,255,.15)"><div class="live-dot w-1.5 h-1.5 rounded-full shrink-0" style="background:var(--acc);border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">Priya S. booked &mdash; <span style="color:#00D1FF">30 min</span></span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">11m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:var(--elev);border:1px solid var(--border)"><div class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#818cf8;border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">Sequence launched &mdash; Legal vertical</span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">14m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:var(--elev);border:1px solid var(--border)"><div class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#fbbf24;border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">1,200 new prospects enriched</span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">18m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:rgba(0,209,255,.06);border:1px solid rgba(0,209,255,.15)"><div class="live-dot w-1.5 h-1.5 rounded-full shrink-0" style="background:var(--acc);border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">Daniel K. booked &mdash; <span style="color:#00D1FF">30 min</span></span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">22m</span></div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5 rounded" style="background:var(--elev);border:1px solid var(--border)"><div class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#34d399;border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">Reply rate up 12% this week</span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">30m</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gdiv" />
+
+<!-- TICKER -->
+<div class="z1 overflow-hidden py-3" style="background:linear-gradient(90deg,#071626,#0D2444,#071626);border-top:1px solid rgba(232,184,75,.12);border-bottom:1px solid rgba(0,209,255,.1)">
+  <div class="flex overflow-hidden select-none">
+    <div class="ticker-track text-xs font-medium" style="color:rgba(148,163,184,0.55);letter-spacing:.04em">
+      <span>&bull;&ensp;SaaS Companies</span><span>&bull;&ensp;Consulting Firms</span><span>&bull;&ensp;FinTech Startups</span><span>&bull;&ensp;Professional Services</span><span>&bull;&ensp;Media Agencies</span><span>&bull;&ensp;Solo Operators</span><span>&bull;&ensp;B2B Service Businesses</span><span style="color:rgba(232,184,75,.75);font-weight:700">&bull;&ensp;47 Clients Served</span><span style="color:rgba(34,197,94,.7);font-weight:600">&bull;&ensp;$1.8M+ Pipeline Generated</span>
+      <span>&bull;&ensp;SaaS Companies</span><span>&bull;&ensp;Consulting Firms</span><span>&bull;&ensp;FinTech Startups</span><span>&bull;&ensp;Professional Services</span><span>&bull;&ensp;Media Agencies</span><span>&bull;&ensp;Solo Operators</span><span>&bull;&ensp;B2B Service Businesses</span><span style="color:rgba(232,184,75,.75);font-weight:700">&bull;&ensp;47 Clients Served</span><span style="color:rgba(34,197,94,.7);font-weight:600">&bull;&ensp;$1.8M+ Pipeline Generated</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PROBLEM ═══════════ -->
+<section class="z1 py-24 light-section">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rev mb-12">
+      <div class="lbl">The Problem</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em">
+        Your pipeline isn&rsquo;t broken.<br /><span style="color:var(--t3)">Your strategy is.</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="rev tilt card p-6">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3 class="font-display font-bold mb-1.5" style="font-size:1rem">Feast or famine pipeline</h3>
+        <p style="font-size:.875rem;line-height:1.65;color:var(--t2)">One month you&rsquo;re slammed, the next scrambling. Inconsistent revenue is a symptom of broken outbound — not bad luck.</p>
+      </div>
+      <div class="rev tilt card p-6" style="transition-delay:.06s">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3 class="font-display font-bold mb-1.5" style="font-size:1rem">Trapped by referrals</h3>
+        <p style="font-size:.875rem;line-height:1.65;color:var(--t2)">Referrals are great &mdash; until they stop. You can&rsquo;t scale on hope. You need a predictable system you own.</p>
+      </div>
+      <div class="rev tilt card p-6" style="transition-delay:.12s">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <h3 class="font-display font-bold mb-1.5" style="font-size:1rem">Cold outreach that flops</h3>
+        <p style="font-size:.875rem;line-height:1.65;color:var(--t2)">Generic templates sent to unverified lists kill deliverability before your prospect reads a word.</p>
+      </div>
+      <div class="rev tilt card p-6" style="transition-delay:.18s">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3 class="font-display font-bold mb-1.5" style="font-size:1rem">SDRs cost a fortune</h3>
+        <p style="font-size:.875rem;line-height:1.65;color:var(--t2)">Hiring and managing a sales rep eats $80&ndash;120K/year before benefits — and still needs 90 days to ramp.</p>
+      </div>
+      <div class="rev tilt card p-6" style="transition-delay:.24s">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <h3 class="font-display font-bold mb-1.5" style="font-size:1rem">Ad spend with no ROI</h3>
+        <p style="font-size:.875rem;line-height:1.65;color:var(--t2)">Paid ads demand big budgets, long learning curves, and constant optimization. A money pit for most B2B businesses.</p>
+      </div>
+      <div class="rev tilt card p-6" style="transition-delay:.3s">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3 class="font-display font-bold mb-1.5" style="font-size:1rem">No time to prospect</h3>
+        <p style="font-size:.875rem;line-height:1.65;color:var(--t2)">You&rsquo;re running the business. You can&rsquo;t also be your own BDR. Every hour chasing leads is stolen from delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ SOLUTION ═══════════ -->
+<section class="z1 py-24 depth-dark" style="background:linear-gradient(160deg,var(--surf) 0%,#0B1F3A 100%)">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+      <div class="rev">
+        <div class="lbl lbl-gold">The Solution</div>
+        <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.25rem">
+          Meet purLEAD &mdash;<br />your AI outbound<br /><span style="color:var(--gold)">engine.</span>
+        </h2>
+        <p style="font-size:.9375rem;line-height:1.7;max-width:44ch;margin-bottom:1rem;color:var(--t2)">
+          purLEAD builds and operates a fully AI-personalized outbound system. We identify ideal clients, craft hyper-personalized sequences, warm your sending infrastructure, and book qualified calls directly into your calendar.
+        </p>
+        <p style="font-size:.9375rem;line-height:1.7;max-width:44ch;margin-bottom:1.75rem;color:var(--t2)">
+          No templates. No spray-and-pray. Every message is crafted with AI precision around each prospect&rsquo;s specific context &mdash; so it reads like your best sales rep wrote it, at scale.
+        </p>
+        <ul class="space-y-2.5">
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)">
+            <span style="width:16px;height:16px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cta);font-size:8px;flex-shrink:0">&#10003;</span>
+            Done-for-you. Zero lift on your end.
+          </li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)">
+            <span style="width:16px;height:16px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cta);font-size:8px;flex-shrink:0">&#10003;</span>
+            AI-personalized at every touchpoint
+          </li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)">
+            <span style="width:16px;height:16px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cta);font-size:8px;flex-shrink:0">&#10003;</span>
+            Results in 30&ndash;45 days, not 6 months
+          </li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)">
+            <span style="width:16px;height:16px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cta);font-size:8px;flex-shrink:0">&#10003;</span>
+            Full transparency &mdash; you own all data
+          </li>
+        </ul>
+      </div>
+
+      <!-- Animated stats grid -->
+      <div class="rev grid grid-cols-2 gap-3" style="transition-delay:.1s">
+        <div class="p-7 card" style="border-color:rgba(0,209,255,.2)">
+          <div class="snum" data-count="12" data-suffix="+">0+</div>
+          <div class="sbar"></div>
+          <div class="font-mono text-xs" style="color:var(--t3);letter-spacing:.07em;text-transform:uppercase">Meetings/month avg.</div>
+        </div>
+        <div class="p-7 card" style="border-color:rgba(0,209,255,.2)">
+          <div class="snum" data-count="41" data-suffix="%">0%</div>
+          <div class="sbar"></div>
+          <div class="font-mono text-xs" style="color:var(--t3);letter-spacing:.07em;text-transform:uppercase">Open rate (2× industry)</div>
+        </div>
+        <div class="p-7 card" style="border-color:rgba(0,209,255,.2)">
+          <div class="snum" data-count="6" data-suffix="%+ reply">0%</div>
+          <div class="sbar"></div>
+          <div class="font-mono text-xs" style="color:var(--t3);letter-spacing:.07em;text-transform:uppercase">Positive reply rate</div>
+        </div>
+        <div class="p-7 card" style="border-color:rgba(34,197,94,.25)">
+          <div class="snum" data-count="3" data-suffix=" weeks" style="color:var(--cta)">0 weeks</div>
+          <div class="sbar" style="background:var(--cta)"></div>
+          <div class="font-mono text-xs" style="color:var(--t3);letter-spacing:.07em;text-transform:uppercase">Time to first booked call</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ INTEGRATIONS ═══════════ -->
+<section class="z1 py-12 light-section">
+  <div class="max-w-5xl mx-auto px-6">
+    <p class="rev font-mono text-xs text-center mb-7" style="color:var(--t3);letter-spacing:.14em;text-transform:uppercase">Connects with your existing stack — no rip-and-replace</p>
+    <div class="rev flex flex-wrap items-center justify-center gap-3">
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A59;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">HubSpot</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#00A1E0;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Salesforce</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#7C3AED;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Apollo.io</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#A855F7;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Clay</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Instantly</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#E01E5A;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Slack</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#0A66C2;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">LinkedIn</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#EA4335;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Gmail</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#22C55E;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Zapier</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#0052CC;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Pipedrive</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#34d399;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Smartlead</span></div>
+      <div class="int-pill"><span style="width:7px;height:7px;border-radius:50%;background:#818cf8;display:inline-block;flex-shrink:0"></span><span class="font-mono text-xs" style="color:var(--t2)">Notion</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section id="how" class="z1 py-24 depth-dark" style="background:linear-gradient(135deg,#0B1F3A 0%,#0F2847 100%)">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rev mb-12">
+      <div class="lbl">The Process</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em">
+        Up and running in <span style="color:var(--cta)">30 days.</span>
+      </h2>
+      <p style="color:var(--t2);margin-top:.5rem;font-size:.9375rem">Four steps. Full execution. Zero headaches.</p>
+    </div>
+    <div class="grid md:grid-cols-4 gap-5">
+      <div class="rev relative" style="transition-delay:0s">
+        <div class="hidden md:block sconn"></div>
+        <div class="font-mono text-xs mb-3" style="color:var(--acc);letter-spacing:.12em">01</div>
+        <div style="width:1px;height:28px;background:var(--acc);margin-bottom:1rem;opacity:.35"></div>
+        <h3 class="font-display font-bold mb-2" style="color:var(--t1);font-size:.9375rem">Strategy &amp; ICP</h3>
+        <p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">We deep-dive your offer, define your Ideal Client Profile, and map your go-to-market targeting strategy.</p>
+      </div>
+      <div class="rev relative" style="transition-delay:.1s">
+        <div class="hidden md:block sconn"></div>
+        <div class="font-mono text-xs mb-3" style="color:var(--acc);letter-spacing:.12em">02</div>
+        <div style="width:1px;height:28px;background:var(--acc);margin-bottom:1rem;opacity:.35"></div>
+        <h3 class="font-display font-bold mb-2" style="color:var(--t1);font-size:.9375rem">System Build</h3>
+        <p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">We configure sending infrastructure, warm domains, enrich prospect lists, and build AI-personalized sequences.</p>
+      </div>
+      <div class="rev relative" style="transition-delay:.2s">
+        <div class="hidden md:block sconn"></div>
+        <div class="font-mono text-xs mb-3" style="color:var(--acc);letter-spacing:.12em">03</div>
+        <div style="width:1px;height:28px;background:var(--acc);margin-bottom:1rem;opacity:.35"></div>
+        <h3 class="font-display font-bold mb-2" style="color:var(--t1);font-size:.9375rem">Launch &amp; Test</h3>
+        <p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">Campaigns go live. We A/B test subject lines, copy angles, and CTAs. AI optimizes on reply signals continuously.</p>
+      </div>
+      <div class="rev relative" style="transition-delay:.3s">
+        <div class="font-mono text-xs mb-3" style="color:var(--acc);letter-spacing:.12em">04</div>
+        <div style="width:1px;height:28px;background:var(--acc);margin-bottom:1rem;opacity:.35"></div>
+        <h3 class="font-display font-bold mb-2" style="color:var(--t1);font-size:.9375rem">Calls on Calendar</h3>
+        <p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">Qualified prospects book directly into your calendar. We handle reply management so you can focus on closing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ EMAIL PREVIEW ═══════════ -->
+<section class="z1 py-24 light-section">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-14 items-center">
+      <div class="rev">
+        <div class="lbl">What It Looks Like</div>
+        <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.25rem">
+          This lands in your<br />prospect&rsquo;s inbox —<br /><span style="color:var(--acc)">and gets replies.</span>
+        </h2>
+        <p style="font-size:.9375rem;line-height:1.7;max-width:44ch;color:var(--t2);margin-bottom:1.5rem">
+          Every message references something real about the prospect — their company news, funding, LinkedIn activity, or specific pain. It doesn&rsquo;t read like a template because it isn&rsquo;t one.
+        </p>
+        <ul class="space-y-2.5">
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)"><span style="color:var(--acc);font-size:10px">&#9679;</span> AI-researched per prospect before sending</li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)"><span style="color:var(--acc);font-size:10px">&#9679;</span> Reads like you wrote it personally</li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)"><span style="color:var(--acc);font-size:10px">&#9679;</span> Deliverability-optimized domain &amp; inbox</li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:var(--t2)"><span style="color:var(--acc);font-size:10px">&#9679;</span> 3-touch sequence fully managed for you</li>
+        </ul>
+      </div>
+      <div class="rev" style="transition-delay:.1s">
+        <div class="card overflow-hidden p-0">
+          <!-- Browser chrome -->
+          <div class="px-4 py-3" style="background:#EEF2F7;border-bottom:1px solid rgba(0,0,0,0.08)">
+            <div class="flex items-center gap-1.5 mb-3">
+              <div class="w-2 h-2 rounded-full" style="background:rgba(255,59,48,.5)"></div>
+              <div class="w-2 h-2 rounded-full" style="background:rgba(255,196,0,.5)"></div>
+              <div class="w-2 h-2 rounded-full" style="background:rgba(0,209,255,.5)"></div>
+              <span class="ml-2 font-mono" style="font-size:.62rem;color:var(--t3)">Gmail &mdash; Compose</span>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2" style="font-size:.78rem;border-bottom:1px solid var(--border);padding-bottom:1rem">
+                <span class="font-mono w-9 shrink-0" style="color:var(--t3)">From</span>
+                <span style="color:var(--t2)">alex@growthpartners.io</span>
+              </div>
+              <div class="flex items-center gap-2" style="font-size:.78rem;border-bottom:1px solid var(--border);padding-bottom:1rem">
+                <span class="font-mono w-9 shrink-0" style="color:var(--t3)">To</span>
+                <span style="color:var(--t2)">sarah.chen@nextsaas.com</span>
+              </div>
+              <div class="flex items-center gap-2" style="font-size:.78rem;padding-top:.25rem">
+                <span class="font-mono w-9 shrink-0" style="color:var(--t3)">Re</span>
+                <span style="color:var(--t1);font-weight:600">Quick thought on NextSaaS&rsquo;s Q3 growth push</span>
+              </div>
+            </div>
+          </div>
+          <!-- Body -->
+          <div class="px-5 py-4" style="font-size:.875rem;line-height:1.75;color:var(--t2)">
+            <p style="margin-bottom:.75rem">Hi Sarah,</p>
+            <p style="margin-bottom:.75rem">Saw the announcement about NextSaaS closing its Series A &mdash; congrats. That&rsquo;s a real inflection point and the timing of this note is intentional.</p>
+            <p style="margin-bottom:.75rem">Most founders at your stage are choosing between hiring SDRs (90-day ramp, $90K+) or cobbling together outreach themselves. There&rsquo;s a third option that&rsquo;s faster and cheaper.</p>
+            <p style="margin-bottom:.75rem">We run an AI outbound system that books <span style="color:var(--t1);font-weight:600">10&ndash;20 qualified calls/month</span> for B2B SaaS teams &mdash; live in 2 weeks, no headcount needed.</p>
+            <p style="margin-bottom:1rem">Worth 20 minutes to run the numbers?</p>
+            <p style="color:var(--t3)">— Alex</p>
+          </div>
+          <!-- AI annotation bar -->
+          <div class="email-tag">
+            <div class="live-dot w-1.5 h-1.5 rounded-full shrink-0" style="background:var(--acc);border-radius:50%"></div>
+            <span class="font-mono" style="font-size:.62rem;color:var(--acc)">Personalized using: Series A announcement &bull; LinkedIn role &bull; ICP match score 94%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ BENEFITS ═══════════ -->
+<section class="z1 py-24 light-section">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rev mb-12">
+      <div class="lbl">Why purLEAD</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em">
+        Built for businesses<br />serious about <span style="color:var(--acc)">growth.</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="rev tilt card p-6 flex gap-4"><div class="ib"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><h3 class="font-display font-bold mb-1.5" style="color:var(--t1);font-size:.9375rem">AI-Personalized at Scale</h3><p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">Every email references something real &mdash; company news, role, recent activity, or pain. Not a mail-merge. Actual intelligence.</p></div></div>
+      <div class="rev tilt card p-6 flex gap-4" style="transition-delay:.06s"><div class="ib"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><h3 class="font-display font-bold mb-1.5" style="color:var(--t1);font-size:.9375rem">Calls Booked, Not Just Leads</h3><p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">We don&rsquo;t hand you a list and call it a day. We manage responses and get qualified prospects scheduled so you show up and close.</p></div></div>
+      <div class="rev tilt card p-6 flex gap-4" style="transition-delay:.12s"><div class="ib"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h3 class="font-display font-bold mb-1.5" style="color:var(--t1);font-size:.9375rem">Faster Than Any Hire</h3><p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">An SDR takes 90 days to ramp. purLEAD is live in 2 weeks and booking in 30. No recruiting, no onboarding, no overhead.</p></div></div>
+      <div class="rev tilt card p-6 flex gap-4" style="transition-delay:.18s"><div class="ib"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M9 17V9l4 4 4-8"/></svg></div><div><h3 class="font-display font-bold mb-1.5" style="color:var(--t1);font-size:.9375rem">Full Accountability</h3><p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">Weekly reporting. Transparent metrics. You always know what&rsquo;s sending, what&rsquo;s working, and what we&rsquo;re optimizing. No black boxes.</p></div></div>
+      <div class="rev tilt card p-6 flex gap-4" style="transition-delay:.24s"><div class="ib"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div><div><h3 class="font-display font-bold mb-1.5" style="color:var(--t1);font-size:.9375rem">Precision Targeting</h3><p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">We build targeted, verified prospect lists from premium data sources. Only real decision-makers matching your ICP enter the pipeline.</p></div></div>
+      <div class="rev tilt card p-6 flex gap-4" style="transition-delay:.3s"><div class="ib"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></div><div><h3 class="font-display font-bold mb-1.5" style="color:var(--t1);font-size:.9375rem">Continuously Optimized</h3><p style="font-size:.8375rem;line-height:1.65;color:var(--t2)">Our system learns as it runs. We test, iterate, and improve reply rates every week. Your outbound gets sharper over time, not stale.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ RESULTS METRICS ═══════════ -->
+<section class="z1 py-24 depth-dark depth-gold" style="background:linear-gradient(135deg,#0A1C35 0%,#0C2044 60%,#0A1C35 100%);position:relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rev text-center mb-12">
+      <div class="lbl lbl-gold justify-center" style="display:inline-flex">Aggregate Results</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-top:.5rem">
+        Numbers don&rsquo;t lie.<br /><span style="color:var(--gold)">Ours don&rsquo;t either.</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 rev">
+      <div class="p-8 text-center card" style="border-color:rgba(232,184,75,.3);background:linear-gradient(160deg,rgba(232,184,75,.08),rgba(13,36,68,.65))">
+        <div class="font-display font-extrabold" style="font-size:1.875rem;color:var(--gold);line-height:1">$1.8M+</div>
+        <div style="width:32px;height:2px;background:var(--gold);border-radius:1px;margin:.6rem auto .5rem"></div>
+        <div class="font-mono text-xs" style="color:var(--t3);text-transform:uppercase;letter-spacing:.07em">Pipeline Generated</div>
+      </div>
+      <div class="p-8 text-center card">
+        <div class="snum" data-count="620" data-suffix="" style="font-size:1.75rem">0</div>
+        <div style="width:32px;height:2px;background:var(--acc);border-radius:1px;margin:.6rem auto .5rem"></div>
+        <div class="font-mono text-xs" style="color:var(--t3);text-transform:uppercase;letter-spacing:.07em">Meetings Booked</div>
+      </div>
+      <div class="p-8 text-center card">
+        <div class="snum" data-count="34" data-suffix="" style="font-size:1.75rem">0</div>
+        <div style="width:32px;height:2px;background:var(--acc);border-radius:1px;margin:.6rem auto .5rem"></div>
+        <div class="font-mono text-xs" style="color:var(--t3);text-transform:uppercase;letter-spacing:.07em">Active Clients</div>
+      </div>
+      <div class="p-8 text-center card">
+        <div class="snum" data-count="87" data-suffix="%" style="font-size:1.75rem">0%</div>
+        <div style="width:32px;height:2px;background:var(--acc);border-radius:1px;margin:.6rem auto .5rem"></div>
+        <div class="font-mono text-xs" style="color:var(--t3);text-transform:uppercase;letter-spacing:.07em">Client Retention</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ COMPARISON ═══════════ -->
+<section class="z1 py-24 light-section">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="rev mb-12">
+      <div class="lbl">How We Compare</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em">
+        The honest <span style="color:var(--acc)">comparison.</span>
+      </h2>
+      <p style="color:var(--t2);margin-top:.5rem;font-size:.9375rem;max-width:48ch">We built this table ourselves. You should pressure-test it.</p>
+    </div>
+    <div class="rev overflow-x-auto" style="border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;width:28%">Criteria</th>
+            <th class="cmp-hl">purLEAD</th>
+            <th>SDR Hire</th>
+            <th>DIY Outreach</th>
+            <th>Generic Agency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Time to first result</td>
+            <td class="cmp-hl cmp-yes">2&ndash;4 weeks</td>
+            <td class="cmp-no">90+ days</td>
+            <td class="cmp-mid">4&ndash;8 weeks</td>
+            <td class="cmp-mid">4&ndash;6 weeks</td>
+          </tr>
+          <tr>
+            <td>Monthly cost</td>
+            <td class="cmp-hl cmp-yes">$997&ndash;$3,997</td>
+            <td class="cmp-no">$7,000&ndash;$10,000</td>
+            <td class="cmp-mid">$200&ndash;$500 tools</td>
+            <td class="cmp-mid">$3,000&ndash;$8,000</td>
+          </tr>
+          <tr>
+            <td>AI personalization</td>
+            <td class="cmp-hl cmp-yes">&#10003; Every message</td>
+            <td class="cmp-no">&#10007; Manual only</td>
+            <td class="cmp-no">&#10007; Templates</td>
+            <td class="cmp-no">&#10007; Templates</td>
+          </tr>
+          <tr>
+            <td>Reply management</td>
+            <td class="cmp-hl cmp-yes">&#10003; Fully handled</td>
+            <td class="cmp-yes">&#10003; Handled</td>
+            <td class="cmp-no">&#10007; You handle it</td>
+            <td class="cmp-mid">&#126; Partial</td>
+          </tr>
+          <tr>
+            <td>Reporting &amp; transparency</td>
+            <td class="cmp-hl cmp-yes">&#10003; Weekly detailed</td>
+            <td class="cmp-mid">&#126; Varies</td>
+            <td class="cmp-no">&#10007; Manual tracking</td>
+            <td class="cmp-no">&#10007; Usually opaque</td>
+          </tr>
+          <tr>
+            <td>Setup effort (your side)</td>
+            <td class="cmp-hl cmp-yes">&#10003; 1 onboarding call</td>
+            <td class="cmp-no">&#10007; Full hiring process</td>
+            <td class="cmp-no">&#10007; You build everything</td>
+            <td class="cmp-mid">&#126; Medium</td>
+          </tr>
+          <tr>
+            <td>Scalability</td>
+            <td class="cmp-hl cmp-yes">&#10003; Instant plan upgrade</td>
+            <td class="cmp-no">&#10007; Hire another rep</td>
+            <td class="cmp-mid">&#126; Limited by your time</td>
+            <td class="cmp-mid">&#126; Slow</td>
+          </tr>
+          <tr>
+            <td>Cancel anytime</td>
+            <td class="cmp-hl cmp-yes">&#10003; After 3 months</td>
+            <td class="cmp-no">&#10007; Employment law</td>
+            <td class="cmp-yes">&#10003; Yes</td>
+            <td class="cmp-mid">&#126; Contract-dependent</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ PRICING ═══════════ -->
+<section id="pricing" class="z1 py-24 depth-dark depth-gold" style="background:linear-gradient(135deg,#0A1C35 0%,#0D2444 60%,#0A1C35 100%);position:relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rev mb-4">
+      <div class="lbl lbl-gold">Pricing</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em">
+        Transparent. Simple.<br /><span style="color:var(--gold)">Built to pay for itself.</span>
+      </h2>
+    </div>
+    <!-- Toggle -->
+    <div class="rev flex items-center gap-3 mb-10" style="transition-delay:.05s">
+      <div class="tog-wrap">
+        <button class="tog-btn active" id="tog-monthly" onclick="setTog('monthly')">Monthly</button>
+        <button class="tog-btn" id="tog-annual"  onclick="setTog('annual')">Annual</button>
+      </div>
+      <span class="save-badge">Save 20%</span>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 md:items-end">
+
+      <!-- Starter -->
+      <div class="rev tilt card p-7" style="opacity:.85">
+        <div class="font-mono text-xs mb-5" style="color:var(--t3);letter-spacing:.14em;text-transform:uppercase">Starter</div>
+        <div class="flex items-end gap-1 mb-1">
+          <span class="font-display font-extrabold" style="font-size:1.875rem;color:var(--t1);line-height:1" data-monthly="$997" data-annual="$797">$997</span>
+          <span class="text-sm mb-1.5" style="color:var(--t3)">/mo</span>
+        </div>
+        <div class="font-mono text-xs mb-6" style="color:var(--t3)" data-setup-monthly="+ $497 one-time setup" data-setup-annual="+ $397 one-time setup">+ $497 one-time setup</div>
+        <div class="mb-6">
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)"><strong style="color:var(--t1)">5&ndash;10 qualified meetings</strong>/month</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">1 target vertical / ICP</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">AI-personalized sequences</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Domain &amp; inbox setup</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Bi-weekly reporting</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Reply management</div>
+        </div>
+        <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer" class="btn-g block text-center text-sm py-3">Get Started &rarr;</a>
+      </div>
+
+      <!-- Growth (featured) -->
+      <div class="rev" style="transition-delay:.1s">
+        <div class="font-mono text-xs mb-2.5 text-center" style="color:var(--gold);letter-spacing:.16em;text-transform:uppercase">&#9733; Most Popular</div>
+        <div class="pfwrap">
+          <div class="pfinner p-7">
+            <div class="font-mono text-xs mb-5" style="color:var(--gold);letter-spacing:.14em;text-transform:uppercase">Growth</div>
+            <div class="flex items-end gap-1 mb-1">
+              <span class="font-display font-extrabold" style="font-size:1.875rem;color:var(--t1);line-height:1" data-monthly="$1,997" data-annual="$1,597">$1,997</span>
+              <span class="text-sm mb-1.5" style="color:var(--t3)">/mo</span>
+            </div>
+            <div class="font-mono text-xs mb-6" style="color:var(--t3)" data-setup-monthly="+ $997 one-time setup" data-setup-annual="+ $797 one-time setup">+ $997 one-time setup</div>
+            <div class="mb-6">
+              <div class="pi py-2.5 text-sm" style="color:var(--t2)"><strong style="color:var(--t1)">10&ndash;25 qualified meetings</strong>/month</div>
+              <div class="pi py-2.5 text-sm" style="color:var(--t2)">2 target verticals / ICPs</div>
+              <div class="pi py-2.5 text-sm" style="color:var(--t2)">Advanced AI personalization</div>
+              <div class="pi py-2.5 text-sm" style="color:var(--t2)">Multi-channel outreach</div>
+              <div class="pi py-2.5 text-sm" style="color:var(--t2)">Weekly reporting + strategy calls</div>
+              <div class="pi py-2.5 text-sm" style="color:var(--t2)">Full reply management</div>
+              <div class="pi py-2.5 text-sm" style="color:var(--t2)">A/B testing &amp; optimization</div>
+            </div>
+            <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer" class="btn-p block text-center text-sm py-3">Book a Call &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scale -->
+      <div class="rev tilt card p-7" style="opacity:.85;transition-delay:.2s">
+        <div class="font-mono text-xs mb-5" style="color:var(--t3);letter-spacing:.14em;text-transform:uppercase">Scale</div>
+        <div class="flex items-end gap-1 mb-1">
+          <span class="font-display font-extrabold" style="font-size:1.875rem;color:var(--t1);line-height:1" data-monthly="$3,997" data-annual="$3,197">$3,997</span>
+          <span class="text-sm mb-1.5" style="color:var(--t3)">/mo</span>
+        </div>
+        <div class="font-mono text-xs mb-6" style="color:var(--t3)" data-setup-monthly="+ $1,997 one-time setup" data-setup-annual="+ $1,597 one-time setup">+ $1,997 one-time setup</div>
+        <div class="mb-6">
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)"><strong style="color:var(--t1)">20&ndash;45 qualified meetings</strong>/month</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">3+ verticals / ICPs</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Premium AI personalization engine</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Full multi-channel stack</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Dedicated account strategist</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Priority support &amp; SLA</div>
+          <div class="pi py-2.5 text-sm" style="color:var(--t2)">Custom integrations &amp; CRM sync</div>
+        </div>
+        <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer" class="btn-g block text-center text-sm py-3">Get Started &rarr;</a>
+      </div>
+    </div>
+    <p class="mt-8 text-sm" style="color:var(--t3)">Not sure which fits? <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer" style="color:var(--acc)" class="hover:underline underline-offset-2">Book a free call</a> and we&rsquo;ll tell you.</p>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ GUARANTEE ═══════════ -->
+<section class="z1 py-24 depth-dark depth-gold" style="background:linear-gradient(160deg,#0A1C35 0%,#0E2340 60%,#0A1C35 100%);position:relative">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="rev text-center mb-12">
+      <div class="lbl lbl-gold justify-center" style="display:inline-flex">Risk-Free Commitment</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-top:.5rem">
+        We only win<br /><span style="color:var(--gold)">when you win.</span>
+      </h2>
+      <p style="color:var(--t2);margin-top:.75rem;font-size:.9375rem;max-width:46ch;margin-left:auto;margin-right:auto">Three promises we make to every client before they sign a single thing.</p>
+    </div>
+    <div class="rev grid md:grid-cols-3 gap-4">
+      <div class="gtee">
+        <div class="gtee-num mb-2">45</div>
+        <div class="font-mono text-xs mb-3" style="color:var(--gold);letter-spacing:.1em;text-transform:uppercase">Day Guarantee</div>
+        <p style="font-size:.875rem;line-height:1.7;color:var(--t2)">If we haven&rsquo;t booked your first qualified call within 45 days of launch, you don&rsquo;t pay for month two. No questions asked.</p>
+      </div>
+      <div class="gtee">
+        <div class="gtee-num mb-2">100%</div>
+        <div class="font-mono text-xs mb-3" style="color:var(--gold);letter-spacing:.1em;text-transform:uppercase">Transparent Reporting</div>
+        <p style="font-size:.875rem;line-height:1.7;color:var(--t2)">Weekly reports showing exactly what was sent, what replied, and what we&rsquo;re doing about it. Every campaign, every metric, every week.</p>
+      </div>
+      <div class="gtee">
+        <div class="gtee-num mb-2">0</div>
+        <div class="font-mono text-xs mb-3" style="color:var(--gold);letter-spacing:.1em;text-transform:uppercase">Lock-in After Month 3</div>
+        <p style="font-size:.875rem;line-height:1.7;color:var(--t2)">After the initial 3-month window, it&rsquo;s fully month-to-month. Our clients stay because they see results &mdash; not because they&rsquo;re locked in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ ROI CALCULATOR ═══════════ -->
+<section class="z1 py-24 light-section">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="rev mb-10">
+      <div class="lbl">ROI Calculator</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:.6rem">
+        See your numbers<br /><span style="color:var(--acc)">before you commit.</span>
+      </h2>
+      <p style="color:var(--t2);font-size:.9375rem;max-width:48ch">Move the sliders to match your business. The math updates instantly.</p>
+    </div>
+    <div class="rev card p-7">
+      <div class="grid md:grid-cols-2 gap-x-10 gap-y-6 mb-8">
+        <!-- Deal value -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-mono text-xs" style="color:var(--t3);letter-spacing:.1em;text-transform:uppercase">Avg. Deal Value</span>
+            <span id="lbl-deal" class="font-display font-bold text-sm" style="color:var(--t1)">$15,000</span>
+          </div>
+          <input type="range" id="roi-deal" class="roi-range" min="2000" max="150000" step="1000" value="15000" oninput="calcROI()">
+          <div class="flex justify-between font-mono text-xs" style="color:var(--t3)"><span>$2k</span><span>$150k</span></div>
+        </div>
+        <!-- Close rate -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-mono text-xs" style="color:var(--t3);letter-spacing:.1em;text-transform:uppercase">Close Rate</span>
+            <span id="lbl-close" class="font-display font-bold text-sm" style="color:var(--t1)">20%</span>
+          </div>
+          <input type="range" id="roi-close" class="roi-range" min="5" max="60" step="1" value="20" oninput="calcROI()">
+          <div class="flex justify-between font-mono text-xs" style="color:var(--t3)"><span>5%</span><span>60%</span></div>
+        </div>
+        <!-- Meetings / month -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-mono text-xs" style="color:var(--t3);letter-spacing:.1em;text-transform:uppercase">Meetings / Month</span>
+            <span id="lbl-meet" class="font-display font-bold text-sm" style="color:var(--t1)">15</span>
+          </div>
+          <input type="range" id="roi-meet" class="roi-range" min="5" max="45" step="1" value="15" oninput="calcROI()">
+          <div class="flex justify-between font-mono text-xs" style="color:var(--t3)"><span>5</span><span>45</span></div>
+        </div>
+        <!-- Plan cost -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-mono text-xs" style="color:var(--t3);letter-spacing:.1em;text-transform:uppercase">Monthly Plan Cost</span>
+            <span id="lbl-plan" class="font-display font-bold text-sm" style="color:var(--t1)">$1,997</span>
+          </div>
+          <input type="range" id="roi-plan" class="roi-range" min="997" max="3997" step="1000" value="1997" oninput="calcROI()">
+          <div class="flex justify-between font-mono text-xs" style="color:var(--t3)"><span>Starter</span><span>Scale</span></div>
+        </div>
+      </div>
+      <hr style="border:none;border-top:1px solid var(--border);margin-bottom:1.5rem">
+      <!-- Output -->
+      <div class="grid grid-cols-3 gap-3">
+        <div class="roi-out">
+          <div class="roi-big roi-green" id="roi-monthly">$45,000</div>
+          <div class="font-mono text-xs" style="color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-top:.3rem">Monthly Revenue</div>
+        </div>
+        <div class="roi-out">
+          <div class="roi-big roi-white" id="roi-annual">$540,000</div>
+          <div class="font-mono text-xs" style="color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-top:.3rem">Annual Pipeline</div>
+        </div>
+        <div class="roi-out">
+          <div class="roi-big roi-green" id="roi-multiple">22x</div>
+          <div class="font-mono text-xs" style="color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-top:.3rem">Return on Investment</div>
+        </div>
+      </div>
+      <p class="mt-4 text-xs" style="color:var(--t3)">Based on conservative estimates. Actual results depend on your offer, ICP, and market conditions.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="z1 py-24 depth-dark" style="background:linear-gradient(135deg,#0F2847 0%,#0B1F3A 100%)">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rev mb-12">
+      <div class="lbl lbl-gold">Client Results</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em">
+        Real businesses.<br /><span style="color:var(--gold)">Real pipeline.</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="rev card p-8 flex flex-col gap-5" style="border-color:rgba(232,184,75,0.28);background:linear-gradient(160deg,rgba(232,184,75,.05),rgba(13,36,68,.65))">
+        <span class="qmark" style="font-size:2rem;line-height:1;margin-bottom:-.25rem">&ldquo;</span>
+        <p class="font-display" style="font-size:.9rem;font-style:italic;color:var(--t1);line-height:1.65;font-weight:400;flex:1">We went from 2&ndash;3 referral calls a month to 14 qualified meetings booked in our first 6 weeks. purLEAD paid for itself after the second call we closed.</p>
+        <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(0,209,255,0.12)">
+          <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="James T." width="36" height="36" class="rounded-full" style="border:1px solid rgba(0,209,255,0.25);object-fit:cover">
+          <p class="font-mono text-xs" style="color:var(--t3);letter-spacing:.08em;text-transform:uppercase">James T. &mdash; CEO, SaaS Consulting Firm</p>
+        </div>
+      </div>
+      <div class="rev card p-8 flex flex-col gap-5" style="border-color:rgba(0,209,255,0.2);transition-delay:.1s">
+        <span class="qmark" style="font-size:2rem;line-height:1;margin-bottom:-.25rem">&ldquo;</span>
+        <p class="font-display" style="font-size:.9rem;font-style:italic;color:var(--t1);line-height:1.65;font-weight:400;flex:1">I was skeptical of AI outreach &mdash; I&rsquo;d tried it before and got nothing. purLEAD&rsquo;s personalization is on another level. My prospects respond thinking I wrote each email myself.</p>
+        <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(0,209,255,0.12)">
+          <img src="https://randomuser.me/api/portraits/women/60.jpg" alt="Aisha R." width="36" height="36" class="rounded-full" style="border:1px solid rgba(0,209,255,0.25);object-fit:cover">
+          <p class="font-mono text-xs" style="color:var(--t3);letter-spacing:.08em;text-transform:uppercase">Aisha R. &mdash; Founder, FinTech Advisory</p>
+        </div>
+      </div>
+      <div class="rev card p-8 flex flex-col gap-5" style="border-color:rgba(0,209,255,0.2);transition-delay:.2s">
+        <span class="qmark" style="font-size:2rem;line-height:1;margin-bottom:-.25rem">&ldquo;</span>
+        <p class="font-display" style="font-size:.9rem;font-style:italic;color:var(--t1);line-height:1.65;font-weight:400;flex:1">We scaled from Growth to Scale in month 3. Booking 30+ calls a month now and our close rate improved because the meetings are actually qualified. Best investment we made.</p>
+        <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(0,209,255,0.12)">
+          <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Marcus P." width="36" height="36" class="rounded-full" style="border:1px solid rgba(0,209,255,0.25);object-fit:cover">
+          <p class="font-mono text-xs" style="color:var(--t3);letter-spacing:.08em;text-transform:uppercase">Marcus P. &mdash; Managing Director, B2B Media Group</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section id="faq" class="z1 py-24 light-section">
+  <div class="max-w-2xl mx-auto px-6">
+    <div class="rev mb-10">
+      <div class="lbl">FAQ</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em">
+        Questions we get <span style="color:var(--acc)">a lot.</span>
+      </h2>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div class="rev faq-item cursor-pointer" style="border-bottom:1px solid var(--border)"><div class="faq-trigger flex items-center justify-between px-6 py-4 select-none hover:bg-white/[.01] transition-colors"><span class="font-display font-semibold text-sm" style="color:var(--t1)">How fast will I see results?</span><span class="faq-icon text-lg leading-none shrink-0 ml-3 transition-transform" style="color:var(--acc)">+</span></div><div class="fa px-6 pb-0 text-sm leading-relaxed" style="color:var(--t2)">Most clients receive their first booked call within 2&ndash;4 weeks of launch. Month one typically produces 50&ndash;70% of full capacity as the system warms and optimizes.</div></div>
+      <div class="rev faq-item cursor-pointer" style="border-bottom:1px solid var(--border);transition-delay:.04s"><div class="faq-trigger flex items-center justify-between px-6 py-4 select-none hover:bg-white/[.01] transition-colors"><span class="font-display font-semibold text-sm" style="color:var(--t1)">Do I need to write any of the emails myself?</span><span class="faq-icon text-lg leading-none shrink-0 ml-3 transition-transform" style="color:var(--acc)">+</span></div><div class="fa px-6 pb-0 text-sm leading-relaxed" style="color:var(--t2)">No. Our team writes all copy and our AI personalizes every message. We&rsquo;ll have an onboarding call to learn your voice and positioning &mdash; then we handle everything else.</div></div>
+      <div class="rev faq-item cursor-pointer" style="border-bottom:1px solid var(--border);transition-delay:.08s"><div class="faq-trigger flex items-center justify-between px-6 py-4 select-none hover:bg-white/[.01] transition-colors"><span class="font-display font-semibold text-sm" style="color:var(--t1)">Will this work in my industry?</span><span class="faq-icon text-lg leading-none shrink-0 ml-3 transition-transform" style="color:var(--acc)">+</span></div><div class="fa px-6 pb-0 text-sm leading-relaxed" style="color:var(--t2)">If your clients are businesses (B2B) and your average deal value is $5K+, outbound email works. We&rsquo;ve run campaigns in SaaS, consulting, fintech, professional services, media, and more.</div></div>
+      <div class="rev faq-item cursor-pointer" style="border-bottom:1px solid var(--border);transition-delay:.12s"><div class="faq-trigger flex items-center justify-between px-6 py-4 select-none hover:bg-white/[.01] transition-colors"><span class="font-display font-semibold text-sm" style="color:var(--t1)">How is this different from a regular email agency?</span><span class="faq-icon text-lg leading-none shrink-0 ml-3 transition-transform" style="color:var(--acc)">+</span></div><div class="fa px-6 pb-0 text-sm leading-relaxed" style="color:var(--t2)">Traditional agencies use templates. We use AI to research each prospect and write genuinely personalized messages &mdash; referencing their company, role, recent news, and specific pain points. The difference in reply rates is dramatic. We also manage replies and handle booking, not just sending.</div></div>
+      <div class="rev faq-item cursor-pointer" style="border-bottom:1px solid var(--border);transition-delay:.16s"><div class="faq-trigger flex items-center justify-between px-6 py-4 select-none hover:bg-white/[.01] transition-colors"><span class="font-display font-semibold text-sm" style="color:var(--t1)">What if I don&rsquo;t hit the meeting targets?</span><span class="faq-icon text-lg leading-none shrink-0 ml-3 transition-transform" style="color:var(--acc)">+</span></div><div class="fa px-6 pb-0 text-sm leading-relaxed" style="color:var(--t2)">We take accountability seriously. If we consistently fall short, we&rsquo;ll discuss plan adjustments, strategy pivots, or additional support at no extra cost. We succeed when you succeed.</div></div>
+      <div class="rev faq-item cursor-pointer" style="transition-delay:.2s"><div class="faq-trigger flex items-center justify-between px-6 py-4 select-none hover:bg-white/[.01] transition-colors"><span class="font-display font-semibold text-sm" style="color:var(--t1)">Is there a long-term contract?</span><span class="faq-icon text-lg leading-none shrink-0 ml-3 transition-transform" style="color:var(--acc)">+</span></div><div class="fa px-6 pb-0 text-sm leading-relaxed" style="color:var(--t2)">We ask for a 3-month initial commitment &mdash; outbound takes time to fully optimize. After that, it&rsquo;s month-to-month. Most clients stay because they see results, not because they&rsquo;re locked in.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdiv" />
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact" class="z1 py-24 light-section">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="rev mb-10">
+      <div class="lbl">Get in Touch</div>
+      <h2 style="font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:.5rem">Let&rsquo;s talk <span style="color:var(--acc)">pipeline.</span></h2>
+      <p style="color:var(--t2);max-width:42ch;font-size:.9375rem">Have a question before booking? We&rsquo;ll get back to you within one business day.</p>
+    </div>
+    <div class="rev grid md:grid-cols-3 gap-px" style="background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <a href="mailto:hello@purlead.co" class="block p-7 group" style="background:var(--bg);transition:background .2s" onmouseover="this.style.background='#EEF2F7'" onmouseout="this.style.background='var(--surf)'">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="font-display font-bold mb-1" style="color:var(--t1);font-size:.9375rem">Email Us</div>
+        <div class="text-sm mb-3" style="color:var(--t2)">hello@purlead.co</div>
+        <div class="font-mono text-xs" style="color:var(--acc);letter-spacing:.08em">SEND A MESSAGE &rarr;</div>
+      </a>
+      <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer" class="block p-7" style="background:var(--bg);transition:background .2s" onmouseover="this.style.background='#EEF2F7'" onmouseout="this.style.background='var(--surf)'">
+        <div class="ib mb-4"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="font-display font-bold mb-1" style="color:var(--t1);font-size:.9375rem">Book a Call</div>
+        <div class="text-sm mb-3" style="color:var(--t2)">Free 30-min strategy session</div>
+        <div class="font-mono text-xs" style="color:var(--acc);letter-spacing:.08em">OPEN CALENDLY &rarr;</div>
+      </a>
+      <a href="https://linkedin.com/company/purlead" target="_blank" rel="noopener noreferrer" class="block p-7" style="background:var(--bg);transition:background .2s" onmouseover="this.style.background='#EEF2F7'" onmouseout="this.style.background='var(--surf)'">
+        <div class="ib mb-4"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+        <div class="font-display font-bold mb-1" style="color:var(--t1);font-size:.9375rem">LinkedIn</div>
+        <div class="text-sm mb-3" style="color:var(--t2)">Follow our company page</div>
+        <div class="font-mono text-xs" style="color:var(--acc);letter-spacing:.08em">VIEW PROFILE &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FINAL CTA ═══════════ -->
+<section class="z1 py-28 depth-dark depth-gold" style="background:linear-gradient(160deg,#071526 0%,#0A1C35 40%,#0C2040 70%,#071526 100%);position:relative">
+  <div class="max-w-2xl mx-auto px-6 text-center" style="position:relative;z-index:1">
+    <div class="rev">
+      <div class="lbl lbl-gold justify-center" style="display:inline-flex;margin-bottom:1rem">
+        Now Accepting New Clients
+      </div>
+      <h2 class="font-display font-extrabold" style="font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.1;letter-spacing:-.02em;color:var(--t1);margin-bottom:1.25rem">
+        Your next 15 sales calls<br /><span style="color:var(--gold)">are waiting.</span>
+      </h2>
+      <p style="font-size:1rem;line-height:1.7;color:var(--t2);max-width:46ch;margin:0 auto 2rem">
+        Book a free 30-minute strategy call and we&rsquo;ll show you exactly how many meetings purLEAD can generate for your business &mdash; and how fast.
+      </p>
+      <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
+         class="btn-p mag inline-flex items-center gap-2.5 text-base px-10 py-4.5" style="font-size:.9375rem">
+        Book My Free Strategy Call
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="mt-5 text-sm" style="color:var(--t3)">No sales pressure &bull; No commitment &bull; Results or you don&rsquo;t pay month two.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer style="background:linear-gradient(180deg,#071526 0%,#060F1C 100%);border-top:1px solid rgba(232,184,75,0.2);box-shadow:0 -1px 0 rgba(0,209,255,0.06),0 -4px 40px rgba(232,184,75,.05)">
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
+      <a href="#" class="font-display font-extrabold tracking-tight" style="color:var(--t1);font-size:1rem">pur<span style="color:var(--gold)">LEAD</span></a>
+      <div class="flex flex-wrap gap-x-7 gap-y-2 text-sm" style="color:rgba(148,163,184,0.6)">
+        <a href="#how" style="transition:color .2s" onmouseover="this.style.color='#00D1FF'" onmouseout="this.style.color='rgba(148,163,184,0.6)'">How It Works</a>
+        <a href="#pricing" style="transition:color .2s" onmouseover="this.style.color='#00D1FF'" onmouseout="this.style.color='rgba(148,163,184,0.6)'">Pricing</a>
+        <a href="#faq" style="transition:color .2s" onmouseover="this.style.color='#00D1FF'" onmouseout="this.style.color='rgba(148,163,184,0.6)'">FAQ</a>
+        <a href="#contact" style="transition:color .2s" onmouseover="this.style.color='#00D1FF'" onmouseout="this.style.color='rgba(148,163,184,0.6)'">Contact</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://linkedin.com/company/purlead" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-8 h-8 flex items-center justify-center hover:text-acc transition-colors" style="border:1px solid var(--border);border-radius:3px;color:var(--t3)"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://twitter.com/purlead" target="_blank" rel="noopener noreferrer" aria-label="X" class="w-8 h-8 flex items-center justify-center hover:text-acc transition-colors" style="border:1px solid var(--border);border-radius:3px;color:var(--t3)"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:1.25rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem">
+      <p class="font-mono text-xs" style="color:rgba(148,163,184,0.5)">&copy; 2026 purLEAD. All rights reserved.</p>
+      <div class="flex items-center gap-5 font-mono text-xs" style="color:rgba(148,163,184,0.5)">
+        <button onclick="openModal('modal-privacy')" style="background:none;border:none;transition:color .2s;cursor:none" onmouseover="this.style.color='#00D1FF'" onmouseout="this.style.color='rgba(148,163,184,0.5)'">Privacy Policy</button>
+        <button onclick="openModal('modal-terms')"   style="background:none;border:none;transition:color .2s;cursor:none" onmouseover="this.style.color='#00D1FF'" onmouseout="this.style.color='rgba(148,163,184,0.5)'">Terms of Service</button>
+        <a href="mailto:hello@purlead.co" style="transition:color .2s" onmouseover="this.style.color='#00D1FF'" onmouseout="this.style.color='rgba(148,163,184,0.5)'">hello@purlead.co</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- ═══ PRIVACY MODAL ═══ -->
+<div id="modal-privacy" class="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="flex items-start justify-between mb-5 pb-4" style="border-bottom:1px solid var(--border)">
+      <h3 class="font-display font-extrabold text-xl" style="color:var(--t1)">Privacy Policy</h3>
+      <button onclick="closeModal('modal-privacy')" class="w-7 h-7 flex items-center justify-center text-xs" style="border:1px solid var(--border);border-radius:3px;color:var(--t3)">&#10005;</button>
+    </div>
+    <div class="text-sm leading-relaxed space-y-3.5" style="color:var(--t2)">
+      <p class="font-mono text-xs" style="color:var(--t3)">Last updated: April 2026</p>
+      <p>purLEAD (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Information We Collect</h4>
+      <p>We collect information you provide directly (name, email, company, phone) when you book a call or contact us, plus analytics data about website interactions.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">How We Use Your Information</h4>
+      <ul class="space-y-1 pl-4" style="list-style:disc;color:var(--t2)"><li>To schedule and conduct strategy calls</li><li>To provide and improve our services</li><li>To send relevant service-related communications</li><li>To respond to inquiries and support requests</li></ul>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Data Sharing</h4>
+      <p>We do not sell or share your personal information with third parties for their marketing purposes.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Your Rights</h4>
+      <p>You may access, correct, or delete your data at any time. Contact <a href="mailto:hello@purlead.co" style="color:var(--acc)">hello@purlead.co</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TERMS MODAL ═══ -->
+<div id="modal-terms" class="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="flex items-start justify-between mb-5 pb-4" style="border-bottom:1px solid var(--border)">
+      <h3 class="font-display font-extrabold text-xl" style="color:var(--t1)">Terms of Service</h3>
+      <button onclick="closeModal('modal-terms')" class="w-7 h-7 flex items-center justify-center text-xs" style="border:1px solid var(--border);border-radius:3px;color:var(--t3)">&#10005;</button>
+    </div>
+    <div class="text-sm leading-relaxed space-y-3.5" style="color:var(--t2)">
+      <p class="font-mono text-xs" style="color:var(--t3)">Last updated: April 2026</p>
+      <p>By engaging purLEAD&rsquo;s services, you agree to these Terms of Service.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Services</h4>
+      <p>purLEAD provides AI-powered outbound lead generation on a subscription basis. Specific deliverables and terms are defined in your signed service agreement.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Payment &amp; Billing</h4>
+      <p>Subscription fees are billed monthly in advance. A one-time setup fee is charged upon onboarding. All fees are non-refundable except as stated in your agreement.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Minimum Commitment</h4>
+      <p>All plans require a 3-month initial commitment, then continue month-to-month with 30 days&rsquo; written notice to cancel.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Limitation of Liability</h4>
+      <p>purLEAD&rsquo;s liability is limited to the monthly fees paid in the month of the claim. We do not guarantee specific revenue outcomes.</p>
+      <h4 class="font-display font-bold" style="color:var(--t1)">Contact</h4>
+      <p>Legal inquiries: <a href="mailto:hello@purlead.co" style="color:var(--acc)">hello@purlead.co</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ JS ═══════════ -->
+<script>
+// ── Nav: transparent → solid on scroll ──
+const mainNav = document.getElementById('main-nav');
+function updateNav() {
+  if (window.scrollY > 40) {
+    mainNav.classList.add('scrolled');
+  } else {
+    mainNav.classList.remove('scrolled');
+  }
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+// ── Scroll progress ──
+const prog = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+}, { passive: true });
+
+// ── Back to top ──
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500), { passive: true });
+
+// ── Reveal ──
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rev').forEach(el => {
+  const r = el.getBoundingClientRect();
+  if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('vis');
+  else ro.observe(el);
+});
+
+// ── Hero word animation ──
+setTimeout(() => {
+  document.querySelectorAll('.word-in').forEach((el, i) => {
+    setTimeout(() => el.classList.add('vis'), i * 120);
+  });
+}, 200);
+
+// ── Active nav ──
+const nls = document.querySelectorAll('.nl');
+document.querySelectorAll('section[id]').forEach(s => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) nls.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-40% 0px -40% 0px' }).observe(s);
+});
+
+// ── FAQ ──
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-trigger').addEventListener('click', () => {
+    const ans  = item.querySelector('.fa');
+    const icon = item.querySelector('.faq-icon');
+    const open = ans.classList.contains('open');
+    document.querySelectorAll('.fa').forEach(a => { a.classList.remove('open'); a.style.paddingBottom = '0'; });
+    document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = ''; });
+    if (!open) { ans.classList.add('open'); ans.style.paddingBottom = '1.25rem'; icon.style.transform = 'rotate(45deg)'; }
+  });
+});
+
+// ── Mobile nav ──
+const tog = document.getElementById('nav-toggle');
+const mm  = document.getElementById('mmenu');
+const hbs = tog.querySelectorAll('.hb');
+function closeMob() {
+  mm.classList.add('hidden'); tog.setAttribute('aria-expanded','false');
+  hbs[0].style.transform = hbs[2].style.transform = ''; hbs[1].style.opacity = '';
+}
+tog.addEventListener('click', () => {
+  const isOpen = !mm.classList.contains('hidden');
+  if (isOpen) { closeMob(); return; }
+  mm.classList.remove('hidden'); tog.setAttribute('aria-expanded','true');
+  hbs[0].style.transform = 'rotate(45deg) translate(4px,4px)';
+  hbs[1].style.opacity   = '0';
+  hbs[2].style.transform = 'rotate(-45deg) translate(4px,-4px)';
+});
+document.addEventListener('click', e => { if (!tog.contains(e.target) && !mm.contains(e.target)) closeMob(); });
+
+// ── Modals ──
+function openModal(id)  { document.getElementById(id).classList.add('open');    document.body.style.overflow='hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => { if (e.target===o) closeModal(o.id); }));
+document.addEventListener('keydown', e => { if (e.key==='Escape') document.querySelectorAll('.modal-overlay.open').forEach(m=>closeModal(m.id)); });
+
+// ── Animated counters ──
+function animCounter(el, target, suffix, dur = 1400) {
+  const start = performance.now();
+  const update = t => {
+    const p = Math.min((t - start) / dur, 1);
+    const v = Math.round((1 - Math.pow(1 - p, 3)) * target);
+    el.textContent = v + suffix;
+    if (p < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      animCounter(el, +el.dataset.count, el.dataset.suffix || '');
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.snum[data-count]').forEach(el => counterObs.observe(el));
+
+// ── 3D Card tilt ──
+document.querySelectorAll('.tilt').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-2px)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+// ── Button ripple ──
+document.querySelectorAll('.btn-p').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const r = btn.getBoundingClientRect();
+    const span = document.createElement('span');
+    const size = Math.max(r.width, r.height);
+    span.className = 'ripple';
+    span.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px`;
+    btn.appendChild(span);
+    setTimeout(() => span.remove(), 600);
+  });
+});
+
+// ── Magnetic CTA ──
+document.querySelectorAll('.mag').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width/2)  * 0.25;
+    const y = (e.clientY - r.top  - r.height/2) * 0.25;
+    btn.style.transform = `translate(${x}px,${y}px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+// ── Pricing toggle ──
+function setTog(mode) {
+  const isAnnual = mode === 'annual';
+  document.getElementById('tog-monthly').classList.toggle('active', !isAnnual);
+  document.getElementById('tog-annual').classList.toggle('active',  isAnnual);
+  document.querySelectorAll('[data-monthly]').forEach(el => {
+    el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+  });
+  document.querySelectorAll('[data-setup-monthly]').forEach(el => {
+    el.textContent = isAnnual ? el.dataset.setupAnnual : el.dataset.setupMonthly;
+  });
+}
+
+// ── Dashboard clock ──
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  const el = document.getElementById('dash-clock');
+  if (el) el.textContent = `${h}:${m}:${s}`;
+}
+setInterval(updateClock, 1000); updateClock();
+
+// ── Dashboard live feed updates (in-place, 10 fixed rows) ──
+const feedItems = [
+  { color:'var(--acc)', label:'Rachel W. booked &mdash; <span style="color:#00D1FF">30 min</span>', time:'now', live:true },
+  { color:'#818cf8',   label:'Sequence launched &mdash; SaaS vertical', time:'1m', live:false },
+  { color:'var(--acc)', label:'Tom B. booked &mdash; <span style="color:#00D1FF">45 min</span>', time:'2m', live:true },
+  { color:'#fbbf24',   label:'950 prospects verified &amp; enriched', time:'4m', live:false },
+  { color:'#34d399',   label:'Subject line A/B winner confirmed', time:'6m', live:false },
+  { color:'var(--acc)', label:'Nina F. booked &mdash; <span style="color:#00D1FF">30 min</span>', time:'9m', live:true },
+  { color:'#818cf8',   label:'Sequence launched &mdash; Consulting niche', time:'11m', live:false },
+  { color:'#fbbf24',   label:'1,400 new prospects enriched', time:'13m', live:false },
+  { color:'var(--acc)', label:'James C. booked &mdash; <span style="color:#00D1FF">30 min</span>', time:'16m', live:true },
+  { color:'#34d399',   label:'Reply rate up 9% this week', time:'20m', live:false },
+  { color:'var(--acc)', label:'Aisha R. booked &mdash; <span style="color:#00D1FF">45 min</span>', time:'now', live:true },
+  { color:'#818cf8',   label:'Sequence launched &mdash; FinTech vertical', time:'2m', live:false },
+  { color:'#fbbf24',   label:'780 leads verified &amp; enriched', time:'5m', live:false },
+  { color:'var(--acc)', label:'Marcus P. booked &mdash; <span style="color:#00D1FF">30 min</span>', time:'7m', live:true },
+  { color:'#34d399',   label:'Open rate hit 52% this campaign', time:'10m', live:false },
+];
+let feedIdx = 0;
+const feed = document.getElementById('feed');
+if (feed) {
+  function updateFeedRow(row, item) {
+    row.style.transition = 'opacity .3s';
+    row.style.opacity = '0';
+    setTimeout(() => {
+      row.style.cssText = item.live
+        ? 'background:rgba(0,209,255,.06);border:1px solid rgba(0,209,255,.15);display:flex;align-items:center;gap:.5rem;padding:.375rem .625rem;border-radius:.25rem;transition:opacity .3s'
+        : 'background:var(--elev);border:1px solid var(--border);display:flex;align-items:center;gap:.5rem;padding:.375rem .625rem;border-radius:.25rem;transition:opacity .3s';
+      row.innerHTML = `<div class="${item.live?'live-dot':''} w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.color};border-radius:50%"></div><span style="font-size:.75rem;color:var(--t2)">${item.label}</span><span class="ml-auto font-mono" style="font-size:.55rem;color:var(--t3)">${item.time}</span>`;
+      row.style.opacity = '1';
+    }, 320);
+  }
+
+  const rows = Array.from(feed.children);
+  setInterval(() => {
+    const item = feedItems[feedIdx % feedItems.length];
+    const targetRow = rows[feedIdx % rows.length];
+    if (targetRow) updateFeedRow(targetRow, item);
+    feedIdx++;
+    if (item.live) {
+      const cEl = document.getElementById('d-calls');
+      if (cEl) cEl.textContent = String(parseInt(cEl.textContent) + 1);
+    }
+  }, 3000);
+}
+
+// ── Hero canvas particles ──
+const canvas = document.getElementById('hero-canvas');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  let W, H, pts;
+  function resize() {
+    W = canvas.width  = canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
+    pts = Array.from({length: Math.floor(W*H/18000)}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
+      r: Math.random()*1.5+.5
+    }));
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0||p.x > W) p.vx *= -1;
+      if (p.y < 0||p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,209,255,.3)';
+      ctx.fill();
+    });
+    // Connections
+    for (let i=0; i<pts.length; i++) {
+      for (let j=i+1; j<pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(0,209,255,${0.15*(1-dist/120)})`;
+          ctx.lineWidth = .5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── Announcement bar ──
+(function(){
+  const bar = document.getElementById('ann-bar');
+  if(!bar) return;
+  // Restore dismissed state
+  if(sessionStorage.getItem('ann-gone')){
+    bar.classList.add('gone');
+    return;
+  }
+  document.body.classList.add('has-ann');
+})();
+
+function dismissAnn(){
+  const bar = document.getElementById('ann-bar');
+  if(!bar) return;
+  bar.classList.add('gone');
+  document.body.classList.remove('has-ann');
+  sessionStorage.setItem('ann-gone','1');
+}
+
+// ── Social proof toasts ──
+(function(){
+  const wrap = document.getElementById('toast-wrap');
+  if(!wrap) return;
+
+  const people = [
+    { name:'James T.',  loc:'New York, US',   img:'https://randomuser.me/api/portraits/men/32.jpg',  dur:'30 min' },
+    { name:'Priya S.',  loc:'London, UK',     img:'https://randomuser.me/api/portraits/women/44.jpg', dur:'45 min' },
+    { name:'Marcus P.', loc:'Toronto, CA',    img:'https://randomuser.me/api/portraits/men/68.jpg',  dur:'30 min' },
+    { name:'Rachel W.', loc:'Sydney, AU',     img:'https://randomuser.me/api/portraits/women/29.jpg', dur:'30 min' },
+    { name:'Daniel K.', loc:'Berlin, DE',     img:'https://randomuser.me/api/portraits/men/52.jpg',  dur:'45 min' },
+    { name:'Nina F.',   loc:'Chicago, US',    img:'https://randomuser.me/api/portraits/women/60.jpg', dur:'30 min' },
+    { name:'Tom B.',    loc:'Dubai, UAE',     img:'https://randomuser.me/api/portraits/men/36.jpg',  dur:'30 min' },
+    { name:'Aisha R.',  loc:'Singapore, SG',  img:'https://randomuser.me/api/portraits/women/47.jpg', dur:'45 min' },
+    { name:'Carlos M.', loc:'Miami, US',      img:'https://randomuser.me/api/portraits/men/22.jpg',  dur:'30 min' },
+    { name:'Sophie L.', loc:'Paris, FR',      img:'https://randomuser.me/api/portraits/women/55.jpg', dur:'30 min' },
+  ];
+
+  let idx = 0;
+
+  function showToast(){
+    const p = people[idx % people.length];
+    idx++;
+
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.innerHTML = `
+      <img src="${p.img}" width="38" height="38" style="border-radius:50%;object-fit:cover;border:1px solid var(--border);flex-shrink:0" alt="${p.name}">
+      <div style="min-width:0;flex:1">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--t1);margin-bottom:.15rem">${p.name} <span style="font-weight:400;color:var(--t3)">from ${p.loc}</span></div>
+        <div style="font-size:.78rem;color:var(--t2);margin-bottom:.35rem">just booked a <span style="color:var(--cta);font-weight:600">${p.dur} strategy call</span></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--t3)">&#128205; Verified booking &bull; just now</div>
+      </div>
+      <button onclick="this.closest('.toast').remove()" aria-label="Dismiss" style="background:none;border:none;color:var(--t3);font-size:1rem;cursor:none;line-height:1;padding:0;flex-shrink:0;margin-top:-.1rem">&#10005;</button>
+      <div class="toast-prog"></div>`;
+
+    wrap.appendChild(t);
+    // Slide in
+    requestAnimationFrame(()=> requestAnimationFrame(()=>{
+      t.classList.add('show');
+      t.querySelector('.toast-prog').classList.add('run');
+    }));
+
+    // Slide out after 5.5s
+    setTimeout(()=>{
+      t.classList.remove('show');
+      setTimeout(()=> t.remove(), 500);
+    }, 5500);
+
+    // Schedule next toast (22–38s randomised)
+    const next = 22000 + Math.random() * 16000;
+    setTimeout(showToast, next);
+  }
+
+  // First toast after 8 seconds
+  setTimeout(showToast, 8000);
+})();
+
+// ── Custom cursor ──
+(function(){
+  if(!window.matchMedia('(pointer:fine)').matches) return;
+  const ring = document.getElementById('cur-ring');
+  if(!ring) return;
+
+  let mx=0,my=0,rx=0,ry=0;
+
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX; my=e.clientY;
+    ring.classList.remove('hidden');
+  });
+
+  // Smooth follow with spring easing
+  function loop(){
+    rx+=(mx-rx)*.18;
+    ry+=(my-ry)*.18;
+    ring.style.left=rx+'px';
+    ring.style.top =ry+'px';
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // Hide when leaving window
+  document.addEventListener('mouseleave',()=>ring.classList.add('hidden'));
+  document.addEventListener('mouseenter',()=>ring.classList.remove('hidden'));
+
+  // Hover state — expand on interactive elements
+  const targets='a,button,[onclick],.card,.faq-trigger,.roi-range,.int-pill,.tog-btn,.pfwrap,.gtee';
+  document.querySelectorAll(targets).forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('hov'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('hov'));
+  });
+
+  // Click pulse
+  document.addEventListener('mousedown',()=>ring.classList.add('click'));
+  document.addEventListener('mouseup',()=>ring.classList.remove('click'));
+})();
+
+// ── ROI Calculator ──
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '$' + Math.round(n/1000) + 'K';
+  return '$' + n;
+}
+function calcROI() {
+  const deal  = +document.getElementById('roi-deal').value;
+  const close = +document.getElementById('roi-close').value / 100;
+  const meet  = +document.getElementById('roi-meet').value;
+  const plan  = +document.getElementById('roi-plan').value;
+
+  document.getElementById('lbl-deal').textContent  = fmt(deal);
+  document.getElementById('lbl-close').textContent = Math.round(close*100) + '%';
+  document.getElementById('lbl-meet').textContent  = meet;
+  document.getElementById('lbl-plan').textContent  = '$' + plan.toLocaleString();
+
+  const monthly = Math.round(deal * close * meet);
+  const annual  = monthly * 12;
+  const roi     = Math.round(monthly / plan);
+
+  document.getElementById('roi-monthly').textContent  = fmt(monthly);
+  document.getElementById('roi-annual').textContent   = fmt(annual);
+  document.getElementById('roi-multiple').textContent = roi + 'x';
+}
+calcROI();
+</script>
+</body>
+</html>
