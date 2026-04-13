@@ -306,6 +306,20 @@
 
     /* ── Nav CTA gold shimmer on hover ── */
     nav .btn-p:hover{box-shadow:0 8px 24px rgba(0,0,0,.3)}
+
+    /* ── Mobile: scale down headlines & large numbers ── */
+    @media (max-width: 640px) {
+      h1{font-size:1.5rem!important;line-height:1.12!important}
+      h2{font-size:1.15rem!important;line-height:1.18!important}
+      .snum,.snum-gold{font-size:1.25rem!important}
+      .gtee-num{font-size:1.3rem!important}
+      .qmark{font-size:1.4rem!important}
+      [style*="font-size:1.875rem"]{font-size:1.3rem!important}
+      [style*="font-size:1.75rem"]{font-size:1.25rem!important}
+      [style*="font-size:2rem"]{font-size:1.4rem!important}
+      [style*="font-size:2.2rem"]{font-size:1.5rem!important}
+      [style*="font-size:2.75rem"]{font-size:1.5rem!important}
+    }
   </style>
 </head>
 <body>
