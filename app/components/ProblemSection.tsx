@@ -93,8 +93,19 @@ function ProblemCard({ c }: { c: Item }) {
 }
 
 export default function ProblemSection() {
+  const [paused, setPaused] = useState(false);
   return (
-    <section className="z1 py-24" style={{ background: 'linear-gradient(160deg, #070F1C 0%, #0A1C35 50%, #080D18 100%)' }}>
+    <section className="z1 py-24" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        backgroundImage: 'url(https://www.contactspace.com/wp-content/uploads/ai-min-scaled.jpeg)',
+        backgroundSize: 'cover', backgroundPosition: 'center',
+      }} />
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        background: 'rgba(7,12,24,0.83)',
+      }} />
+      <div style={{ position: 'relative', zIndex: 1 }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="rev mb-10">
           <div className="lbl">The Problem</div>
@@ -105,9 +116,12 @@ export default function ProblemSection() {
             Tap each card to reveal the impact.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {problems.map((c, i) => <ProblemCard key={i} c={c} />)}
+        <div className="prob-marquee-outer" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+          <div className={`prob-marquee-track${paused ? ' paused' : ''}`}>
+            {[...problems, ...problems].map((c, i) => <ProblemCard key={i} c={c} />)}
+          </div>
         </div>
+      </div>
       </div>
     </section>
   );

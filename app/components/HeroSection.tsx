@@ -217,10 +217,23 @@ export default function HeroSection() {
 
   return (
     <section className="relative flex items-center overflow-hidden"
-      style={{ minHeight: '100svh', paddingTop: 60, background: 'linear-gradient(145deg,#060F1C 0%,#0A1C35 30%,#0D2448 60%,#0A1C35 85%,#060F1C 100%)' }}>
-      <canvas ref={canvasRef} id="hero-canvas" />
+      style={{ minHeight: '100svh', paddingTop: 60 }}>
+      {/* Animated background image */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: '-5%', zIndex: 0,
+        backgroundImage: 'url(https://cdn.vocallabs.ai/Blogs/6a18df1c-0c79-4edf-88d0-b15f92bfe699.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        animation: 'heroBgZoom 18s ease-in-out infinite',
+      }} />
+      {/* Dark overlay */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        background: 'linear-gradient(160deg, rgba(4,10,20,0.82) 0%, rgba(7,22,45,0.75) 50%, rgba(4,10,20,0.88) 100%)',
+      }} />
+      <canvas ref={canvasRef} id="hero-canvas" style={{ position: 'absolute', inset: 0, zIndex: 1 }} />
 
-      <div className="relative z-[1] max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+      <div className="relative z-[2] max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
         {/* Copy */}
         <div>
           <div className="lbl lbl-gold" style={{ marginBottom: '1.25rem' }}>AI-Powered Outbound System</div>

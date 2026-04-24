@@ -35,10 +35,22 @@ export default function VideoSection() {
     return () => clearInterval(id);
   }, [visible]);
 
+
   return (
-    <section ref={ref} className="z1 py-24" style={{ background: 'linear-gradient(160deg,#070F1C 0%,#0A1C35 60%,#070F1C 100%)' }}>
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="rev mb-12 text-center">
+    <section ref={ref} className="z1 py-14" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        aria-hidden="true"
+        src="https://t4.ftcdn.net/jpg/08/77/44/41/360_F_877444172_0YE7Uw597WGyl76tzOuu2Gq9uRg2qbsB.jpg"
+        alt=""
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+      />
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        background: 'linear-gradient(135deg, rgba(7,15,28,0.78) 0%, rgba(10,28,53,0.72) 60%, rgba(7,15,28,0.78) 100%)',
+      }} />
+      <div className="max-w-5xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="rev mb-6 text-center">
           <div className="lbl" style={{ justifyContent: 'center' }}>See It Work</div>
           <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
             How we booked <span style={{ color: 'var(--acc)' }}>14 calls in 28 days</span><br />for a SaaS founder.
@@ -50,19 +62,19 @@ export default function VideoSection() {
           {/* Left — process steps */}
           <div style={{
             background: 'rgba(13,36,68,0.6)', border: '1px solid rgba(0,209,255,0.18)',
-            borderRadius: 16, padding: '1.75rem', backdropFilter: 'blur(12px)',
+            borderRadius: 16, padding: '1.25rem', backdropFilter: 'blur(12px)',
           }}>
             <p className="font-mono" style={{ fontSize: '.62rem', color: 'var(--t3)', letterSpacing: '.14em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>
               CAMPAIGN TIMELINE
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '.625rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem' }}>
               {steps.map((s, i) => {
                 const done  = i < activeStep;
                 const isNow = i === activeStep;
                 return (
                   <div key={s.label} style={{
                     display: 'flex', alignItems: 'center', gap: '.875rem',
-                    padding: '.75rem 1rem', borderRadius: 10,
+                    padding: '.5rem .75rem', borderRadius: 10,
                     background: isNow ? `rgba(${s.color === '#22C55E' ? '34,197,94' : s.color === '#E8B84B' ? '232,184,75' : s.color === '#A78BFA' ? '167,139,250' : '0,209,255'},0.08)` : 'rgba(255,255,255,0.02)',
                     border: `1px solid ${isNow ? s.color + '55' : 'rgba(255,255,255,0.06)'}`,
                     transition: 'all .4s cubic-bezier(.16,1,.3,1)',
@@ -107,7 +119,7 @@ export default function VideoSection() {
           {/* Right — inbox feed */}
           <div style={{
             background: 'rgba(13,36,68,0.6)', border: '1px solid rgba(0,209,255,0.18)',
-            borderRadius: 16, padding: '1.75rem', backdropFilter: 'blur(12px)',
+            borderRadius: 16, padding: '1.25rem', backdropFilter: 'blur(12px)',
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
               <p className="font-mono" style={{ fontSize: '.62rem', color: 'var(--t3)', letterSpacing: '.14em', textTransform: 'uppercase' }}>
@@ -120,11 +132,11 @@ export default function VideoSection() {
               }}>2 new</span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem', marginBottom: '1rem' }}>
               {emails.map((e, i) => (
                 <div key={i} style={{
                   display: 'flex', alignItems: 'flex-start', gap: '.75rem',
-                  padding: '.75rem .875rem', borderRadius: 10,
+                  padding: '.5rem .75rem', borderRadius: 10,
                   background: e.open ? 'rgba(34,197,94,0.05)' : 'rgba(255,255,255,0.02)',
                   border: `1px solid ${e.open ? 'rgba(34,197,94,0.2)' : 'rgba(255,255,255,0.05)'}`,
                   animation: visible ? `fadeSlideDown .4s ${i * .1}s both` : 'none',

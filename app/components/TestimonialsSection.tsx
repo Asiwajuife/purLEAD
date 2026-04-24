@@ -245,14 +245,26 @@ function TestimonialCard({ t, onClick }: { t: Testimonial; onClick: () => void }
 
 export default function TestimonialsSection() {
   const [active, setActive] = useState<Testimonial | null>(null);
-  const row1 = [...testimonials.slice(0, 3), ...testimonials.slice(0, 3)];
-  const row2 = [...testimonials.slice(3), ...testimonials.slice(3)];
+  const row = [...testimonials, ...testimonials];
 
   return (
     <>
-      <section className="z1 py-24" style={{ background: 'linear-gradient(135deg,#0F2847 0%,#0B1F3A 100%)', overflow: 'hidden' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="rev mb-12">
+      <section className="z1 py-14" style={{ overflow: 'hidden', position: 'relative' }}>
+        {/* Background image layer */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, zIndex: 0,
+          backgroundImage: 'url(https://paeditorial.co.uk/wp-content/uploads/2025/07/AI-in-Peer-Review.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.18,
+        }} />
+        {/* Dark base overlay */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, zIndex: 0,
+          background: 'rgba(7,15,28,0.70)',
+        }} />
+        <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="rev mb-6">
             <div className="lbl lbl-gold">Client Results</div>
             <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
               Real businesses.<br /><span style={{ color: 'var(--gold)' }}>Real pipeline.</span>
@@ -263,17 +275,9 @@ export default function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Row 1 — scrolls left */}
-        <div className="testimonials-marquee" style={{ marginBottom: '1.25rem' }}>
+        <div className="testimonials-marquee" style={{ position: 'relative', zIndex: 1 }}>
           <div className="testimonial-track" style={{ display: 'flex', gap: '1.25rem' }}>
-            {row1.map((t, i) => <TestimonialCard key={i} t={t} onClick={() => setActive(t)} />)}
-          </div>
-        </div>
-
-        {/* Row 2 — scrolls right */}
-        <div className="testimonials-marquee">
-          <div className="testimonial-track-r" style={{ display: 'flex', gap: '1.25rem' }}>
-            {row2.map((t, i) => <TestimonialCard key={i} t={t} onClick={() => setActive(t)} />)}
+            {row.map((t, i) => <TestimonialCard key={i} t={t} onClick={() => setActive(t)} />)}
           </div>
         </div>
       </section>

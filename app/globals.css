@@ -432,20 +432,21 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 .contact-card:hover { background: #EEF2F7 !important; }
 
 /* ── Custom cursor ── */
-@media (pointer: fine) {
-  body, a, button, [data-interactive], label, input, select, textarea { cursor: none !important; }
-  #cur-ring {
-    position: fixed; top: 0; left: 0; width: 28px; height: 28px;
-    border: 2px solid #00D1FF; border-radius: 50%;
-    pointer-events: none; z-index: 99999;
-    transform: translate(-50%, -50%);
-    background: rgba(0,209,255,.08);
-    transition: width .22s cubic-bezier(.16,1,.3,1), height .22s cubic-bezier(.16,1,.3,1), background .2s, opacity .3s;
-    will-change: transform;
-  }
-  #cur-ring.hov { width: 44px; height: 44px; background: rgba(0,209,255,.12); }
-  #cur-ring.click { width: 18px; height: 18px; background: rgba(0,209,255,.25); }
-  #cur-ring.hidden { opacity: 0; }
+.custom-cursor-active * { cursor: none !important; }
+#cur-ring polygon { animation: cursorPulse 2s ease-in-out infinite; }
+#cur-ring.hov polygon { fill: #ffffff; filter: url(#cur-glow) drop-shadow(0 0 6px #00D1FF); }
+#cur-ring.click { transform: translate(-4px,-4px) scale(0.75) !important; }
+
+/* ── Why purLEAD panel — responsive grid ── */
+.why-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .why-panel { grid-template-columns: 1fr !important; }
+  .why-panel-illus { height: 160px !important; }
 }
 
 /* ── Mobile scale down ── */
@@ -455,18 +456,57 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .snum, .snum-gold { font-size: 1.25rem !important; }
   .gtee-num { font-size: 1.3rem !important; }
   .qmark { font-size: 1.4rem !important; }
+  /* ROI output */
+  .roi-out { padding: .75rem .4rem !important; }
+  .roi-big { font-size: .95rem !important; }
+  /* Comparison table */
+  .cmp-table th, .cmp-table td { padding: .4rem .5rem !important; font-size: .72rem !important; }
+  /* Toast — full-width at bottom */
+  #toast-wrap { left: .75rem !important; right: .75rem !important; width: auto !important; bottom: 5rem !important; }
+  /* Back-to-top — tuck above sticky bar */
+  #btt { bottom: 5rem !important; right: .75rem !important; }
+  /* Floating cal btn — above sticky bar */
+  .float-cal-btn { bottom: 5rem !important; right: .75rem !important; }
+  /* Sticky bar — condensed text */
+  .sticky-bar-hint { display: none; }
+  /* Cards — reduce padding */
+  .card { padding: 1rem !important; }
+  .pfinner.p-5 { padding: 1rem !important; }
+  /* Section px */
+  .px-6 { padding-left: 1rem !important; padding-right: 1rem !important; }
+  /* Modal full-screen on mobile */
+  .modal-box { padding: 1.25rem; max-height: 90vh; }
 }
 
 /* ── Problem reveal cards ── */
-.prob-flip { display: grid; cursor: pointer; }
-.prob-face { grid-area: 1 / 1; border-radius: 14px; transition: opacity .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1); }
-.prob-front { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
-.prob-back  { opacity: 0; transform: translateY(10px) scale(.97); pointer-events: none; }
-.prob-flip.flipped .prob-front { opacity: 0; transform: translateY(-10px) scale(.97); pointer-events: none; }
-.prob-flip.flipped .prob-back  { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
-.prob-face.card:hover { transform: none !important; }
+.prob-flip { perspective: 900px; cursor: pointer; }
+.prob-flip-inner {
+  display: grid; grid-template-columns: 1fr; width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.prob-flip.flipped .prob-flip-inner { transform: rotateY(180deg); }
+.prob-face { grid-row: 1; grid-column: 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; }
+.prob-back { transform: rotateY(180deg); }
 .prob-hint { opacity: .55; transition: opacity .2s; }
 .prob-flip.flipped .prob-hint { opacity: 0; }
+
+/* ── Problem marquee ── */
+.prob-marquee-outer {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.prob-marquee-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: probScroll 40s linear infinite;
+}
+.prob-marquee-track.paused { animation-play-state: paused; }
+.prob-marquee-track .rev { animation: none; opacity: 1; transform: none; }
+.prob-marquee-track .prob-flip { width: 270px; flex-shrink: 0; }
 
 /* ── How It Works interactive ── */
 .how-track { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 .5rem; }
@@ -512,6 +552,16 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 @keyframes stepIconPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
 @keyframes stepIconBob   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 @keyframes stepIconWag   { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-10deg)} 75%{transform:rotate(10deg)} }
+@keyframes cursorPulse   { 0%,100%{opacity:0.85} 50%{opacity:1} }
+@keyframes probScroll    { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes heroBgZoom {
+  0%   { transform: scale(1)    translateX(0)   translateY(0);   }
+  25%  { transform: scale(1.05) translateX(-2%) translateY(-1%); }
+  50%  { transform: scale(1.08) translateX(-1%) translateY(-2%); }
+  75%  { transform: scale(1.05) translateX(1%)  translateY(-1%); }
+  100% { transform: scale(1)    translateX(0)   translateY(0);   }
+}
+@keyframes fillBar       { from{transform:scaleX(0)} to{transform:scaleX(1)} }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {

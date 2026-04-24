@@ -14,17 +14,22 @@ export default function ConversionLayer() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Exit intent — fires once per session */
+  /* Exit intent — fires only after 3 minutes on page */
   useEffect(() => {
     if (sessionStorage.getItem('exitShown')) return;
+    let readyToFire = false;
+    const timer = setTimeout(() => { readyToFire = true; }, 3 * 60 * 1000);
     function onMouseLeave(e: MouseEvent) {
-      if (e.clientY < 20) {
+      if (e.clientY < 20 && readyToFire) {
         setShowExit(true);
         sessionStorage.setItem('exitShown', '1');
       }
     }
     document.addEventListener('mouseleave', onMouseLeave);
-    return () => document.removeEventListener('mouseleave', onMouseLeave);
+    return () => {
+      document.removeEventListener('mouseleave', onMouseLeave);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -64,7 +69,7 @@ export default function ConversionLayer() {
       >
         <p style={{ fontSize: '.875rem', color: 'var(--t2)', fontWeight: 500, flex: 1, minWidth: 0 }}>
           <span style={{ color: 'var(--t1)', fontWeight: 700 }}>Ready to fill your calendar?</span>
-          {' '}Book a 15-min strategy call — free.
+          <span className="sticky-bar-hint">{' '}Book a 15-min strategy call — free.</span>
         </p>
         <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
            className="btn-p text-sm px-5 py-2.5 whitespace-nowrap" style={{ flexShrink: 0 }}>

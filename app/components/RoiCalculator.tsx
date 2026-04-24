@@ -99,14 +99,25 @@ export default function RoiCalculator() {
   });
 
   return (
-    <section ref={sectionRef} className="z1 py-24 light-section">
-      <div className="max-w-4xl mx-auto px-6">
+    <section ref={sectionRef} className="z1 py-24 light-section" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        aria-hidden="true"
+        src="https://img.freepik.com/premium-vector/abstract-artificial-intelligence-brain_33403-43.jpg"
+        alt=""
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+      />
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        background: 'rgba(255,255,255,0.6)',
+      }} />
+      <div className="max-w-4xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
         <div className="rev mb-10">
-          <div className="lbl">ROI Calculator</div>
-          <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '.6rem' }}>
+          <div className="lbl" style={{ color: '#0F172A', borderColor: 'rgba(0,0,0,0.15)' }}>ROI Calculator</div>
+          <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '.6rem', color: '#0F172A' }}>
             See your numbers<br /><span style={{ color: 'var(--acc)' }}>before you commit.</span>
           </h2>
-          <p style={{ color: 'var(--t2)', fontSize: '.9375rem', maxWidth: '48ch' }}>Move the sliders to match your business. The math updates instantly.</p>
+          <p style={{ color: '#334155', fontSize: '.9375rem', maxWidth: '48ch' }}>Move the sliders to match your business. The math updates instantly.</p>
         </div>
         <div className="rev card p-7">
           <div className="grid md:grid-cols-2 gap-x-10 gap-y-6 mb-8">

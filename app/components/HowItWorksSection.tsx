@@ -59,8 +59,18 @@ export default function HowItWorksSection() {
   useEffect(() => () => { if (resetTimer.current) clearTimeout(resetTimer.current); }, []);
 
   return (
-    <section id="how" className="z1 py-24" style={{ background: 'linear-gradient(135deg,#0B1F3A 0%,#0F2847 100%)' }}>
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="how" className="z1 py-24" style={{
+      backgroundImage: 'url(https://i0.wp.com/outboundsalespro.com/wp-content/uploads/2025/11/3.jpg?resize=993.75%2C559&ssl=1)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+      position: 'relative',
+    }}>
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        background: 'linear-gradient(160deg, rgba(7,15,28,0.88) 0%, rgba(10,28,53,0.83) 100%)',
+      }} />
+      <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
         <div className="rev mb-10">
           <div className="lbl">The Process</div>
           <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>

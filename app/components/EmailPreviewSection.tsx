@@ -23,17 +23,28 @@ export default function EmailPreviewSection() {
   );
 
   return (
-    <section className="z1 py-24 light-section">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="z1 py-24 light-section" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        aria-hidden="true"
+        src="https://t3.ftcdn.net/jpg/07/69/73/28/360_F_769732816_wJtrCLNzSffmJn20BdW36sbraDQgPnqj.jpg"
+        alt=""
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+      />
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        background: 'rgba(255,255,255,0.55)',
+      }} />
+      <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
         <div className="grid md:grid-cols-2 gap-14 items-center">
 
           {/* Left copy */}
           <div className="rev">
-            <div className="lbl">What It Looks Like</div>
-            <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '1.25rem' }}>
+            <div className="lbl" style={{ color: '#0F172A', borderColor: 'rgba(0,0,0,0.15)' }}>What It Looks Like</div>
+            <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '1.25rem', color: '#0F172A' }}>
               This lands in your<br />prospect&rsquo;s inbox &mdash;<br /><span style={{ color: 'var(--acc)' }}>and gets replies.</span>
             </h2>
-            <p style={{ fontSize: '.9375rem', lineHeight: 1.7, maxWidth: '44ch', color: 'var(--t2)', marginBottom: '1.5rem' }}>
+            <p style={{ fontSize: '.9375rem', lineHeight: 1.7, maxWidth: '44ch', color: '#334155', marginBottom: '1.5rem' }}>
               Every message references something real about the prospect &mdash; their company news, funding, LinkedIn activity, or specific pain. It doesn&rsquo;t read like a template because it isn&rsquo;t one.
             </p>
             <ul className="space-y-2.5">
@@ -43,7 +54,7 @@ export default function EmailPreviewSection() {
                 'Deliverability-optimized domain & inbox',
                 '3-touch sequence fully managed for you',
               ].map((item, i) => (
-                <li key={item} className="rev flex items-center gap-2.5 text-sm" style={{ color: 'var(--t2)', transitionDelay: `${.1 + i * .08}s` }}>
+                <li key={item} className="rev flex items-center gap-2.5 text-sm" style={{ color: '#334155', transitionDelay: `${.1 + i * .08}s` }}>
                   <span style={{ color: 'var(--acc)', fontSize: 10 }}>&#9679;</span> {item}
                 </li>
               ))}

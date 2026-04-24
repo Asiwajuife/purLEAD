@@ -1,4 +1,4 @@
-import AnnouncementBar from './components/AnnouncementBar';
+﻿import AnnouncementBar from './components/AnnouncementBar';
 import NavBar from './components/NavBar';
 import AmbientOrbs from './components/AmbientOrbs';
 import HeroSection from './components/HeroSection';
@@ -16,6 +16,9 @@ import CustomCursor from './components/CustomCursor';
 import ToastProvider from './components/ToastProvider';
 import PageEffects from './components/PageEffects';
 import ConversionLayer from './components/ConversionLayer';
+import WhyPurLEADSection from './components/WhyPurLEADSection';
+import SolutionSection from './components/SolutionSection';
+import IntegrationsSection from './components/IntegrationsSection';
 
 export default function Home() {
   return (
@@ -39,8 +42,8 @@ export default function Home() {
         <div className="z1 overflow-hidden py-3" style={{ background: 'linear-gradient(90deg,#071626,#0D2444,#071626)', borderTop: '1px solid rgba(232,184,75,.12)', borderBottom: '1px solid rgba(0,209,255,.1)' }}>
           <div className="flex overflow-hidden select-none">
             <div className="ticker-track text-xs font-medium" style={{ color: 'rgba(148,163,184,0.55)', letterSpacing: '.04em' }}>
-              <span>&bull;&ensp;SaaS Companies</span><span>&bull;&ensp;Consulting Firms</span><span>&bull;&ensp;FinTech Startups</span><span>&bull;&ensp;Professional Services</span><span>&bull;&ensp;Media Agencies</span><span>&bull;&ensp;Solo Operators</span><span>&bull;&ensp;B2B Service Businesses</span><span style={{ color: 'rgba(232,184,75,.75)', fontWeight: 700 }}>&bull;&ensp;47 Clients Served</span><span style={{ color: 'rgba(34,197,94,.7)', fontWeight: 600 }}>&bull;&ensp;$1.8M+ Pipeline Generated</span>
-              <span>&bull;&ensp;SaaS Companies</span><span>&bull;&ensp;Consulting Firms</span><span>&bull;&ensp;FinTech Startups</span><span>&bull;&ensp;Professional Services</span><span>&bull;&ensp;Media Agencies</span><span>&bull;&ensp;Solo Operators</span><span>&bull;&ensp;B2B Service Businesses</span><span style={{ color: 'rgba(232,184,75,.75)', fontWeight: 700 }}>&bull;&ensp;47 Clients Served</span><span style={{ color: 'rgba(34,197,94,.7)', fontWeight: 600 }}>&bull;&ensp;$1.8M+ Pipeline Generated</span>
+              <span>&bull;&ensp;SaaS Companies</span><span>&bull;&ensp;Consulting Firms</span><span>&bull;&ensp;FinTech Startups</span><span>&bull;&ensp;Professional Services</span><span>&bull;&ensp;Media Agencies</span><span>&bull;&ensp;Solo Operators</span><span>&bull;&ensp;B2B Service Businesses</span><span style={{ color: 'rgba(232,184,75,.75)', fontWeight: 700 }}>&bull;&ensp;47 Clients Served</span><span style={{ color: 'rgba(34,197,94,.7)', fontWeight: 600 }}>&bull;&ensp;$800K+ Pipeline Generated</span>
+              <span>&bull;&ensp;SaaS Companies</span><span>&bull;&ensp;Consulting Firms</span><span>&bull;&ensp;FinTech Startups</span><span>&bull;&ensp;Professional Services</span><span>&bull;&ensp;Media Agencies</span><span>&bull;&ensp;Solo Operators</span><span>&bull;&ensp;B2B Service Businesses</span><span style={{ color: 'rgba(232,184,75,.75)', fontWeight: 700 }}>&bull;&ensp;47 Clients Served</span><span style={{ color: 'rgba(34,197,94,.7)', fontWeight: 600 }}>&bull;&ensp;$800K+ Pipeline Generated</span>
             </div>
           </div>
         </div>
@@ -49,77 +52,11 @@ export default function Home() {
 
         <hr className="hdiv" />
 
-        {/* Solution */}
-        <section className="z1 py-24" style={{ background: 'linear-gradient(160deg,var(--surf) 0%,#0B1F3A 100%)' }}>
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid md:grid-cols-2 gap-16 items-start">
-              <div className="rev">
-                <div className="lbl lbl-gold">The Solution</div>
-                <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '1.25rem' }}>
-                  Meet purLEAD &mdash;<br />your AI outbound<br /><span style={{ color: 'var(--gold)' }}>engine.</span>
-                </h2>
-                <p style={{ fontSize: '.9375rem', lineHeight: 1.7, maxWidth: '44ch', marginBottom: '1rem', color: 'var(--t2)' }}>
-                  purLEAD builds and operates a fully AI-personalized outbound system. We identify ideal clients, craft hyper-personalized sequences, warm your sending infrastructure, and book qualified calls directly into your calendar.
-                </p>
-                <p style={{ fontSize: '.9375rem', lineHeight: 1.7, maxWidth: '44ch', marginBottom: '1.75rem', color: 'var(--t2)' }}>
-                  No templates. No spray-and-pray. Every message is crafted with AI precision around each prospect&rsquo;s specific context &mdash; so it reads like your best sales rep wrote it, at scale.
-                </p>
-                <ul className="space-y-2.5">
-                  {['Done-for-you. Zero lift on your end.', 'AI-personalized at every touchpoint', 'Results in 30\u201345 days, not 6 months', 'Full transparency \u2014 you own all data'].map(item => (
-                    <li key={item} className="flex items-center gap-2.5 text-sm" style={{ color: 'var(--t2)' }}>
-                      <span style={{ width: 16, height: 16, background: 'rgba(34,197,94,.12)', border: '1px solid rgba(34,197,94,.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cta)', fontSize: 8, flexShrink: 0 }}>&#10003;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rev grid grid-cols-2 gap-3" style={{ transitionDelay: '.1s' }}>
-                {[
-                  { count: 12, suffix: '+', label: 'Meetings/month avg.', color: 'var(--t1)', barColor: 'var(--acc)' },
-                  { count: 41, suffix: '%', label: 'Open rate (2\xd7 industry)', color: 'var(--t1)', barColor: 'var(--acc)' },
-                  { count: 6,  suffix: '%+ reply', label: 'Positive reply rate', color: 'var(--t1)', barColor: 'var(--acc)' },
-                  { count: 3,  suffix: ' weeks', label: 'Time to first booked call', color: 'var(--cta)', barColor: 'var(--cta)' },
-                ].map((s, i) => (
-                  <div key={i} className="p-7 card" style={{ borderColor: i === 3 ? 'rgba(34,197,94,.25)' : 'rgba(0,209,255,.2)' }}>
-                    <div className="snum" data-count={s.count} data-suffix={s.suffix} style={{ color: s.color }}>0{s.suffix}</div>
-                    <div className="sbar" style={{ background: s.barColor }} />
-                    <div className="font-mono text-xs" style={{ color: 'var(--t3)', letterSpacing: '.07em', textTransform: 'uppercase' }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <SolutionSection />
 
         <hr className="hdiv" />
 
-        {/* Integrations */}
-        <section className="z1 py-12 light-section">
-          <div className="max-w-5xl mx-auto px-6">
-            <p className="rev font-mono text-xs text-center mb-7" style={{ color: 'var(--t3)', letterSpacing: '.14em', textTransform: 'uppercase' }}>Connects with your existing stack &mdash; no rip-and-replace</p>
-            <div className="rev flex flex-wrap items-center justify-center gap-3">
-              {[
-                { name: 'HubSpot',    color: '#FF7A59' },
-                { name: 'Salesforce', color: '#00A1E0' },
-                { name: 'Apollo.io',  color: '#7C3AED' },
-                { name: 'Clay',       color: '#A855F7' },
-                { name: 'Instantly',  color: 'var(--acc)' },
-                { name: 'Slack',      color: '#E01E5A' },
-                { name: 'LinkedIn',   color: '#0A66C2' },
-                { name: 'Gmail',      color: '#EA4335' },
-                { name: 'Zapier',     color: '#22C55E' },
-                { name: 'Pipedrive',  color: '#0052CC' },
-                { name: 'Smartlead', color: '#34d399' },
-                { name: 'Notion',     color: '#818cf8' },
-              ].map(p => (
-                <div key={p.name} className="int-pill">
-                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: p.color, display: 'inline-block', flexShrink: 0 }} />
-                  <span className="font-mono text-xs" style={{ color: 'var(--t2)' }}>{p.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <IntegrationsSection />
 
         <hr className="hdiv" />
 
@@ -135,96 +72,49 @@ export default function Home() {
 
         <hr className="hdiv" />
 
-        {/* Benefits */}
-        <section className="z1 py-24 light-section">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="rev mb-12">
-              <div className="lbl">Why purLEAD</div>
-              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
-                Built for businesses<br />serious about <span style={{ color: 'var(--acc)' }}>growth.</span>
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 gap-3">
-              {[
-                {
-                  delay: '0s',
-                  svg: <><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></>,
-                  title: 'AI-Personalized at Scale',
-                  body: 'Every email references something real \u2014 company news, role, recent activity, or pain. Not a mail-merge. Actual intelligence.',
-                },
-                {
-                  delay: '.06s',
-                  svg: <><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></>,
-                  title: 'Calls Booked, Not Just Leads',
-                  body: "We don\u2019t hand you a list and call it a day. We manage responses and get qualified prospects scheduled so you show up and close.",
-                },
-                {
-                  delay: '.12s',
-                  svg: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />,
-                  title: 'Faster Than Any Hire',
-                  body: 'An SDR takes 90 days to ramp. purLEAD is live in 2 weeks and booking in 30. No recruiting, no onboarding, no overhead.',
-                },
-                {
-                  delay: '.18s',
-                  svg: <><path d="M3 3v18h18"/><path d="M9 17V9l4 4 4-8"/></>,
-                  title: 'Full Accountability',
-                  body: "Weekly reporting. Transparent metrics. You always know what\u2019s sending, what\u2019s working, and what we\u2019re optimizing. No black boxes.",
-                },
-                {
-                  delay: '.24s',
-                  svg: <><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></>,
-                  title: 'Precision Targeting',
-                  body: 'We build targeted, verified prospect lists from premium data sources. Only real decision-makers matching your ICP enter the pipeline.',
-                },
-                {
-                  delay: '.3s',
-                  svg: <><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></>,
-                  title: 'Continuously Optimized',
-                  body: 'Our system learns as it runs. We test, iterate, and improve reply rates every week. Your outbound gets sharper over time, not stale.',
-                },
-              ].map((b, i) => (
-                <div key={i} className="rev tilt card p-6 flex gap-4" style={{ transitionDelay: b.delay }}>
-                  <div className="ib">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{b.svg}</svg>
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold mb-1.5" style={{ color: 'var(--t1)', fontSize: '.9375rem' }}>{b.title}</h3>
-                    <p style={{ fontSize: '.8375rem', lineHeight: 1.65, color: 'var(--t2)' }}>{b.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <WhyPurLEADSection />
 
         <hr className="hdiv" />
 
         {/* Results Metrics */}
         <section className="z1 py-24" style={{ background: 'linear-gradient(135deg,#0A1C35 0%,#0C2044 60%,#0A1C35 100%)', position: 'relative' }}>
           <div className="max-w-6xl mx-auto px-6">
-            <div className="rev text-center mb-12">
-              <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex' }}>Aggregate Results</div>
-              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginTop: '.5rem' }}>
-                Numbers don&rsquo;t lie.<br /><span style={{ color: 'var(--gold)' }}>Ours don&rsquo;t either.</span>
-              </h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 rev">
-              <div className="p-8 text-center card" style={{ borderColor: 'rgba(232,184,75,.3)', background: 'linear-gradient(160deg,rgba(232,184,75,.08),rgba(13,36,68,.65))' }}>
-                <div className="font-display font-extrabold" style={{ fontSize: '1.875rem', color: 'var(--gold)', lineHeight: 1 }}>$1.8M+</div>
-                <div style={{ width: 32, height: 2, background: 'var(--gold)', borderRadius: 1, margin: '.6rem auto .5rem' }} />
-                <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>Pipeline Generated</div>
+            <div className="rev grid md:grid-cols-[45%_55%] gap-10 items-stretch">
+              {/* LEFT: image */}
+              <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(232,184,75,0.25)', boxShadow: '0 0 60px rgba(232,184,75,0.1)', position: 'relative', minHeight: 340 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D5612AQE59nh9oSZKrw/article-cover_image-shrink_720_1280/B56ZqISEuKJ8AI-/0/1763223031917?e=2147483647&v=beta&t=CFVHxen3Puq4nciKrtfvjFP5NV8ra1N-NoZPGQkLQFM"
+                  alt="AI-powered results"
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 60%, rgba(10,28,53,0.6) 100%)' }} />
               </div>
-              {[
-                { count: 620, suffix: '',  label: 'Meetings Booked' },
-                { count: 34,  suffix: '',  label: 'Active Clients' },
-                { count: 87,  suffix: '%', label: 'Client Retention' },
-              ].map((s, i) => (
-                <div key={i} className="p-8 text-center card">
-                  <div className="snum" data-count={s.count} data-suffix={s.suffix} style={{ fontSize: '1.75rem' }}>0{s.suffix}</div>
-                  <div style={{ width: 32, height: 2, background: 'var(--acc)', borderRadius: 1, margin: '.6rem auto .5rem' }} />
-                  <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>{s.label}</div>
+              {/* RIGHT: heading + stats */}
+              <div>
+                <div className="lbl lbl-gold">Aggregate Results</div>
+                <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginTop: '.5rem', marginBottom: '1.5rem' }}>
+                  Numbers don&rsquo;t lie.<br /><span style={{ color: 'var(--gold)' }}>Ours don&rsquo;t either.</span>
+                </h2>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-6 text-center card" style={{ borderColor: 'rgba(232,184,75,.3)', background: 'linear-gradient(160deg,rgba(232,184,75,.08),rgba(13,36,68,.65))' }}>
+                    <div className="font-display font-extrabold" style={{ fontSize: '1.875rem', color: 'var(--gold)', lineHeight: 1 }}>$800K+</div>
+                    <div style={{ width: 32, height: 2, background: 'var(--gold)', borderRadius: 1, margin: '.6rem auto .5rem' }} />
+                    <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>Pipeline Generated</div>
+                  </div>
+                  {[
+                    { count: 620, suffix: '',  label: 'Meetings Booked' },
+                    { count: 34,  suffix: '',  label: 'Active Clients' },
+                    { count: 87,  suffix: '%', label: 'Client Retention' },
+                  ].map((s, i) => (
+                    <div key={i} className="p-6 text-center card">
+                      <div className="snum" data-count={s.count} data-suffix={s.suffix} style={{ fontSize: '1.75rem' }}>0{s.suffix}</div>
+                      <div style={{ width: 32, height: 2, background: 'var(--acc)', borderRadius: 1, margin: '.6rem auto .5rem' }} />
+                      <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>{s.label}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
@@ -232,17 +122,29 @@ export default function Home() {
         <hr className="hdiv" />
 
         {/* Comparison Table */}
-        <section className="z1 py-24 light-section">
-          <div className="max-w-5xl mx-auto px-6">
+        <section className="z1 py-24 light-section" style={{ position: 'relative', overflow: 'hidden' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            aria-hidden="true"
+            src="https://as1.ftcdn.net/jpg/01/56/32/36/1000_F_156323698_IuUwv2hjH8vt1SsUwdOUZHPm7iQ1tq11.jpg"
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+          />
+          <div aria-hidden="true" style={{
+            position: 'absolute', inset: 0, zIndex: 0,
+            background: 'rgba(255,255,255,0.72)',
+          }} />
+          <div className="max-w-5xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
             <div className="rev mb-12">
-              <div className="lbl">How We Compare</div>
-              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
+              <div className="lbl" style={{ color: '#0F172A', borderColor: 'rgba(0,0,0,0.15)' }}>How We Compare</div>
+              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', color: '#0F172A' }}>
                 The honest <span style={{ color: 'var(--acc)' }}>comparison.</span>
               </h2>
-              <p style={{ color: 'var(--t2)', marginTop: '.5rem', fontSize: '.9375rem', maxWidth: '48ch' }}>We built this table ourselves. You should pressure-test it.</p>
+              <p style={{ color: '#334155', marginTop: '.5rem', fontSize: '.9375rem', maxWidth: '48ch' }}>We built this table ourselves. You should pressure-test it.</p>
             </div>
-            <div className="rev overflow-x-auto" style={{ border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
-              <table className="cmp-table">
+            <div className="rev" style={{ border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
+            <div className="overflow-x-auto">
+              <table className="cmp-table" style={{ minWidth: 520 }}>
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left', width: '28%' }}>Criteria</th>
@@ -274,6 +176,7 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
+            </div>
           </div>
         </section>
 
@@ -284,27 +187,41 @@ export default function Home() {
         <hr className="hdiv" />
 
         {/* Guarantee */}
-        <section className="z1 py-24" style={{ background: 'linear-gradient(160deg,#0A1C35 0%,#0E2340 60%,#0A1C35 100%)', position: 'relative' }}>
+        <section className="z1 py-14" style={{ background: 'linear-gradient(160deg,#0A1C35 0%,#0E2340 60%,#0A1C35 100%)', position: 'relative' }}>
           <div className="max-w-5xl mx-auto px-6">
-            <div className="rev text-center mb-12">
-              <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex' }}>Risk-Free Commitment</div>
-              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginTop: '.5rem' }}>
-                We only win<br /><span style={{ color: 'var(--gold)' }}>when you win.</span>
-              </h2>
-              <p style={{ color: 'var(--t2)', marginTop: '.75rem', fontSize: '.9375rem', maxWidth: '46ch', marginLeft: 'auto', marginRight: 'auto' }}>Three promises we make to every client before they sign a single thing.</p>
-            </div>
-            <div className="rev grid md:grid-cols-3 gap-4">
-              {[
-                { num: '45',   tag: 'Day Guarantee',            body: "If we haven\u2019t booked your first qualified call within 45 days of launch, you don\u2019t pay for month two. No questions asked." },
-                { num: '100%', tag: 'Transparent Reporting',    body: "Weekly reports showing exactly what was sent, what replied, and what we\u2019re doing about it. Every campaign, every metric, every week." },
-                { num: '0',    tag: 'Lock-in After Month 3',   body: "After the initial 3-month window, it\u2019s fully month-to-month. Our clients stay because they see results \u2014 not because they\u2019re locked in." },
-              ].map((g, i) => (
-                <div key={i} className="gtee">
-                  <div className="gtee-num mb-2">{g.num}</div>
-                  <div className="font-mono text-xs mb-3" style={{ color: 'var(--gold)', letterSpacing: '.1em', textTransform: 'uppercase' }}>{g.tag}</div>
-                  <p style={{ fontSize: '.875rem', lineHeight: 1.7, color: 'var(--t2)' }}>{g.body}</p>
+            <div className="rev grid md:grid-cols-[58%_42%] gap-10 items-center">
+              {/* Left: all text + cards */}
+              <div>
+                <div className="lbl lbl-gold">Risk-Free Commitment</div>
+                <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginTop: '.5rem' }}>
+                  We only win<br /><span style={{ color: 'var(--gold)' }}>when you win.</span>
+                </h2>
+                <p style={{ color: 'var(--t2)', marginTop: '.75rem', fontSize: '.9rem', maxWidth: '46ch', marginBottom: '1rem' }}>
+                  Three promises we make to every client before they sign a single thing.
+                </p>
+                <div className="flex flex-col gap-2">
+                  {[
+                    { num: '45',   tag: 'Day Guarantee',          body: "If we haven't booked your first qualified call within 45 days of launch, you don't pay for month two. No questions asked." },
+                    { num: '100%', tag: 'Transparent Reporting',  body: "Weekly reports showing exactly what was sent, what replied, and what we're doing about it. Every campaign, every metric." },
+                    { num: '0',    tag: 'Lock-in After Month 3',  body: "After the initial 3-month window, it's fully month-to-month. Our clients stay because they see results \u2014 not because they're locked in." },
+                  ].map((g, i) => (
+                    <div key={i} className="gtee" style={{ padding: '.75rem 1rem' }}>
+                      <div className="gtee-num" style={{ fontSize: '1.2rem', marginBottom: '.15rem' }}>{g.num}</div>
+                      <div className="font-mono" style={{ fontSize: '.6rem', color: 'var(--gold)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: '.35rem' }}>{g.tag}</div>
+                      <p style={{ fontSize: '.82rem', lineHeight: 1.65, color: 'var(--t2)', margin: 0 }}>{g.body}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+              {/* Right: image */}
+              <div className="hidden md:block" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', height: '100%', minHeight: 280 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://www.ringcentral.com/gb/en/blog/wp-content/uploads/2024/09/ai-powered-predictive-dialers-in-contact-centre-790x415.jpg"
+                  alt="AI-powered outbound in action"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', minHeight: 280 }}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -381,24 +298,42 @@ export default function Home() {
         </section>
 
         {/* Final CTA */}
-        <section className="z1 py-28" style={{ background: 'linear-gradient(160deg,#071526 0%,#0A1C35 40%,#0C2040 70%,#071526 100%)', position: 'relative' }}>
-          <div className="max-w-2xl mx-auto px-6 text-center" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="rev">
-              <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex', marginBottom: '1rem' }}>
+        <section className="z1 py-16" style={{ position: 'relative', overflow: 'hidden' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            aria-hidden="true"
+            src="https://plaksha.edu.in/blog/storage/ai-image-2.jpeg"
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+          />
+          <div aria-hidden="true" style={{
+            position: 'absolute', inset: 0, zIndex: 0,
+            background: 'linear-gradient(160deg, rgba(7,21,38,0.82) 0%, rgba(10,28,53,0.76) 50%, rgba(7,21,38,0.82) 100%)',
+          }} />
+          <div className="max-w-xl mx-auto px-6 text-center" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="rev" style={{
+              background: 'rgba(13,36,68,0.7)',
+              border: '1px solid rgba(0,209,255,0.2)',
+              borderTop: '2px solid rgba(0,209,255,0.5)',
+              borderRadius: 18,
+              padding: '2rem',
+              backdropFilter: 'blur(12px)',
+            }}>
+              <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex', marginBottom: '.75rem', fontSize: '.6rem' }}>
                 Now Accepting New Clients
               </div>
-              <h2 className="font-display font-extrabold" style={{ fontSize: 'clamp(1.5rem,2.8vw,2.2rem)', lineHeight: 1.1, letterSpacing: '-.02em', color: 'var(--t1)', marginBottom: '1.25rem' }}>
+              <h2 className="font-display font-extrabold" style={{ fontSize: 'clamp(1.15rem,2vw,1.5rem)', lineHeight: 1.15, letterSpacing: '-.02em', color: 'var(--t1)', marginBottom: '.75rem' }}>
                 Your next 15 sales calls<br /><span style={{ color: 'var(--gold)' }}>are waiting.</span>
               </h2>
-              <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--t2)', maxWidth: '46ch', margin: '0 auto 2rem' }}>
-                Book a free 30-minute strategy call and we&rsquo;ll show you exactly how many meetings purLEAD can generate for your business &mdash; and how fast.
+              <p style={{ fontSize: '.875rem', lineHeight: 1.65, color: 'var(--t2)', maxWidth: '38ch', margin: '0 auto 1.5rem' }}>
+                Book a free 30-min strategy call. We&rsquo;ll show you exactly how many meetings purLEAD can generate &mdash; and how fast.
               </p>
               <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
-                className="btn-p mag inline-flex items-center gap-2.5" style={{ fontSize: '.9375rem', padding: '1rem 2.5rem' }}>
+                className="btn-p mag inline-flex items-center gap-2" style={{ fontSize: '.875rem', padding: '.8rem 2rem' }}>
                 Book My Free Strategy Call
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </a>
-              <p className="mt-5 text-sm" style={{ color: 'var(--t3)' }}>No sales pressure &bull; No commitment &bull; Results or you don&rsquo;t pay month two.</p>
+              <p className="mt-4 text-xs" style={{ color: 'var(--t3)' }}>No sales pressure &bull; No commitment &bull; Results or you don&rsquo;t pay month two.</p>
             </div>
           </div>
         </section>

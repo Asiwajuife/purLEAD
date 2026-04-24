@@ -15,32 +15,53 @@ export default function FaqSection() {
 
   return (
     <section id="faq" className="z1 py-24 light-section">
-      <div className="max-w-2xl mx-auto px-6">
-        <div className="rev mb-10">
-          <div className="lbl">FAQ</div>
-          <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
-            Questions we get <span style={{ color: 'var(--acc)' }}>a lot.</span>
-          </h2>
-        </div>
-        <div style={{ border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
-          {items.map((item, i) => {
-            const isOpen = openIdx === i;
-            return (
-              <div key={i} className="rev faq-item" style={{ borderBottom: i < items.length - 1 ? '1px solid var(--border)' : 'none', transitionDelay: `${i * .04}s` }}>
-                <div className="faq-trigger flex items-center justify-between px-6 py-4 select-none cursor-pointer"
-                  style={{ transition: 'background .15s' }}
-                  onClick={() => setOpenIdx(isOpen ? null : i)}>
-                  <span className="font-display font-semibold text-sm" style={{ color: 'var(--t1)' }}>{item.q}</span>
-                  <span className="text-lg leading-none shrink-0 ml-3"
-                    style={{ color: 'var(--acc)', transform: isOpen ? 'rotate(45deg)' : '', transition: 'transform .25s' }}>+</span>
-                </div>
-                <div className={`fa px-6 text-sm leading-relaxed${isOpen ? ' open' : ''}`}
-                  style={{ color: 'var(--t2)', paddingBottom: isOpen ? '1.25rem' : 0 }}>
-                  {item.a}
-                </div>
-              </div>
-            );
-          })}
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-[55%_45%] gap-12 items-start">
+          {/* LEFT: heading + accordion */}
+          <div>
+            <div className="rev mb-10">
+              <div className="lbl">FAQ</div>
+              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
+                Questions we get <span style={{ color: 'var(--acc)' }}>a lot.</span>
+              </h2>
+            </div>
+            <div style={{ border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
+              {items.map((item, i) => {
+                const isOpen = openIdx === i;
+                return (
+                  <div key={i} className="rev faq-item" style={{ borderBottom: i < items.length - 1 ? '1px solid var(--border)' : 'none', transitionDelay: `${i * .04}s` }}>
+                    <div className="faq-trigger flex items-center justify-between px-6 py-4 select-none cursor-pointer"
+                      style={{ transition: 'background .15s' }}
+                      onClick={() => setOpenIdx(isOpen ? null : i)}>
+                      <span className="font-display font-semibold text-sm" style={{ color: 'var(--t1)' }}>{item.q}</span>
+                      <span className="text-lg leading-none shrink-0 ml-3"
+                        style={{ color: 'var(--acc)', transform: isOpen ? 'rotate(45deg)' : '', transition: 'transform .25s' }}>+</span>
+                    </div>
+                    <div className={`fa px-6 text-sm leading-relaxed${isOpen ? ' open' : ''}`}
+                      style={{ color: 'var(--t2)', paddingBottom: isOpen ? '1.25rem' : 0 }}>
+                      {item.a}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* RIGHT: sticky image */}
+          <div className="hidden md:block" style={{ position: 'sticky', top: '6rem' }}>
+            <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.2)', boxShadow: '0 0 50px rgba(0,209,255,0.1)' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://img.freepik.com/premium-photo/robot-hand-with-question-mark-digital-binary-code-background_3972-11.jpg?w=360"
+                alt="AI assistant"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
+            <p style={{ marginTop: '1rem', fontSize: '.82rem', color: 'var(--t3)', textAlign: 'center', fontFamily: 'monospace', letterSpacing: '.05em' }}>
+              Have a question not listed?<br />
+              <a href="mailto:hello@purlead.co" style={{ color: 'var(--acc)' }}>hello@purlead.co</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
