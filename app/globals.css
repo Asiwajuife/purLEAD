@@ -470,7 +470,23 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .prob-front { transition: opacity .35s; }
   .prob-flip.flipped .prob-front { opacity: 0; }
   .prob-flip.flipped .prob-back { opacity: 1; }
+  /* ── Nav: always show background on mobile ── */
+  #main-nav { background: rgba(11,31,58,0.97) !important; }
+  /* ── Problem marquee: disable animation, show as wrapping grid ── */
+  .prob-marquee-outer { overflow: visible !important; mask-image: none !important; -webkit-mask-image: none !important; }
+  .prob-marquee-track { animation: none !important; transform: none !important; flex-wrap: wrap !important; width: 100% !important; gap: .75rem !important; }
+  .prob-marquee-track > *:nth-child(n+7) { display: none !important; }
+  .prob-marquee-track .prob-flip { width: 100% !important; flex-shrink: 1 !important; }
+  /* ── Testimonials: horizontal scroll instead of animated marquee ── */
+  .testimonials-sect { overflow-x: auto !important; -webkit-overflow-scrolling: touch; padding-bottom: .75rem !important; scrollbar-width: none; }
+  .testimonials-sect::-webkit-scrollbar { display: none; }
+  .testimonial-track { animation: none !important; transform: none !important; }
+  .testimonials-sect .testimonial-track > *:nth-child(n+7) { display: none !important; }
 }
+
+/* ── Case study before/after grid ── */
+.cs-ba-grid { display: grid; grid-template-columns: 1fr 1fr; }
+@media (max-width: 500px) { .cs-ba-grid { grid-template-columns: 1fr; } }
 
 /* ── Mobile scale down ── */
 @media (max-width: 640px) {

@@ -162,7 +162,7 @@ function CaseStudyModal({ t, onClose }: { t: Testimonial; onClose: () => void })
         ))}
 
         {/* Before / After */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1.5rem' }}>
+        <div className="cs-ba-grid" style={{ gap: '1rem', marginTop: '1.5rem' }}>
           {(['before', 'after'] as const).map(key => (
             <div key={key} style={{
               background: key === 'after' ? 'rgba(34,197,94,0.05)' : 'rgba(255,255,255,0.03)',
@@ -249,7 +249,7 @@ export default function TestimonialsSection() {
 
   return (
     <>
-      <section className="z1 py-14" style={{ overflow: 'hidden', position: 'relative' }}>
+      <section className="testimonials-sect z1 py-14" style={{ overflow: 'hidden', position: 'relative' }}>
         {/* Background image layer */}
         <div aria-hidden="true" style={{
           position: 'absolute', inset: 0, zIndex: 0,

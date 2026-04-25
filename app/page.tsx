@@ -102,7 +102,7 @@ export default function Home() {
                 <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginTop: '.5rem', marginBottom: '1.5rem' }}>
                   Numbers don&rsquo;t lie.<br /><span style={{ color: 'var(--gold)' }}>Ours don&rsquo;t either.</span>
                 </h2>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-6 text-center card" style={{ borderColor: 'rgba(232,184,75,.3)', background: 'linear-gradient(160deg,rgba(232,184,75,.08),rgba(13,36,68,.65))' }}>
                     <div className="font-display font-extrabold" style={{ fontSize: '1.875rem', color: 'var(--gold)', lineHeight: 1 }}>$800K+</div>
                     <div style={{ width: 32, height: 2, background: 'var(--gold)', borderRadius: 1, margin: '.6rem auto .5rem' }} />

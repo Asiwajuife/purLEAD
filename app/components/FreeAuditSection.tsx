@@ -81,7 +81,7 @@ export default function FreeAuditSection() {
   const inputStyle: React.CSSProperties = {
     width: '100%', background: 'rgba(255,255,255,0.04)',
     border: '1px solid rgba(0,209,255,0.18)', borderRadius: 8,
-    padding: '.65rem .875rem', fontSize: '.875rem', color: 'var(--t1)',
+    padding: '.65rem .875rem', fontSize: '1rem', color: 'var(--t1)',
     outline: 'none', transition: 'border-color .2s',
   };
 

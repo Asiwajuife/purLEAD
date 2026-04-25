@@ -63,7 +63,7 @@ export default function HowItWorksSection() {
       backgroundImage: 'url(https://i0.wp.com/outboundsalespro.com/wp-content/uploads/2025/11/3.jpg?resize=993.75%2C559&ssl=1)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
+      backgroundAttachment: 'scroll',
       position: 'relative',
     }}>
       <div aria-hidden="true" style={{
@@ -159,7 +159,7 @@ export default function HowItWorksSection() {
                   </>
                 ) : (
                   <p className="font-mono" style={{ fontSize: '.58rem', color: 'var(--t3)', marginTop: '.5rem', letterSpacing: '.07em' }}>
-                    CLICK TO EXPAND
+                    TAP TO EXPAND
                   </p>
                 )}
               </div>
