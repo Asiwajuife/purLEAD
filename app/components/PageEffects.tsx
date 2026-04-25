@@ -47,9 +47,9 @@ export default function PageEffects() {
       });
     }
     observeRevEls();
-    /* Watch for .rev elements added later by dynamic imports */
-    const mo = new MutationObserver(observeRevEls);
-    mo.observe(document.body, { childList: true, subtree: true });
+    /* Re-run after short delays to catch elements from dynamic imports */
+    const t1 = setTimeout(observeRevEls, 800);
+    const t2 = setTimeout(observeRevEls, 2500);
 
     /* ── Animated counters ── */
     const counterObs = new IntersectionObserver(entries => {
@@ -115,7 +115,8 @@ export default function PageEffects() {
       window.removeEventListener('scroll', onScroll);
       ro.disconnect();
       counterObs.disconnect();
-      mo.disconnect();
+      clearTimeout(t1);
+      clearTimeout(t2);
     };
   }, []);
 
