@@ -36,11 +36,20 @@ export default function PageEffects() {
     const ro = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); } });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.rev').forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('vis');
-      else ro.observe(el);
-    });
+    const observed = new WeakSet<Element>();
+    function observeRevEls() {
+      document.querySelectorAll<HTMLElement>('.rev').forEach(el => {
+        if (observed.has(el)) return;
+        observed.add(el);
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('vis');
+        else ro.observe(el);
+      });
+    }
+    observeRevEls();
+    /* Watch for .rev elements added later by dynamic imports */
+    const mo = new MutationObserver(observeRevEls);
+    mo.observe(document.body, { childList: true, subtree: true });
 
     /* ── Animated counters ── */
     const counterObs = new IntersectionObserver(entries => {
@@ -106,6 +115,7 @@ export default function PageEffects() {
       window.removeEventListener('scroll', onScroll);
       ro.disconnect();
       counterObs.disconnect();
+      mo.disconnect();
     };
   }, []);
 

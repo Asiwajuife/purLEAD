@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Item = { delay: string; svg: React.ReactNode; title: string; body: string; cta: string };
 
@@ -50,12 +50,14 @@ const problems: Item[] = [
 
 function ProblemCard({ c }: { c: Item }) {
   const [flipped, setFlipped] = useState(false);
+  const [isMouse, setIsMouse] = useState(false);
+  useEffect(() => { setIsMouse(window.matchMedia('(pointer:fine)').matches); }, []);
   return (
     <div className="rev" style={{ transitionDelay: c.delay }}>
     <div
       className={`prob-flip${flipped ? ' flipped' : ''}`}
-      onMouseEnter={() => setFlipped(true)}
-      onMouseLeave={() => setFlipped(false)}
+      onMouseEnter={isMouse ? () => setFlipped(true) : undefined}
+      onMouseLeave={isMouse ? () => setFlipped(false) : undefined}
       onClick={() => setFlipped(f => !f)}
     >
       <div className="prob-flip-inner">
@@ -65,7 +67,7 @@ function ProblemCard({ c }: { c: Item }) {
           </div>
           <h3 className="font-display font-bold" style={{ fontSize: '1rem', color: 'var(--t1)' }}>{c.title}</h3>
           <div className="prob-hint font-mono" style={{ fontSize: '.6rem', color: 'rgba(0,209,255,0.5)', letterSpacing: '.1em', marginTop: '.875rem' }}>
-            HOVER TO REVEAL →
+            TAP TO REVEAL →
           </div>
         </div>
         <div className="prob-face prob-back p-6" style={{
@@ -96,11 +98,14 @@ export default function ProblemSection() {
   const [paused, setPaused] = useState(false);
   return (
     <section className="z1 py-24" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div aria-hidden="true" style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        backgroundImage: 'url(https://www.contactspace.com/wp-content/uploads/ai-min-scaled.jpeg)',
-        backgroundSize: 'cover', backgroundPosition: 'center',
-      }} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        aria-hidden="true"
+        src="https://www.contactspace.com/wp-content/uploads/ai-min-scaled.jpeg"
+        alt=""
+        loading="lazy" decoding="async"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+      />
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 0,
         background: 'rgba(7,12,24,0.83)',

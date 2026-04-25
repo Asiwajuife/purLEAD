@@ -213,8 +213,8 @@ section[id] { scroll-margin-top: 72px; }
 .ticker-track { display: flex; gap: 3rem; animation: ticker 28s linear infinite; white-space: nowrap; }
 
 /* ── Reveal ── */
-.rev { opacity: 0; transform: translateY(20px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
-.rev.vis { opacity: 1; transform: translateY(0); }
+.rev { opacity: 0; transform: translateY(20px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); animation: revFallback .65s 4s cubic-bezier(.16,1,.3,1) forwards; }
+.rev.vis { opacity: 1; transform: translateY(0); animation: none; }
 
 /* ── Nav link ── */
 .nl { position: relative; padding-bottom: 2px; transition: color .2s; }
@@ -456,6 +456,15 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   /* Disable hover-only animations on touch */
   .card:hover { transform: none !important; }
   .btn-p:hover, .btn-g:hover { transform: none !important; }
+  /* Show all content immediately — no JS-gated opacity on mobile */
+  .rev, .word-in, .email-para { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+  /* Problem card: fade-swap instead of 3D flip (preserve-3d breaks under overflow:hidden on iOS) */
+  .prob-flip { position: relative; }
+  .prob-flip-inner { transform: none !important; }
+  .prob-back { position: absolute !important; inset: 0; transform: none !important; opacity: 0; transition: opacity .35s; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; }
+  .prob-front { transition: opacity .35s; }
+  .prob-flip.flipped .prob-front { opacity: 0; }
+  .prob-flip.flipped .prob-back { opacity: 1; }
 }
 
 /* ── Mobile scale down ── */
@@ -539,6 +548,7 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 .email-reveal .email-hl { animation: hlPulse 1.8s ease .8s both; }
 
 /* ════════ KEYFRAMES ════════ */
+@keyframes revFallback { to { opacity: 1; transform: none; } }
 @keyframes shimmer { 0% { left: -100%; } 55% { left: 150%; } 100% { left: 150%; } }
 @keyframes ticker  { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @keyframes fbob    { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
@@ -579,4 +589,5 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .rev, .word-in, .email-para { opacity: 1 !important; transform: none !important; animation: none !important; }
 }
