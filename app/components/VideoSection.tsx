@@ -43,6 +43,7 @@ export default function VideoSection() {
         aria-hidden="true"
         src="https://t4.ftcdn.net/jpg/08/77/44/41/360_F_877444172_0YE7Uw597WGyl76tzOuu2Gq9uRg2qbsB.jpg"
         alt=""
+        loading="lazy" decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{

@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 
 const feedItems = [
   { color: 'var(--acc)', label: "Rachel W. booked — <span style='color:#00D1FF'>30 min</span>", time: 'now', live: true },
@@ -27,25 +26,28 @@ export default function HeroSection() {
   const emailCountRef  = useRef<HTMLSpanElement>(null);
   const twRef          = useRef<number | null>(null);
 
-  /* Canvas particles */
+  /* Canvas particles (desktop only) */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (window.innerWidth < 768) return; // skip on mobile
     const ctx = canvas.getContext('2d')!;
     let W: number, H: number, pts: { x:number;y:number;vx:number;vy:number;r:number }[];
     let rafId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     function resize() {
       W = canvas!.width  = canvas!.parentElement!.offsetWidth;
       H = canvas!.height = canvas!.parentElement!.offsetHeight;
-      pts = Array.from({ length: Math.floor(W * H / 18000) }, () => ({
+      pts = Array.from({ length: Math.min(Math.floor(W * H / 18000), 50) }, () => ({
         x: Math.random()*W, y: Math.random()*H,
         vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
         r: Math.random()*1.5+.5,
       }));
     }
     resize();
-    window.addEventListener('resize', resize);
+    function debouncedResize() { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); }
+    window.addEventListener('resize', debouncedResize);
 
     function draw() {
       ctx.clearRect(0,0,W,H);
@@ -75,7 +77,7 @@ export default function HeroSection() {
       rafId = requestAnimationFrame(draw);
     }
     draw();
-    return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(rafId); };
+    return () => { window.removeEventListener('resize', debouncedResize); cancelAnimationFrame(rafId); };
   }, []);
 
   /* Clock */
@@ -268,10 +270,13 @@ export default function HeroSection() {
 
           <div className="rev flex items-center gap-4 flex-wrap" style={{ marginTop: '1.75rem', transitionDelay: '.2s' }}>
             <div className="flex -space-x-2">
-              {['men/52','women/60','men/36','women/29'].map(p => (
-                <Image key={p} src={`https://randomuser.me/api/portraits/${p}.jpg`} alt="Client"
-                  width={32} height={32} className="rounded-full"
-                  style={{ border: '2px solid var(--bg)', objectFit: 'cover' }} />
+              {['#4F46E5','#0891B2','#059669','#D97706'].map((bg, i) => (
+                <div key={i} aria-hidden="true" style={{
+                  width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
+                  background: bg, border: '2px solid var(--bg)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '.65rem', fontWeight: 700, color: '#fff',
+                }}>{'MTSP'[i]}</div>
               ))}
             </div>
             <p style={{ fontSize: '.85rem', color: 'var(--t2)' }}>

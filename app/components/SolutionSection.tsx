@@ -136,17 +136,20 @@ export default function SolutionSection() {
     let pts: { x: number; y: number; vx: number; vy: number; r: number }[];
     let rafId: number;
 
+    if (window.innerWidth < 768) return; // skip canvas on mobile
+    let resizeTimer: ReturnType<typeof setTimeout>;
     function resize() {
       W = canvas!.width = canvas!.parentElement!.offsetWidth;
       H = canvas!.height = canvas!.parentElement!.offsetHeight;
-      pts = Array.from({ length: Math.floor(W * H / 22000) }, () => ({
+      pts = Array.from({ length: Math.min(Math.floor(W * H / 22000), 40) }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
         r: Math.random() * 1.2 + 0.4,
       }));
     }
     resize();
-    window.addEventListener('resize', resize);
+    function debouncedResize() { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); }
+    window.addEventListener('resize', debouncedResize);
 
     function draw() {
       ctx.clearRect(0, 0, W, H);
@@ -176,7 +179,7 @@ export default function SolutionSection() {
       rafId = requestAnimationFrame(draw);
     }
     draw();
-    return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(rafId); };
+    return () => { window.removeEventListener('resize', debouncedResize); cancelAnimationFrame(rafId); };
   }, []);
 
   return (
@@ -245,6 +248,7 @@ export default function SolutionSection() {
               <img
                 src="https://media.licdn.com/dms/image/v2/D5612AQGXapinavXLpg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1700037910684?e=2147483647&v=beta&t=LjKcnA7TJmllGmxPwdmddKq0hCfKXY94WxONk7FS2AM"
                 alt=""
+                loading="lazy" decoding="async"
                 style={{ width: '100%', height: 'auto', display: 'block', opacity: 0.85 }}
               />
             </div>

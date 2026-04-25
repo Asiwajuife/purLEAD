@@ -105,6 +105,7 @@ export default function RoiCalculator() {
         aria-hidden="true"
         src="https://img.freepik.com/premium-vector/abstract-artificial-intelligence-brain_33403-43.jpg"
         alt=""
+        loading="lazy" decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{

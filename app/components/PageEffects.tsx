@@ -14,19 +14,22 @@ function animCounter(el: HTMLElement, target: number, suffix: string, dur = 1400
 
 export default function PageEffects() {
   useEffect(() => {
-    /* ── Scroll progress ── */
+    /* ── Scroll progress + back-to-top (RAF-throttled) ── */
     const prog = document.getElementById('scroll-progress');
+    const btt  = document.getElementById('btt');
+    let rafPending = false;
     function updateProg() {
       if (!prog) return;
       const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
       prog.style.width = pct + '%';
     }
-    window.addEventListener('scroll', updateProg, { passive: true });
-
-    /* ── Back to top ── */
-    const btt = document.getElementById('btt');
     function updateBtt() { btt?.classList.toggle('show', window.scrollY > 500); }
-    window.addEventListener('scroll', updateBtt, { passive: true });
+    function onScroll() {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(() => { rafPending = false; updateProg(); updateBtt(); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
     btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     /* ── Reveal ── */
@@ -58,8 +61,10 @@ export default function PageEffects() {
       });
     }, 200);
 
-    /* ── 3D Card tilt ── */
-    function attachTilt() {
+    const isFinePointer = window.matchMedia('(pointer:fine)').matches;
+
+    /* ── 3D Card tilt (desktop only) ── */
+    if (isFinePointer) {
       document.querySelectorAll<HTMLElement>('.tilt').forEach(card => {
         card.addEventListener('mousemove', e => {
           const r = card.getBoundingClientRect();
@@ -70,7 +75,6 @@ export default function PageEffects() {
         card.addEventListener('mouseleave', () => { card.style.transform = ''; });
       });
     }
-    attachTilt();
 
     /* ── Button ripple ── */
     document.querySelectorAll<HTMLElement>('.btn-p').forEach(btn => {
@@ -85,20 +89,21 @@ export default function PageEffects() {
       });
     });
 
-    /* ── Magnetic buttons ── */
-    document.querySelectorAll<HTMLElement>('.mag').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width  / 2) * 0.25;
-        const y = (e.clientY - r.top  - r.height / 2) * 0.25;
-        btn.style.transform = `translate(${x}px,${y}px)`;
+    /* ── Magnetic buttons (desktop only) ── */
+    if (isFinePointer) {
+      document.querySelectorAll<HTMLElement>('.mag').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const r = btn.getBoundingClientRect();
+          const x = (e.clientX - r.left - r.width  / 2) * 0.25;
+          const y = (e.clientY - r.top  - r.height / 2) * 0.25;
+          btn.style.transform = `translate(${x}px,${y}px)`;
+        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
       });
-      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
-    });
+    }
 
     return () => {
-      window.removeEventListener('scroll', updateProg);
-      window.removeEventListener('scroll', updateBtt);
+      window.removeEventListener('scroll', onScroll);
       ro.disconnect();
       counterObs.disconnect();
     };

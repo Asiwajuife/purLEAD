@@ -447,6 +447,15 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 @media (max-width: 767px) {
   .why-panel { grid-template-columns: 1fr !important; }
   .why-panel-illus { height: 160px !important; }
+  /* Kill expensive fixed/blur effects on mobile */
+  body::before, body::after { display: none !important; }
+  .orb, .scanlines { display: none !important; }
+  .card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .pfinner { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  nav.scrolled { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  /* Disable hover-only animations on touch */
+  .card:hover { transform: none !important; }
+  .btn-p:hover, .btn-g:hover { transform: none !important; }
 }
 
 /* ── Mobile scale down ── */

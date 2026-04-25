@@ -29,6 +29,7 @@ export default function EmailPreviewSection() {
         aria-hidden="true"
         src="https://t3.ftcdn.net/jpg/07/69/73/28/360_F_769732816_wJtrCLNzSffmJn20BdW36sbraDQgPnqj.jpg"
         alt=""
+        loading="lazy" decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{

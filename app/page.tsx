@@ -1,24 +1,29 @@
-﻿import AnnouncementBar from './components/AnnouncementBar';
+﻿import dynamic from 'next/dynamic';
+
+/* Above-fold — always loaded */
+import AnnouncementBar from './components/AnnouncementBar';
 import NavBar from './components/NavBar';
 import AmbientOrbs from './components/AmbientOrbs';
 import HeroSection from './components/HeroSection';
-import ProblemSection from './components/ProblemSection';
-import VideoSection from './components/VideoSection';
-import HowItWorksSection from './components/HowItWorksSection';
-import EmailPreviewSection from './components/EmailPreviewSection';
-import PricingSection from './components/PricingSection';
-import RoiCalculator from './components/RoiCalculator';
-import TestimonialsSection from './components/TestimonialsSection';
-import FreeAuditSection from './components/FreeAuditSection';
-import FaqSection from './components/FaqSection';
-import FooterWithModals from './components/FooterWithModals';
 import CustomCursor from './components/CustomCursor';
 import ToastProvider from './components/ToastProvider';
 import PageEffects from './components/PageEffects';
 import ConversionLayer from './components/ConversionLayer';
-import WhyPurLEADSection from './components/WhyPurLEADSection';
-import SolutionSection from './components/SolutionSection';
-import IntegrationsSection from './components/IntegrationsSection';
+
+/* Below-fold — lazy loaded */
+const ProblemSection      = dynamic(() => import('./components/ProblemSection'));
+const SolutionSection     = dynamic(() => import('./components/SolutionSection'));
+const IntegrationsSection = dynamic(() => import('./components/IntegrationsSection'));
+const VideoSection        = dynamic(() => import('./components/VideoSection'));
+const HowItWorksSection   = dynamic(() => import('./components/HowItWorksSection'));
+const EmailPreviewSection = dynamic(() => import('./components/EmailPreviewSection'));
+const WhyPurLEADSection   = dynamic(() => import('./components/WhyPurLEADSection'));
+const PricingSection      = dynamic(() => import('./components/PricingSection'));
+const RoiCalculator       = dynamic(() => import('./components/RoiCalculator'));
+const TestimonialsSection = dynamic(() => import('./components/TestimonialsSection'));
+const FreeAuditSection    = dynamic(() => import('./components/FreeAuditSection'));
+const FaqSection          = dynamic(() => import('./components/FaqSection'));
+const FooterWithModals    = dynamic(() => import('./components/FooterWithModals'));
 
 export default function Home() {
   return (
@@ -86,6 +91,7 @@ export default function Home() {
                 <img
                   src="https://media.licdn.com/dms/image/v2/D5612AQE59nh9oSZKrw/article-cover_image-shrink_720_1280/B56ZqISEuKJ8AI-/0/1763223031917?e=2147483647&v=beta&t=CFVHxen3Puq4nciKrtfvjFP5NV8ra1N-NoZPGQkLQFM"
                   alt="AI-powered results"
+                  loading="lazy" decoding="async"
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 60%, rgba(10,28,53,0.6) 100%)' }} />
@@ -128,6 +134,7 @@ export default function Home() {
             aria-hidden="true"
             src="https://as1.ftcdn.net/jpg/01/56/32/36/1000_F_156323698_IuUwv2hjH8vt1SsUwdOUZHPm7iQ1tq11.jpg"
             alt=""
+            loading="lazy" decoding="async"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
           />
           <div aria-hidden="true" style={{
@@ -304,6 +311,7 @@ export default function Home() {
             aria-hidden="true"
             src="https://plaksha.edu.in/blog/storage/ai-image-2.jpeg"
             alt=""
+            loading="lazy" decoding="async"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
           />
           <div aria-hidden="true" style={{

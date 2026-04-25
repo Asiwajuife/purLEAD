@@ -61,6 +61,7 @@ export default function PricingSection() {
         aria-hidden="true"
         src="https://powerinai.com/frontend/assets/images/services/ai_inbound/AI%20Call%201.webp"
         alt=""
+        loading="lazy" decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{
