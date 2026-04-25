@@ -26,7 +26,11 @@
 
 /* ── Base ── */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 body {
   font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   background: var(--bg);
@@ -472,6 +476,10 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .prob-flip.flipped .prob-back { opacity: 1; }
   /* ── Nav: always show background on mobile ── */
   #main-nav { background: rgba(11,31,58,0.97) !important; }
+  /* ── Ticker: disable animation on mobile (performance) ── */
+  .ticker-track { animation: none !important; white-space: normal !important; flex-wrap: wrap !important; gap: .4rem !important; }
+  /* ── Hero bg zoom: disable on mobile ── */
+  .hero-bg-zoom { animation: none !important; }
   /* ── Problem marquee: disable animation, show as wrapping grid ── */
   .prob-marquee-outer { overflow: visible !important; mask-image: none !important; -webkit-mask-image: none !important; }
   .prob-marquee-track { animation: none !important; transform: none !important; flex-wrap: wrap !important; width: 100% !important; gap: .75rem !important; }

@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const items = [
   { q: 'How fast will I see results?', a: 'Most clients receive their first booked call within 2–4 weeks of launch. Month one typically produces 50–70% of full capacity as the system warms and optimizes.' },
@@ -50,10 +51,12 @@ export default function FaqSection() {
           {/* RIGHT: sticky image */}
           <div className="hidden md:block" style={{ position: 'sticky', top: '6rem' }}>
             <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.2)', boxShadow: '0 0 50px rgba(0,209,255,0.1)' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="https://img.freepik.com/premium-photo/robot-hand-with-question-mark-digital-binary-code-background_3972-11.jpg?w=360"
                 alt="AI assistant"
+                width={360}
+                height={270}
+                sizes="(max-width: 768px) 0px, 360px"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
               />
             </div>

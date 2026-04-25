@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 const feedItems = [
   { color: 'var(--acc)', label: "Rachel W. booked — <span style='color:#00D1FF'>30 min</span>", time: 'now', live: true },
@@ -221,13 +222,19 @@ export default function HeroSection() {
     <section className="relative flex items-center overflow-hidden"
       style={{ minHeight: '100svh', paddingTop: 60 }}>
       {/* Animated background image */}
-      <div aria-hidden="true" style={{
+      <div aria-hidden="true" className="hero-bg-zoom" style={{
         position: 'absolute', inset: '-5%', zIndex: 0,
-        backgroundImage: 'url(https://cdn.vocallabs.ai/Blogs/6a18df1c-0c79-4edf-88d0-b15f92bfe699.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
         animation: 'heroBgZoom 18s ease-in-out infinite',
-      }} />
+      }}>
+        <Image
+          fill
+          src="https://cdn.vocallabs.ai/Blogs/6a18df1c-0c79-4edf-88d0-b15f92bfe699.png"
+          alt=""
+          priority
+          sizes="100vw"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+      </div>
       {/* Dark overlay */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 0,

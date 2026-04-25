@@ -1,4 +1,5 @@
 ﻿import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 /* Above-fold — always loaded */
 import AnnouncementBar from './components/AnnouncementBar';
@@ -87,12 +88,12 @@ export default function Home() {
             <div className="rev grid md:grid-cols-[45%_55%] gap-10 items-stretch">
               {/* LEFT: image */}
               <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(232,184,75,0.25)', boxShadow: '0 0 60px rgba(232,184,75,0.1)', position: 'relative', minHeight: 340 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
+                  fill
                   src="https://media.licdn.com/dms/image/v2/D5612AQE59nh9oSZKrw/article-cover_image-shrink_720_1280/B56ZqISEuKJ8AI-/0/1763223031917?e=2147483647&v=beta&t=CFVHxen3Puq4nciKrtfvjFP5NV8ra1N-NoZPGQkLQFM"
                   alt="AI-powered results"
-                  loading="lazy" decoding="async"
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 60%, rgba(10,28,53,0.6) 100%)' }} />
               </div>
@@ -129,13 +130,12 @@ export default function Home() {
 
         {/* Comparison Table */}
         <section className="z1 py-24 light-section" style={{ position: 'relative', overflow: 'hidden' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            aria-hidden="true"
+          <Image
+            fill
             src="https://as1.ftcdn.net/jpg/01/56/32/36/1000_F_156323698_IuUwv2hjH8vt1SsUwdOUZHPm7iQ1tq11.jpg"
             alt=""
-            loading="lazy" decoding="async"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
           />
           <div aria-hidden="true" style={{
             position: 'absolute', inset: 0, zIndex: 0,
@@ -221,12 +221,13 @@ export default function Home() {
                 </div>
               </div>
               {/* Right: image */}
-              <div className="hidden md:block" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', height: '100%', minHeight: 280 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="hidden md:block" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', height: '100%', minHeight: 280, position: 'relative' }}>
+                <Image
+                  fill
                   src="https://www.ringcentral.com/gb/en/blog/wp-content/uploads/2024/09/ai-powered-predictive-dialers-in-contact-centre-790x415.jpg"
                   alt="AI-powered outbound in action"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', minHeight: 280 }}
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
             </div>
@@ -306,13 +307,12 @@ export default function Home() {
 
         {/* Final CTA */}
         <section className="z1 py-16" style={{ position: 'relative', overflow: 'hidden' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            aria-hidden="true"
+          <Image
+            fill
             src="https://plaksha.edu.in/blog/storage/ai-image-2.jpeg"
             alt=""
-            loading="lazy" decoding="async"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
           />
           <div aria-hidden="true" style={{
             position: 'absolute', inset: 0, zIndex: 0,

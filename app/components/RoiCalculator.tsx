@@ -1,5 +1,6 @@
 'use client';
 import { useState, useCallback, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 function fmt(n: number) {
   if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
@@ -100,13 +101,12 @@ export default function RoiCalculator() {
 
   return (
     <section ref={sectionRef} className="z1 py-24 light-section" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        aria-hidden="true"
+      <Image
+        fill
         src="https://img.freepik.com/premium-vector/abstract-artificial-intelligence-brain_33403-43.jpg"
         alt=""
-        loading="lazy" decoding="async"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+        sizes="100vw"
+        style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 0,

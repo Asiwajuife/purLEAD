@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 type IntPill = { name: string; logo: string | null; color: string; svg?: React.ReactNode };
 
@@ -36,11 +37,11 @@ export default function IntegrationsSection() {
             <div key={p.name} className="int-pill" style={{ gap: '0.5rem', alignItems: 'center', padding: '0.45rem 0.9rem' }}>
               {p.logo ? (
                 <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={p.logo}
                     alt={p.name}
                     width={18} height={18}
+                    unoptimized
                     style={{ display: 'block', flexShrink: 0 }}
                     onError={(e) => {
                       const target = e.currentTarget;

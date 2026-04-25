@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface Testimonial {
   quote: string;
@@ -131,8 +132,7 @@ function CaseStudyModal({ t, onClose }: { t: Testimonial; onClose: () => void })
 
         {/* Header */}
         <div className="flex items-center gap-3" style={{ marginBottom: '1.5rem' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={`https://images.unsplash.com/photo-${t.imgId}?w=72&h=72&fit=crop&crop=face&q=80`}
             alt={t.name} width={48} height={48}
             className="rounded-full"
@@ -224,8 +224,7 @@ function TestimonialCard({ t, onClick }: { t: Testimonial; onClick: () => void }
       {/* Gold stars */}
       <div style={{ fontSize: '.8rem', color: 'var(--gold)', letterSpacing: '.05em' }}>★★★★★</div>
       <div className="flex items-center gap-3 pt-3" style={{ borderTop: '1px solid rgba(0,209,255,0.12)' }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={`https://images.unsplash.com/photo-${t.imgId}?w=72&h=72&fit=crop&crop=face&q=80`}
           alt={t.name}
           width={36} height={36}
@@ -251,13 +250,15 @@ export default function TestimonialsSection() {
     <>
       <section className="testimonials-sect z1 py-14" style={{ overflow: 'hidden', position: 'relative' }}>
         {/* Background image layer */}
-        <div aria-hidden="true" style={{
-          position: 'absolute', inset: 0, zIndex: 0,
-          backgroundImage: 'url(https://paeditorial.co.uk/wp-content/uploads/2025/07/AI-in-Peer-Review.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.18,
-        }} />
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.18 }}>
+          <Image
+            fill
+            src="https://paeditorial.co.uk/wp-content/uploads/2025/07/AI-in-Peer-Review.png"
+            alt=""
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
         {/* Dark base overlay */}
         <div aria-hidden="true" style={{
           position: 'absolute', inset: 0, zIndex: 0,

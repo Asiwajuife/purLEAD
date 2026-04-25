@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 type ChecklistPanel = { title: string; visual: 'checklist'; items: string[] };
 type EmailPanel    = { title: string; visual: 'email'; preview: { subject: string; body: string } };
@@ -244,11 +245,12 @@ export default function SolutionSection() {
             </div>
             {/* Standalone image below dashboard */}
             <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.12)' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="https://media.licdn.com/dms/image/v2/D5612AQGXapinavXLpg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1700037910684?e=2147483647&v=beta&t=LjKcnA7TJmllGmxPwdmddKq0hCfKXY94WxONk7FS2AM"
                 alt=""
-                loading="lazy" decoding="async"
+                width={800}
+                height={450}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ width: '100%', height: 'auto', display: 'block', opacity: 0.85 }}
               />
             </div>

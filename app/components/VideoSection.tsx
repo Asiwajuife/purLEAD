@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const steps = [
   { label: 'ICP research',        detail: 'Identifying 800 decision-makers', icon: '🎯', color: '#00D1FF' },
@@ -38,13 +39,12 @@ export default function VideoSection() {
 
   return (
     <section ref={ref} className="z1 py-14" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        aria-hidden="true"
+      <Image
+        fill
         src="https://t4.ftcdn.net/jpg/08/77/44/41/360_F_877444172_0YE7Uw597WGyl76tzOuu2Gq9uRg2qbsB.jpg"
         alt=""
-        loading="lazy" decoding="async"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+        sizes="100vw"
+        style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 0,

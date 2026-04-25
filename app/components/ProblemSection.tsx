@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type Item = { delay: string; svg: React.ReactNode; title: string; body: string; cta: string };
 
@@ -98,13 +99,12 @@ export default function ProblemSection() {
   const [paused, setPaused] = useState(false);
   return (
     <section className="z1 py-24" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        aria-hidden="true"
+      <Image
+        fill
         src="https://www.contactspace.com/wp-content/uploads/ai-min-scaled.jpeg"
         alt=""
-        loading="lazy" decoding="async"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+        sizes="100vw"
+        style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 0,

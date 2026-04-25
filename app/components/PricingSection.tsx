@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 import { FeatureItem } from './PricingTooltip';
 import CountdownTimer from './CountdownTimer';
 
@@ -56,13 +57,12 @@ export default function PricingSection() {
 
   return (
     <section id="pricing" className="z1 py-10" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        aria-hidden="true"
+      <Image
+        fill
         src="https://powerinai.com/frontend/assets/images/services/ai_inbound/AI%20Call%201.webp"
         alt=""
-        loading="lazy" decoding="async"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+        sizes="100vw"
+        style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
       />
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 0,
