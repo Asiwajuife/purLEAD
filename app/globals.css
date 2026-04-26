@@ -490,6 +490,18 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .testimonials-sect::-webkit-scrollbar { display: none; }
   .testimonial-track { animation: none !important; transform: none !important; }
   .testimonials-sect .testimonial-track > *:nth-child(n+7) { display: none !important; }
+  /* ── Remove ALL backdrop-filter on mobile (overrides inline styles too) — biggest GPU fix ── */
+  *, *::before, *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* ── Stop all remaining infinite animations that create GPU compositing layers ── */
+  .fbadge { animation: none !important; transform: none !important; }
+  .live-dot { animation: none !important; opacity: 1 !important; }
+  .btn-p::after { display: none !important; }
+  .glitch-h1 { animation: none !important; }
+  .float-cal-btn span[aria-hidden="true"] { animation: none !important; }
+  .testimonial-track-r { animation: none !important; transform: none !important; }
 }
 
 /* ── Case study before/after grid ── */
