@@ -490,18 +490,20 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .testimonials-sect::-webkit-scrollbar { display: none; }
   .testimonial-track { animation: none !important; transform: none !important; }
   .testimonials-sect .testimonial-track > *:nth-child(n+7) { display: none !important; }
-  /* ── Remove ALL backdrop-filter on mobile (overrides inline styles too) — biggest GPU fix ── */
+  /* ── Kill ALL backdrop-filter and @keyframes animations on mobile ── */
   *, *::before, *::after {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+    animation: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
-  /* ── Stop all remaining infinite animations that create GPU compositing layers ── */
-  .fbadge { animation: none !important; transform: none !important; }
-  .live-dot { animation: none !important; opacity: 1 !important; }
+  /* ── Hide every full-bleed background image — the primary GPU memory crash cause ── */
+  img[data-nimg="fill"] { display: none !important; }
+  /* ── Suppress shimmer pseudo-element and redundant second testimonial row ── */
   .btn-p::after { display: none !important; }
-  .glitch-h1 { animation: none !important; }
-  .float-cal-btn span[aria-hidden="true"] { animation: none !important; }
-  .testimonial-track-r { animation: none !important; transform: none !important; }
+  .live-dot { opacity: 1 !important; }
+  .testimonial-track-r { display: none !important; }
 }
 
 /* ── Case study before/after grid ── */
