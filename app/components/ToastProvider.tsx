@@ -16,6 +16,7 @@ const people = [
 
 export default function ToastProvider() {
   useEffect(() => {
+    if (window.innerWidth < 768) return; // no toasts on mobile — extra image loads cause memory pressure
     const wrap = document.getElementById('toast-wrap');
     if (!wrap) return;
 

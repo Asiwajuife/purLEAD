@@ -14,9 +14,22 @@ function animCounter(el: HTMLElement, target: number, suffix: string, dur = 1400
 
 export default function PageEffects() {
   useEffect(() => {
-    /* ── Scroll progress + back-to-top (RAF-throttled) ── */
+    const btt = document.getElementById('btt');
+    btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      // Mobile: set all stat counters to their final value immediately — no RAF loop
+      document.querySelectorAll<HTMLElement>('.snum[data-count]').forEach(el => {
+        el.textContent = (el.dataset.count || '0') + (el.dataset.suffix || '');
+      });
+      return;
+    }
+
+    /* ── Desktop only below this line ── */
+
     const prog = document.getElementById('scroll-progress');
-    const btt  = document.getElementById('btt');
     let rafPending = false;
     function updateProg() {
       if (!prog) return;
@@ -30,7 +43,6 @@ export default function PageEffects() {
       requestAnimationFrame(() => { rafPending = false; updateProg(); updateBtt(); });
     }
     window.addEventListener('scroll', onScroll, { passive: true });
-    btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     /* ── Reveal ── */
     const ro = new IntersectionObserver(entries => {
@@ -47,7 +59,6 @@ export default function PageEffects() {
       });
     }
     observeRevEls();
-    /* Re-run after short delays to catch elements from dynamic imports */
     const t1 = setTimeout(observeRevEls, 800);
     const t2 = setTimeout(observeRevEls, 2500);
 

@@ -83,6 +83,7 @@ export default function HeroSection() {
 
   /* Clock */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     function tick() {
       const now = new Date();
       if (clockRef.current)
@@ -95,12 +96,12 @@ export default function HeroSection() {
     return () => clearInterval(id);
   }, []);
 
-  /* Live feed — paused when tab is hidden to reduce background CPU/GPU pressure */
+  /* Live feed */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     const feed = feedRef.current;
     if (!feed) return;
     let idx = 0;
-    let id: ReturnType<typeof setInterval> | null = null;
     const rows = Array.from(feed.children) as HTMLElement[];
 
     function updateRow(row: HTMLElement, item: typeof feedItems[0]) {
@@ -115,27 +116,20 @@ export default function HeroSection() {
       }, 320);
     }
 
-    function startFeed() {
-      id = setInterval(() => {
-        const item = feedItems[idx % feedItems.length];
-        const row  = rows[idx % rows.length];
-        if (row) updateRow(row, item);
-        if (item.live && callsRef.current)
-          callsRef.current.textContent = String(parseInt(callsRef.current.textContent || '18') + 1);
-        idx++;
-      }, 3000);
-    }
-
-    function stopFeed() { if (id) { clearInterval(id); id = null; } }
-    function onVisibility() { document.hidden ? stopFeed() : startFeed(); }
-
-    startFeed();
-    document.addEventListener('visibilitychange', onVisibility);
-    return () => { stopFeed(); document.removeEventListener('visibilitychange', onVisibility); };
+    const id = setInterval(() => {
+      const item = feedItems[idx % feedItems.length];
+      const row  = rows[idx % rows.length];
+      if (row) updateRow(row, item);
+      if (item.live && callsRef.current)
+        callsRef.current.textContent = String(parseInt(callsRef.current.textContent || '18') + 1);
+      idx++;
+    }, 3000);
+    return () => clearInterval(id);
   }, []);
 
   /* Typewriter */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     const el = document.getElementById('typewriter-text') as HTMLSpanElement | null;
     if (!el) return;
     let wordIdx = 0, charIdx = 0, deleting = false;
@@ -174,6 +168,7 @@ export default function HeroSection() {
 
   /* Calls counter (0 → 3 easeOut) */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     const el = callCountRef.current;
     if (!el) return;
     const target = 3, dur = 1800, start = performance.now();
@@ -186,39 +181,27 @@ export default function HeroSection() {
     requestAnimationFrame(frame);
   }, []);
 
-  /* Email counter tick — paused when tab is hidden */
+  /* Email counter tick */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     let count = 847;
-    let id: ReturnType<typeof setInterval> | null = null;
-    function start() {
-      id = setInterval(() => {
-        count++;
-        if (emailCountRef.current) emailCountRef.current.textContent = String(count);
-      }, 2800);
-    }
-    function stop() { if (id) { clearInterval(id); id = null; } }
-    function onVisibility() { document.hidden ? stop() : start(); }
-    start();
-    document.addEventListener('visibilitychange', onVisibility);
-    return () => { stop(); document.removeEventListener('visibilitychange', onVisibility); };
+    const id = setInterval(() => {
+      count++;
+      if (emailCountRef.current) emailCountRef.current.textContent = String(count);
+    }, 2800);
+    return () => clearInterval(id);
   }, []);
 
-  /* Countdown — paused when tab is hidden */
+  /* Countdown */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     let total = 2 * 60 + 14;
-    let id: ReturnType<typeof setInterval> | null = null;
-    function start() {
-      id = setInterval(() => {
-        total = Math.max(0, total - 1);
-        const h = Math.floor(total / 60), m = total % 60;
-        if (countdownRef.current) countdownRef.current.textContent = `${h}h ${m}m`;
-      }, 60000);
-    }
-    function stop() { if (id) { clearInterval(id); id = null; } }
-    function onVisibility() { document.hidden ? stop() : start(); }
-    start();
-    document.addEventListener('visibilitychange', onVisibility);
-    return () => { stop(); document.removeEventListener('visibilitychange', onVisibility); };
+    const id = setInterval(() => {
+      total = Math.max(0, total - 1);
+      const h = Math.floor(total / 60), m = total % 60;
+      if (countdownRef.current) countdownRef.current.textContent = `${h}h ${m}m`;
+    }, 60000);
+    return () => clearInterval(id);
   }, []);
 
   /* Magnetic buttons */

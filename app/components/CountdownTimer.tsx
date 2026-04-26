@@ -20,6 +20,7 @@ export default function CountdownTimer() {
   const [parts, setParts] = useState<ReturnType<typeof formatMs> | null>(null);
 
   useEffect(() => {
+    if (window.innerWidth < 768) return; // hide countdown on mobile — 1s re-render is too expensive
     setParts(formatMs(msToEndOfMonth()));
     const id = setInterval(() => setParts(formatMs(msToEndOfMonth())), 1000);
     return () => clearInterval(id);
