@@ -337,7 +337,7 @@ export default function WhyPurLEADSection() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || window.innerWidth < 768) return;
     timerRef.current = setInterval(() => {
       setActive(a => (a + 1) % tabs.length);
     }, 4000);

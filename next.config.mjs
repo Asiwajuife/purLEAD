@@ -22,7 +22,9 @@ const nextConfig = {
       { hostname: "paeditorial.co.uk" },
     ],
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 86400,
+    minimumCacheTTL: 2592000,
+    deviceSizes: [640, 828, 1080, 1280, 1920],
+    imageSizes: [16, 32, 64, 128, 256],
   },
 };
 

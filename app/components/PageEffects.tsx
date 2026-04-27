@@ -86,13 +86,22 @@ export default function PageEffects() {
     /* ── 3D Card tilt (desktop only) ── */
     if (isFinePointer) {
       document.querySelectorAll<HTMLElement>('.tilt').forEach(card => {
+        let raf: number | null = null, ex = 0, ey = 0;
         card.addEventListener('mousemove', e => {
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width  - 0.5;
-          const y = (e.clientY - r.top)  / r.height - 0.5;
-          card.style.transform = `perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-2px)`;
+          ex = e.clientX; ey = e.clientY;
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = null;
+            const r = card.getBoundingClientRect();
+            const x = (ex - r.left) / r.width  - 0.5;
+            const y = (ey - r.top)  / r.height - 0.5;
+            card.style.transform = `perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-2px)`;
+          });
         });
-        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+        card.addEventListener('mouseleave', () => {
+          if (raf) { cancelAnimationFrame(raf); raf = null; }
+          card.style.transform = '';
+        });
       });
     }
 
@@ -112,13 +121,20 @@ export default function PageEffects() {
     /* ── Magnetic buttons (desktop only) ── */
     if (isFinePointer) {
       document.querySelectorAll<HTMLElement>('.mag').forEach(btn => {
+        let raf: number | null = null, ex = 0, ey = 0;
         btn.addEventListener('mousemove', e => {
-          const r = btn.getBoundingClientRect();
-          const x = (e.clientX - r.left - r.width  / 2) * 0.25;
-          const y = (e.clientY - r.top  - r.height / 2) * 0.25;
-          btn.style.transform = `translate(${x}px,${y}px)`;
+          ex = e.clientX; ey = e.clientY;
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = null;
+            const r = btn.getBoundingClientRect();
+            btn.style.transform = `translate(${(ex - r.left - r.width/2) * 0.25}px,${(ey - r.top - r.height/2) * 0.25}px)`;
+          });
         });
-        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+        btn.addEventListener('mouseleave', () => {
+          if (raf) { cancelAnimationFrame(raf); raf = null; }
+          btn.style.transform = '';
+        });
       });
     }
 

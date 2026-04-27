@@ -40,7 +40,7 @@ export default function HeroSection() {
     function resize() {
       W = canvas!.width  = canvas!.parentElement!.offsetWidth;
       H = canvas!.height = canvas!.parentElement!.offsetHeight;
-      pts = Array.from({ length: Math.min(Math.floor(W * H / 18000), 50) }, () => ({
+      pts = Array.from({ length: Math.min(Math.floor(W * H / 36000), 25) }, () => ({
         x: Math.random()*W, y: Math.random()*H,
         vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
         r: Math.random()*1.5+.5,

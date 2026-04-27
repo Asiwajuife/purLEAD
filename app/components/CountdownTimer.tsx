@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function msToEndOfMonth() {
   const now = new Date();
@@ -18,12 +18,34 @@ function formatMs(ms: number) {
 
 export default function CountdownTimer() {
   const [parts, setParts] = useState<ReturnType<typeof formatMs> | null>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.innerWidth < 768) return; // hide countdown on mobile — 1s re-render is too expensive
+    if (window.innerWidth < 768) return;
     setParts(formatMs(msToEndOfMonth()));
-    const id = setInterval(() => setParts(formatMs(msToEndOfMonth())), 1000);
-    return () => clearInterval(id);
+
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    let obs: IntersectionObserver | null = null;
+    let rafId: number;
+
+    rafId = requestAnimationFrame(() => {
+      const el = wrapRef.current;
+      if (!el) return;
+      obs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          if (!intervalId) intervalId = setInterval(() => setParts(formatMs(msToEndOfMonth())), 1000);
+        } else {
+          if (intervalId) { clearInterval(intervalId); intervalId = null; }
+        }
+      }, { threshold: 0.1 });
+      obs.observe(el);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (intervalId) clearInterval(intervalId);
+      obs?.disconnect();
+    };
   }, []);
 
   if (!parts) return null;
@@ -44,7 +66,7 @@ export default function CountdownTimer() {
   );
 
   return (
-    <div style={{
+    <div ref={wrapRef} style={{
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       flexWrap: 'wrap', gap: '.5rem', marginBottom: '2rem',
     }}>

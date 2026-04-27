@@ -10,8 +10,23 @@ export default function CustomCursor() {
     document.body.classList.add('custom-cursor-active');
 
     let mx = 0, my = 0, rx = 0, ry = 0;
+    let rafId: number | null = null;
 
-    function onMove(e: MouseEvent) { mx = e.clientX; my = e.clientY; ring!.classList.remove('hidden'); }
+    function loop() {
+      const dx = mx - rx, dy = my - ry;
+      if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) { rafId = null; return; }
+      rx += dx * .18;
+      ry += dy * .18;
+      ring!.style.left = rx + 'px';
+      ring!.style.top  = ry + 'px';
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function onMove(e: MouseEvent) {
+      mx = e.clientX; my = e.clientY;
+      ring!.classList.remove('hidden');
+      if (!rafId) rafId = requestAnimationFrame(loop);
+    }
     function onLeave() { ring!.classList.add('hidden'); }
     function onEnter() { ring!.classList.remove('hidden'); }
     function onDown()  { ring!.classList.add('click'); }
@@ -24,23 +39,10 @@ export default function CustomCursor() {
     document.addEventListener('mouseup', onUp);
 
     const targets = 'a,button,[data-interactive],.card,.faq-trigger,.roi-range,.int-pill,.tog-btn,.pfwrap,.gtee';
-    function addHover() {
-      document.querySelectorAll(targets).forEach(el => {
-        el.addEventListener('mouseenter', () => ring!.classList.add('hov'));
-        el.addEventListener('mouseleave', () => ring!.classList.remove('hov'));
-      });
-    }
-    addHover();
-
-    let rafId: number;
-    function loop() {
-      rx += (mx - rx) * .18;
-      ry += (my - ry) * .18;
-      ring!.style.left = rx + 'px';
-      ring!.style.top  = ry + 'px';
-      rafId = requestAnimationFrame(loop);
-    }
-    loop();
+    document.querySelectorAll(targets).forEach(el => {
+      el.addEventListener('mouseenter', () => ring!.classList.add('hov'));
+      el.addEventListener('mouseleave', () => ring!.classList.remove('hov'));
+    });
 
     return () => {
       document.body.classList.remove('custom-cursor-active');
@@ -49,7 +51,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', onEnter);
       document.removeEventListener('mousedown', onDown);
       document.removeEventListener('mouseup', onUp);
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
