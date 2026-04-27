@@ -73,9 +73,9 @@ export default function FooterWithModals() {
               <button onClick={() => setTerms(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit' }}
                 onMouseOver={e => (e.currentTarget.style.color = '#00D1FF')}
                 onMouseOut={e  => (e.currentTarget.style.color = 'rgba(148,163,184,0.5)')}>Terms of Service</button>
-              <a href="mailto:hello@purlead.co"
+              <a href="mailto:hello@purlead.com"
                 onMouseOver={e => (e.currentTarget.style.color = '#00D1FF')}
-                onMouseOut={e  => (e.currentTarget.style.color = 'rgba(148,163,184,0.5)')}>hello@purlead.co</a>
+                onMouseOut={e  => (e.currentTarget.style.color = 'rgba(148,163,184,0.5)')}>hello@purlead.com</a>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function FooterWithModals() {
         <h4 className="font-display font-bold" style={{ color: 'var(--t1)' }}>Data Sharing</h4>
         <p>We do not sell or share your personal information with third parties for their marketing purposes.</p>
         <h4 className="font-display font-bold" style={{ color: 'var(--t1)' }}>Your Rights</h4>
-        <p>You may access, correct, or delete your data at any time. Contact <a href="mailto:hello@purlead.co" style={{ color: 'var(--acc)' }}>hello@purlead.co</a>.</p>
+        <p>You may access, correct, or delete your data at any time. Contact <a href="mailto:hello@purlead.com" style={{ color: 'var(--acc)' }}>hello@purlead.com</a>.</p>
       </Modal>
 
       <Modal id="modal-terms" title="Terms of Service" open={terms} onClose={() => setTerms(false)}>
@@ -111,7 +111,7 @@ export default function FooterWithModals() {
         <h4 className="font-display font-bold" style={{ color: 'var(--t1)' }}>Limitation of Liability</h4>
         <p>purLEAD&rsquo;s liability is limited to the monthly fees paid in the month of the claim. We do not guarantee specific revenue outcomes.</p>
         <h4 className="font-display font-bold" style={{ color: 'var(--t1)' }}>Contact</h4>
-        <p>Legal inquiries: <a href="mailto:hello@purlead.co" style={{ color: 'var(--acc)' }}>hello@purlead.co</a></p>
+        <p>Legal inquiries: <a href="mailto:hello@purlead.com" style={{ color: 'var(--acc)' }}>hello@purlead.com</a></p>
       </Modal>
     </>
   );
