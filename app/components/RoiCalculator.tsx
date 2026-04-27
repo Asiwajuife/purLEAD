@@ -49,6 +49,13 @@ export default function RoiCalculator() {
     if (hasAnimated.current) return;
     const el = sectionRef.current;
     if (!el) return;
+    if (window.innerWidth < 768) {
+      hasAnimated.current = true;
+      setDispMonthly(monthly);
+      setDispAnnual(annual);
+      setDispRoi(roi);
+      return;
+    }
     const obs = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting || hasAnimated.current) return;
       hasAnimated.current = true;

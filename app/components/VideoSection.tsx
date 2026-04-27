@@ -23,6 +23,7 @@ export default function VideoSection() {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.2 });
@@ -31,7 +32,7 @@ export default function VideoSection() {
   }, []);
 
   useEffect(() => {
-    if (!visible) return;
+    if (!visible || window.innerWidth < 768) return;
     const id = setInterval(() => setActiveStep(s => (s + 1) % steps.length), 1800);
     return () => clearInterval(id);
   }, [visible]);

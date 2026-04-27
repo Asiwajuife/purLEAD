@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 function useOnlineCount() {
   const [count, setCount] = useState(3);
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     function randomize() {
       setCount(Math.floor(Math.random() * 4) + 2); // 2–5
       const next = 45000 + Math.random() * 45000;  // 45–90s
@@ -32,6 +33,7 @@ export default function NavBar() {
   const togRef  = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     function onScroll() { setScrolled(window.scrollY > 40); }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -39,6 +41,7 @@ export default function NavBar() {
   }, []);
 
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     const sections = document.querySelectorAll<HTMLElement>('section[id]');
     const observers: IntersectionObserver[] = [];
     sections.forEach(s => {

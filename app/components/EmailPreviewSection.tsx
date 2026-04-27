@@ -7,6 +7,7 @@ export default function EmailPreviewSection() {
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 768) { setRevealed(true); return; }
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(

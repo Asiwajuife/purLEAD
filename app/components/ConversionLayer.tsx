@@ -9,13 +9,15 @@ export default function ConversionLayer() {
 
   /* Sticky bottom bar — show after scrolling 600px */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     function onScroll() { setShowBar(window.scrollY > 600); }
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Exit intent — fires only after 3 minutes on page */
+  /* Exit intent — fires only after 3 minutes on page (desktop/mouse only) */
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     if (sessionStorage.getItem('exitShown')) return;
     let readyToFire = false;
     const timer = setTimeout(() => { readyToFire = true; }, 3 * 60 * 1000);
