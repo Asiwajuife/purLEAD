@@ -467,13 +467,13 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .btn-p:hover, .btn-g:hover { transform: none !important; }
   /* Show all content immediately — no JS-gated opacity on mobile */
   .rev, .word-in, .email-para { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
-  /* Problem cards: display-swap — back is static so tapping expands the card into normal flow */
+  /* Problem cards: display-swap with equal heights — both faces same min-height */
   .prob-flip { position: relative; height: auto !important; }
   .prob-flip-inner { display: block !important; transform: none !important; height: auto !important; }
-  .prob-back { position: static !important; inset: auto !important; transform: none !important; display: none !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; }
-  .prob-front { display: block !important; }
+  .prob-back { position: static !important; inset: auto !important; transform: none !important; display: none !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; min-height: 240px; }
+  .prob-front { display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 240px !important; height: auto !important; overflow: visible !important; }
   .prob-flip.flipped .prob-front { display: none !important; }
-  .prob-flip.flipped .prob-back { display: flex !important; }
+  .prob-flip.flipped .prob-back { display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 240px !important; }
   /* ── Nav: always show background on mobile ── */
   #main-nav { background: rgba(11,31,58,0.97) !important; }
   /* ── Ticker: disable animation on mobile (performance) ── */
@@ -550,12 +550,13 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 /* ── Problem reveal cards ── */
 .prob-flip { perspective: 900px; cursor: pointer; }
 .prob-flip-inner {
-  display: grid; grid-template-columns: 1fr; width: 100%;
+  display: grid; grid-template-columns: 1fr; grid-template-rows: 1fr; width: 100%; height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .prob-flip.flipped .prob-flip-inner { transform: rotateY(180deg); }
-.prob-face { grid-row: 1; grid-column: 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; }
+.prob-face { grid-row: 1; grid-column: 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; height: 100%; overflow: hidden; }
+.prob-front { display: flex; flex-direction: column; justify-content: space-between; }
 .prob-back { transform: rotateY(180deg); }
 .prob-hint { opacity: .55; transition: opacity .2s; }
 .prob-flip.flipped .prob-hint { opacity: 0; }
@@ -575,7 +576,7 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 }
 .prob-marquee-track.paused { animation-play-state: paused; }
 .prob-marquee-track .rev { animation: none; opacity: 1; transform: none; }
-.prob-marquee-track .prob-flip { width: 270px; flex-shrink: 0; }
+.prob-marquee-track .prob-flip { width: 270px; flex-shrink: 0; height: 260px; }
 
 /* ── How It Works interactive ── */
 .how-track { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 .5rem; }
