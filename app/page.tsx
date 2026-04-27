@@ -87,7 +87,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="rev grid md:grid-cols-[45%_55%] gap-10 items-stretch">
               {/* LEFT: image */}
-              <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(232,184,75,0.25)', boxShadow: '0 0 60px rgba(232,184,75,0.1)', position: 'relative', minHeight: 340 }}>
+              <div className="results-img-wrap" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(232,184,75,0.25)', boxShadow: '0 0 60px rgba(232,184,75,0.1)', position: 'relative', minHeight: 340 }}>
                 <Image
                   fill
                   src="https://media.licdn.com/dms/image/v2/D5612AQE59nh9oSZKrw/article-cover_image-shrink_720_1280/B56ZqISEuKJ8AI-/0/1763223031917?e=2147483647&v=beta&t=CFVHxen3Puq4nciKrtfvjFP5NV8ra1N-NoZPGQkLQFM"
@@ -221,7 +221,7 @@ export default function Home() {
                 </div>
               </div>
               {/* Right: image */}
-              <div className="hidden md:block" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', height: '100%', minHeight: 280, position: 'relative' }}>
+              <div className="guarantee-img-wrap" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', minHeight: 220, position: 'relative' }}>
                 <Image
                   fill
                   src="https://www.ringcentral.com/gb/en/blog/wp-content/uploads/2024/09/ai-powered-predictive-dialers-in-contact-centre-790x415.jpg"

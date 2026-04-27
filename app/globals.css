@@ -467,13 +467,13 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .btn-p:hover, .btn-g:hover { transform: none !important; }
   /* Show all content immediately — no JS-gated opacity on mobile */
   .rev, .word-in, .email-para { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
-  /* Problem card: fade-swap instead of 3D flip (preserve-3d breaks under overflow:hidden on iOS) */
-  .prob-flip { position: relative; }
-  .prob-flip-inner { transform: none !important; }
-  .prob-back { position: absolute !important; inset: 0; transform: none !important; opacity: 0; transition: opacity .35s; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; }
-  .prob-front { transition: opacity .35s; }
-  .prob-flip.flipped .prob-front { opacity: 0; }
-  .prob-flip.flipped .prob-back { opacity: 1; }
+  /* Problem cards: display-swap — back is static so tapping expands the card into normal flow */
+  .prob-flip { position: relative; height: auto !important; }
+  .prob-flip-inner { display: block !important; transform: none !important; height: auto !important; }
+  .prob-back { position: static !important; inset: auto !important; transform: none !important; display: none !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; }
+  .prob-front { display: block !important; }
+  .prob-flip.flipped .prob-front { display: none !important; }
+  .prob-flip.flipped .prob-back { display: flex !important; }
   /* ── Nav: always show background on mobile ── */
   #main-nav { background: rgba(11,31,58,0.97) !important; }
   /* ── Ticker: disable animation on mobile (performance) ── */
@@ -499,8 +499,11 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
     animation-iteration-count: 1 !important;
     will-change: auto !important;
   }
-  /* ── Hide every full-bleed background image — primary GPU memory crash cause ── */
+  /* ── Hide full-bleed background images — GPU memory crash cause ── */
   img[data-nimg="fill"] { display: none !important; }
+  /* ── Keep content fill images visible ── */
+  .results-img-wrap img[data-nimg="fill"],
+  .guarantee-img-wrap img[data-nimg="fill"] { display: block !important; }
   /* ── Hide scroll progress bar (removes RAF loop repainting on every scroll) ── */
   #scroll-progress { display: none !important; }
   /* ── Hide toast notifications (stops extra image loads + DOM mutations) ── */
