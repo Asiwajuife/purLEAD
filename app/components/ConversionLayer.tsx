@@ -5,7 +5,6 @@ const CALENDLY = 'https://calendly.com/atanseiyeifeoluwa';
 
 export default function ConversionLayer() {
   const [showBar, setShowBar] = useState(false);
-  const [showExit, setShowExit] = useState(false);
 
   /* Sticky bottom bar — show after scrolling 600px */
   useEffect(() => {
@@ -13,25 +12,6 @@ export default function ConversionLayer() {
     function onScroll() { setShowBar(window.scrollY > 600); }
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  /* Exit intent — fires only after 3 minutes on page (desktop/mouse only) */
-  useEffect(() => {
-    if (window.innerWidth < 768) return;
-    if (sessionStorage.getItem('exitShown')) return;
-    let readyToFire = false;
-    const timer = setTimeout(() => { readyToFire = true; }, 3 * 60 * 1000);
-    function onMouseLeave(e: MouseEvent) {
-      if (e.clientY < 20 && readyToFire) {
-        setShowExit(true);
-        sessionStorage.setItem('exitShown', '1');
-      }
-    }
-    document.addEventListener('mouseleave', onMouseLeave);
-    return () => {
-      document.removeEventListener('mouseleave', onMouseLeave);
-      clearTimeout(timer);
-    };
   }, []);
 
   return (
@@ -78,52 +58,6 @@ export default function ConversionLayer() {
           Book a Call →
         </a>
       </div>
-
-      {/* Exit intent popup */}
-      {showExit && (
-        <div
-          role="dialog" aria-modal="true" aria-label="Before you go"
-          style={{
-            position: 'fixed', inset: 0, zIndex: 60,
-            background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '1.5rem',
-            animation: 'fadeSlideDown .4s cubic-bezier(.16,1,.3,1) forwards',
-          }}
-          onClick={e => { if (e.target === e.currentTarget) setShowExit(false); }}
-        >
-          <div style={{
-            background: '#0C2140', border: '1px solid rgba(0,209,255,0.3)',
-            borderTop: '2px solid var(--acc)',
-            borderRadius: 18, padding: '2.5rem', maxWidth: 460, width: '100%',
-            position: 'relative',
-          }}>
-            <button
-              onClick={() => setShowExit(false)}
-              aria-label="Close"
-              style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', color: 'var(--t3)', cursor: 'pointer', fontSize: '1.25rem', lineHeight: 1 }}>
-              ✕
-            </button>
-            <div className="font-mono" style={{ fontSize: '.62rem', color: 'var(--acc)', letterSpacing: '.14em', marginBottom: '.75rem' }}>WAIT —</div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--t1)', lineHeight: 1.2, marginBottom: '.875rem' }}>
-              Don&rsquo;t leave without<br />your free audit.
-            </h3>
-            <p style={{ fontSize: '.875rem', color: 'var(--t2)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-              We&rsquo;ll audit your outbound in 48 hours and show you exactly where you&rsquo;re leaving pipeline on the table — no strings attached.
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
-              <a href="#free-audit" onClick={() => setShowExit(false)}
-                 className="btn-p block text-center py-3" style={{ fontSize: '.9375rem' }}>
-                Get My Free Audit →
-              </a>
-              <button onClick={() => setShowExit(false)}
-                style={{ background: 'none', border: 'none', color: 'var(--t3)', fontSize: '.8rem', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-                No thanks, I don&rsquo;t want more pipeline
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
