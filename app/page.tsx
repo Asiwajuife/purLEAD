@@ -132,7 +132,7 @@ export default function Home() {
         <section className="z1 py-24 light-section" style={{ position: 'relative', overflow: 'hidden' }}>
           <Image
             fill
-            src="https://as1.ftcdn.net/jpg/01/56/32/36/1000_F_156323698_IuUwv2hjH8vt1SsUwdOUZHPm7iQ1tq11.jpg"
+            src="https://cdn.govexec.com/media/featured/gai-accelerated_ai/gaiacceleratedaiparallax.jpg"
             alt=""
             sizes="100vw"
             style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}

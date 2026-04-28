@@ -11,6 +11,7 @@ const nextConfig = {
       { hostname: "t4.ftcdn.net" },
       { hostname: "t3.ftcdn.net" },
       { hostname: "as1.ftcdn.net" },
+      { hostname: "cdn.govexec.com" },
       { hostname: "media.licdn.com" },
       { hostname: "www.ringcentral.com" },
       { hostname: "plaksha.edu.in" },
