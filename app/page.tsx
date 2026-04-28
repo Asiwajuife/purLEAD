@@ -265,11 +265,11 @@ export default function Home() {
             <div className="rev grid md:grid-cols-3 gap-px" style={{ background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
               {[
                 {
-                  href: 'mailto:hello@purlead.co',
+                  href: 'mailto:hello@purlead.com',
                   target: undefined,
                   svg: <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></>,
                   title: 'Email Us',
-                  sub: 'hello@purlead.co',
+                  sub: 'hello@purlead.com',
                   cta: 'SEND A MESSAGE \u2192',
                 },
                 {

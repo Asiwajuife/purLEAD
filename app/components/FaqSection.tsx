@@ -62,7 +62,7 @@ export default function FaqSection() {
             </div>
             <p style={{ marginTop: '1rem', fontSize: '.82rem', color: 'var(--t3)', textAlign: 'center', fontFamily: 'monospace', letterSpacing: '.05em' }}>
               Have a question not listed?<br />
-              <a href="mailto:hello@purlead.co" style={{ color: 'var(--acc)' }}>hello@purlead.co</a>
+              <a href="mailto:hello@purlead.com" style={{ color: 'var(--acc)' }}>hello@purlead.com</a>
             </p>
           </div>
         </div>

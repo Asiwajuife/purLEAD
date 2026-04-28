@@ -22,11 +22,11 @@ export const metadata: Metadata = {
   title: "purLEAD — AI-Powered Outbound That Books Calls While You Sleep",
   description:
     "purLEAD deploys a fully done-for-you AI outbound system that fills your calendar with 10–20 qualified sales calls every month — without hiring a single SDR.",
-  metadataBase: new URL("https://purlead.co"),
+  metadataBase: new URL("https://purlead.com"),
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: "https://purlead.co",
+    url: "https://purlead.com",
     title: "purLEAD — AI-Powered Outbound That Books Calls While You Sleep",
     description:
       "purLEAD deploys a fully done-for-you AI outbound system that fills your calendar with 10–20 qualified sales calls every month.",

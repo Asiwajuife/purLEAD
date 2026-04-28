@@ -110,7 +110,7 @@ export default function RoiCalculator() {
     <section ref={sectionRef} className="z1 py-24 light-section" style={{ position: 'relative', overflow: 'hidden' }}>
       <Image
         fill
-        src="https://img.freepik.com/premium-vector/abstract-artificial-intelligence-brain_33403-43.jpg"
+        src="https://img.freepik.com/free-vector/technology-face-circuit-diagram-background_1017-18300.jpg?semt=ais_hybrid&w=740&q=80"
         alt=""
         sizes="100vw"
         style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
