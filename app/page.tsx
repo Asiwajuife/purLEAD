@@ -196,7 +196,7 @@ export default function Home() {
         {/* Guarantee */}
         <section className="z1 py-14" style={{ background: 'linear-gradient(160deg,#0A1C35 0%,#0E2340 60%,#0A1C35 100%)', position: 'relative' }}>
           <div className="max-w-5xl mx-auto px-6">
-            <div className="rev grid md:grid-cols-[58%_42%] gap-10 items-center">
+            <div className="rev grid md:grid-cols-[52%_48%] gap-10 items-center">
               {/* Left: all text + cards */}
               <div>
                 <div className="lbl lbl-gold">Risk-Free Commitment</div>
@@ -221,7 +221,7 @@ export default function Home() {
                 </div>
               </div>
               {/* Right: image */}
-              <div className="guarantee-img-wrap" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', minHeight: 220, position: 'relative' }}>
+              <div className="guarantee-img-wrap" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', minHeight: 380, position: 'relative' }}>
                 <Image
                   fill
                   src="https://www.ringcentral.com/gb/en/blog/wp-content/uploads/2024/09/ai-powered-predictive-dialers-in-contact-centre-790x415.jpg"
