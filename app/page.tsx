@@ -306,7 +306,7 @@ export default function Home() {
         </section>
 
         {/* Final CTA */}
-        <section className="z1 py-16" style={{ position: 'relative', overflow: 'hidden' }}>
+        <section className="z1 py-10" style={{ position: 'relative', overflow: 'hidden' }}>
           <Image
             fill
             src="https://plaksha.edu.in/blog/storage/ai-image-2.jpeg"
@@ -324,7 +324,7 @@ export default function Home() {
               border: '1px solid rgba(0,209,255,0.2)',
               borderTop: '2px solid rgba(0,209,255,0.5)',
               borderRadius: 18,
-              padding: '2rem',
+              padding: '1.25rem 1.5rem',
               backdropFilter: 'blur(12px)',
             }}>
               <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex', marginBottom: '.75rem', fontSize: '.6rem' }}>
