@@ -310,15 +310,28 @@ export default function HeroSection() {
 
           {/* Trust logos */}
           <div className="rev" style={{ marginTop: '1.5rem', transitionDelay: '.28s' }}>
-            <p className="font-mono" style={{ fontSize: '.58rem', color: 'var(--t3)', letterSpacing: '.12em', marginBottom: '.65rem' }}>TRUSTED BY TEAMS AT</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.6rem' }}>
-              {['Nexara','VaultHQ','Sprinto','Quantify','PivotLab','GroveAI'].map(name => (
-                <span key={name} style={{
-                  padding: '.3rem .85rem', borderRadius: 100,
-                  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)',
-                  fontSize: '.72rem', fontWeight: 600, color: 'var(--t2)',
-                  backdropFilter: 'blur(8px)', letterSpacing: '.04em',
-                }}>{name}</span>
+            <p className="font-mono" style={{ fontSize: '.58rem', color: 'var(--t3)', letterSpacing: '.12em', marginBottom: '.85rem' }}>TRUSTED BY TEAMS AT</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', alignItems: 'center' }}>
+              {[
+                { name: 'Nexara', mark: 'N', shape: 'roundsq', color: '#6366f1' },
+                { name: 'VaultHQ', mark: 'V', shape: 'shield', color: '#0ea5e9' },
+                { name: 'Sprinto', mark: 'S', shape: 'circle', color: '#22c55e' },
+                { name: 'Quantify', mark: 'Q', shape: 'roundsq', color: '#a855f7' },
+                { name: 'PivotLab', mark: 'P', shape: 'hex', color: '#f97316' },
+                { name: 'GroveAI', mark: 'G', shape: 'circle', color: '#14b8a6' },
+              ].map(({ name, mark, shape, color }) => (
+                <div key={name} title={name} style={{ display: 'flex', alignItems: 'center', gap: '.45rem', opacity: 0.55, filter: 'grayscale(0.3)' }}>
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+                    {shape === 'circle' && <circle cx="11" cy="11" r="11" fill={color} fillOpacity="0.18" />}
+                    {shape === 'circle' && <circle cx="11" cy="11" r="10.5" stroke={color} strokeOpacity="0.45" strokeWidth="1" />}
+                    {shape === 'roundsq' && <rect x="1" y="1" width="20" height="20" rx="5" fill={color} fillOpacity="0.18" />}
+                    {shape === 'roundsq' && <rect x="0.5" y="0.5" width="21" height="21" rx="5.5" stroke={color} strokeOpacity="0.45" strokeWidth="1" />}
+                    {shape === 'shield' && <path d="M11 1L21 5v7c0 5-4.5 8.5-10 9C5.5 20.5 1 17 1 12V5z" fill={color} fillOpacity="0.15" stroke={color} strokeOpacity="0.4" strokeWidth="1" />}
+                    {shape === 'hex' && <path d="M11 1l9 5v10l-9 5-9-5V6z" fill={color} fillOpacity="0.15" stroke={color} strokeOpacity="0.4" strokeWidth="1" />}
+                    <text x="11" y="15.5" textAnchor="middle" fontFamily="system-ui,sans-serif" fontWeight="700" fontSize="10" fill={color} fillOpacity="0.9">{mark}</text>
+                  </svg>
+                  <span style={{ fontSize: '.72rem', fontWeight: 700, color: 'var(--t2)', letterSpacing: '.03em', lineHeight: 1 }}>{name}</span>
+                </div>
               ))}
             </div>
           </div>

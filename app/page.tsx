@@ -306,7 +306,7 @@ export default function Home() {
         </section>
 
         {/* Final CTA */}
-        <section className="z1 py-10" style={{ position: 'relative', overflow: 'hidden' }}>
+        <section className="z1 py-6" style={{ position: 'relative', overflow: 'hidden' }}>
           <Image
             fill
             src="https://plaksha.edu.in/blog/storage/ai-image-2.jpeg"
@@ -324,24 +324,24 @@ export default function Home() {
               border: '1px solid rgba(0,209,255,0.2)',
               borderTop: '2px solid rgba(0,209,255,0.5)',
               borderRadius: 18,
-              padding: '1.25rem 1.5rem',
+              padding: '.875rem 1.25rem',
               backdropFilter: 'blur(12px)',
             }}>
-              <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex', marginBottom: '.75rem', fontSize: '.6rem' }}>
+              <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex', marginBottom: '.4rem', fontSize: '.6rem' }}>
                 Now Accepting New Clients
               </div>
-              <h2 className="font-display font-extrabold" style={{ fontSize: 'clamp(1.15rem,2vw,1.5rem)', lineHeight: 1.15, letterSpacing: '-.02em', color: 'var(--t1)', marginBottom: '.75rem' }}>
+              <h2 className="font-display font-extrabold" style={{ fontSize: 'clamp(1rem,1.8vw,1.3rem)', lineHeight: 1.15, letterSpacing: '-.02em', color: 'var(--t1)', marginBottom: '.4rem' }}>
                 Your next 15 sales calls<br /><span style={{ color: 'var(--gold)' }}>are waiting.</span>
               </h2>
-              <p style={{ fontSize: '.875rem', lineHeight: 1.65, color: 'var(--t2)', maxWidth: '38ch', margin: '0 auto 1.5rem' }}>
+              <p style={{ fontSize: '.8rem', lineHeight: 1.55, color: 'var(--t2)', maxWidth: '38ch', margin: '0 auto .875rem' }}>
                 Book a free 30-min strategy call. We&rsquo;ll show you exactly how many meetings purLEAD can generate &mdash; and how fast.
               </p>
               <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
-                className="btn-p mag inline-flex items-center gap-2" style={{ fontSize: '.875rem', padding: '.8rem 2rem' }}>
+                className="btn-p mag inline-flex items-center gap-2" style={{ fontSize: '.8rem', padding: '.6rem 1.5rem' }}>
                 Book My Free Strategy Call
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </a>
-              <p className="mt-4 text-xs" style={{ color: 'var(--t3)' }}>No sales pressure &bull; No commitment &bull; Results or you don&rsquo;t pay month two.</p>
+              <p className="mt-2.5 text-xs" style={{ color: 'var(--t3)' }}>No sales pressure &bull; No commitment &bull; Results or you don&rsquo;t pay month two.</p>
             </div>
           </div>
         </section>
