@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
+import dynamic from "next/dynamic";
+const ChatWidget = dynamic(() => import("./components/ChatWidget"), { ssr: false });
 
 const syne = Syne({
   subsets: ["latin"],
@@ -49,6 +51,7 @@ export default function RootLayout({
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
       <body className="font-body bg-bg text-t2 antialiased overflow-x-hidden">
         {children}
+        <ChatWidget />
       </body>
     </html>
   );

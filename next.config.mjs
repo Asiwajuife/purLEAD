@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  experimental: { scrollRestoration: true },
   images: {
     remotePatterns: [
       { hostname: "randomuser.me" },

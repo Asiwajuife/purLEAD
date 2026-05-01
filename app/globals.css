@@ -305,7 +305,7 @@ section[id] { scroll-margin-top: 72px; }
 
 /* ── Back to top ── */
 #btt {
-  position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 100;
+  position: fixed; bottom: 1.75rem; right: 5.75rem; z-index: 100;
   background: var(--surf); border: 1px solid var(--border);
   color: var(--t3); border-radius: 6px; width: 38px; height: 38px;
   display: flex; align-items: center; justify-content: center;
@@ -533,7 +533,7 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   /* Toast — full-width at bottom */
   #toast-wrap { left: .75rem !important; right: .75rem !important; width: auto !important; bottom: 5rem !important; }
   /* Back-to-top — tuck above sticky bar */
-  #btt { bottom: 5rem !important; right: .75rem !important; }
+  #btt { bottom: 5rem !important; right: 5.75rem !important; }
   /* Floating cal btn — above sticky bar */
   .float-cal-btn { bottom: 5rem !important; right: .75rem !important; }
   /* Sticky bar — condensed text */

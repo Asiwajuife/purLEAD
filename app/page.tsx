@@ -1,5 +1,6 @@
 ﻿import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { Suspense } from 'react';
 
 /* Above-fold — always loaded */
 import AnnouncementBar from './components/AnnouncementBar';
@@ -54,31 +55,31 @@ export default function Home() {
           </div>
         </div>
 
-        <ProblemSection />
+        <Suspense fallback={null}><ProblemSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <SolutionSection />
+        <Suspense fallback={null}><SolutionSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <IntegrationsSection />
+        <Suspense fallback={null}><IntegrationsSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <VideoSection />
+        <Suspense fallback={null}><VideoSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <HowItWorksSection />
+        <Suspense fallback={null}><HowItWorksSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <EmailPreviewSection />
+        <Suspense fallback={null}><EmailPreviewSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <WhyPurLEADSection />
+        <Suspense fallback={null}><WhyPurLEADSection /></Suspense>
 
         <hr className="hdiv" />
 
@@ -189,7 +190,7 @@ export default function Home() {
 
         <hr className="hdiv" />
 
-        <PricingSection />
+        <Suspense fallback={null}><PricingSection /></Suspense>
 
         <hr className="hdiv" />
 
@@ -236,19 +237,19 @@ export default function Home() {
 
         <hr className="hdiv" />
 
-        <RoiCalculator />
+        <Suspense fallback={null}><RoiCalculator /></Suspense>
 
         <hr className="hdiv" />
 
-        <TestimonialsSection />
+        <Suspense fallback={null}><TestimonialsSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <FreeAuditSection />
+        <Suspense fallback={null}><FreeAuditSection /></Suspense>
 
         <hr className="hdiv" />
 
-        <FaqSection />
+        <Suspense fallback={null}><FaqSection /></Suspense>
 
         <hr className="hdiv" />
 
@@ -347,7 +348,7 @@ export default function Home() {
         </section>
       </main>
 
-      <FooterWithModals />
+      <Suspense fallback={null}><FooterWithModals /></Suspense>
     </>
   );
 }

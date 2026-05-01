@@ -31,10 +31,11 @@ export default function HeroSection() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    if (window.innerWidth < 768) return; // skip on mobile
+    if (window.innerWidth < 768) return;
     const ctx = canvas.getContext('2d')!;
     let W: number, H: number, pts: { x:number;y:number;vx:number;vy:number;r:number }[];
-    let rafId: number;
+    let rafId = 0;
+    let running = true;
     let resizeTimer: ReturnType<typeof setTimeout>;
 
     function resize() {
@@ -75,10 +76,26 @@ export default function HeroSection() {
           }
         }
       }
-      rafId = requestAnimationFrame(draw);
+      if (running) rafId = requestAnimationFrame(draw);
     }
-    draw();
-    return () => { window.removeEventListener('resize', debouncedResize); cancelAnimationFrame(rafId); };
+
+    function start() { if (!running) { running = true; rafId = requestAnimationFrame(draw); } }
+    function stop()  { running = false; cancelAnimationFrame(rafId); }
+
+    rafId = requestAnimationFrame(draw);
+
+    const onVisibility = () => document.hidden ? stop() : start();
+    document.addEventListener('visibilitychange', onVisibility);
+
+    const observer = new IntersectionObserver(([e]) => e.isIntersecting ? start() : stop(), { threshold: 0 });
+    observer.observe(canvas.parentElement!);
+
+    return () => {
+      stop();
+      window.removeEventListener('resize', debouncedResize);
+      document.removeEventListener('visibilitychange', onVisibility);
+      observer.disconnect();
+    };
   }, []);
 
   /* Clock */
