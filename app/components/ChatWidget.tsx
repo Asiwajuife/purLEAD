@@ -82,7 +82,6 @@ export default function ChatWidget() {
           bottom: stickyBar ? "5rem" : "1.75rem",
           right: "1.75rem",
           zIndex: 9999,
-          transition: "bottom 0.3s",
           width: "3.25rem",
           height: "3.25rem",
           borderRadius: "50%",
@@ -94,7 +93,7 @@ export default function ChatWidget() {
           justifyContent: "center",
           boxShadow: "0 0 0 0 rgba(0,209,255,0.4)",
           animation: open ? "none" : "pulse-ring 2.4s ease-out infinite",
-          transition: "transform 0.15s",
+          transition: "bottom 0.3s, transform 0.15s",
         }}
         onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
         onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
