@@ -570,7 +570,12 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   /* ── Keep content fill images visible ── */
   .results-img-wrap img[data-nimg="fill"],
   .guarantee-img-wrap img[data-nimg="fill"],
-  .hero-bg-zoom img[data-nimg="fill"] { display: block !important; }
+  .hero-bg-zoom img[data-nimg="fill"],
+  img.prob-bg-fill[data-nimg="fill"] { display: block !important; }
+  /* ── Problem section: show accordion, hide desktop marquee ── */
+  .prob-desktop-track { display: none !important; }
+  .prob-mobile-track { display: block !important; }
+  .prob-section-hint { display: none !important; }
   /* ── Hide scroll progress bar (removes RAF loop repainting on every scroll) ── */
   #scroll-progress { display: none !important; }
   /* ── Hide toast notifications (stops extra image loads + DOM mutations) ── */
@@ -666,6 +671,7 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 .prob-marquee-track.paused { animation-play-state: paused; }
 .prob-marquee-track .rev { animation: none; opacity: 1; transform: none; }
 .prob-marquee-track .prob-flip { width: 270px; flex-shrink: 0; height: 260px; }
+.prob-mobile-track { display: none; }
 
 /* ── How It Works interactive ── */
 .how-track { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 .5rem; }

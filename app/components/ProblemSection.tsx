@@ -49,6 +49,7 @@ const problems: Item[] = [
   },
 ];
 
+/* ── Desktop flip card (unchanged) ── */
 function ProblemCard({ c }: { c: Item }) {
   const [flipped, setFlipped] = useState(false);
   const [isMouse, setIsMouse] = useState(false);
@@ -95,12 +96,85 @@ function ProblemCard({ c }: { c: Item }) {
   );
 }
 
+/* ── Mobile accordion item ── */
+function ProblemAccordionItem({ c, index, isOpen, onToggle }: {
+  c: Item; index: number; isOpen: boolean; onToggle: () => void;
+}) {
+  const num = String(index + 1).padStart(2, '0');
+  return (
+    <div style={{ borderBottom: index < problems.length - 1 ? '1px solid rgba(0,209,255,0.09)' : 'none' }}>
+      <button
+        onClick={onToggle}
+        style={{
+          width: '100%', display: 'flex', alignItems: 'center', gap: '0.75rem',
+          padding: '0.9375rem 1rem',
+          background: isOpen ? 'rgba(0,209,255,0.05)' : 'transparent',
+          border: 'none', cursor: 'pointer', textAlign: 'left',
+          transition: 'background 0.2s',
+        }}
+      >
+        {/* Number badge */}
+        <span style={{
+          width: 32, height: 32, borderRadius: 8, flexShrink: 0,
+          background: isOpen ? 'rgba(0,209,255,0.14)' : 'rgba(0,209,255,0.06)',
+          border: `1px solid ${isOpen ? 'rgba(0,209,255,0.4)' : 'rgba(0,209,255,0.14)'}`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          color: isOpen ? '#00D1FF' : 'var(--t3)',
+          fontSize: '0.6rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700,
+          letterSpacing: '0.04em', transition: 'all 0.2s',
+        }}>
+          {num}
+        </span>
+
+        {/* Title */}
+        <span style={{
+          flex: 1, fontSize: '0.875rem', fontWeight: 700, lineHeight: 1.3,
+          color: isOpen ? 'var(--t1)' : 'var(--t2)', transition: 'color 0.2s',
+        }}>
+          {c.title}
+        </span>
+
+        {/* Chevron */}
+        <svg
+          width="15" height="15" viewBox="0 0 24 24" fill="none"
+          stroke={isOpen ? '#00D1FF' : 'var(--t3)'}
+          strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+          style={{ flexShrink: 0, transition: 'transform 0.25s, stroke 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {/* Expanded body */}
+      {isOpen && (
+        <div style={{
+          padding: '0 1rem 1.125rem 3.75rem',
+          animation: 'fadeSlideDown 0.22s cubic-bezier(.16,1,.3,1) both',
+        }}>
+          <p style={{ fontSize: '0.82rem', lineHeight: 1.78, color: 'var(--t2)', marginBottom: '0.625rem' }}>
+            {c.body}
+          </p>
+          <span style={{
+            fontSize: '0.72rem', color: '#00D1FF', fontWeight: 700,
+            letterSpacing: '0.03em', display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+          }}>
+            {c.cta}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProblemSection() {
   const [paused, setPaused] = useState(false);
+  const [openIdx, setOpenIdx] = useState(0);
+
   return (
     <section className="z1 py-24" style={{ position: 'relative', overflow: 'hidden' }}>
       <Image
         fill
+        className="prob-bg-fill"
         src="https://www.contactspace.com/wp-content/uploads/ai-min-scaled.jpeg"
         alt=""
         sizes="100vw"
@@ -111,22 +185,44 @@ export default function ProblemSection() {
         background: 'rgba(7,12,24,0.83)',
       }} />
       <div style={{ position: 'relative', zIndex: 1 }}>
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="rev mb-10">
-          <div className="lbl">The Problem</div>
-          <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
-            Your pipeline isn&rsquo;t broken.<br /><span style={{ color: 'var(--t3)' }}>Your strategy is.</span>
-          </h2>
-          <p className="font-mono text-xs mt-3" style={{ color: 'rgba(0,209,255,0.45)', letterSpacing: '.06em' }}>
-            Tap each card to reveal the impact.
-          </p>
-        </div>
-        <div className="prob-marquee-outer" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-          <div className={`prob-marquee-track${paused ? ' paused' : ''}`}>
-            {[...problems, ...problems].map((c, i) => <ProblemCard key={i} c={c} />)}
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="rev mb-10">
+            <div className="lbl">The Problem</div>
+            <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
+              Your pipeline isn&rsquo;t broken.<br /><span style={{ color: 'var(--t3)' }}>Your strategy is.</span>
+            </h2>
+            <p className="font-mono text-xs mt-3 prob-section-hint" style={{ color: 'rgba(0,209,255,0.45)', letterSpacing: '.06em' }}>
+              Tap each card to reveal the impact.
+            </p>
+          </div>
+
+          {/* Desktop: animated marquee flip cards */}
+          <div className="prob-desktop-track">
+            <div className="prob-marquee-outer" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+              <div className={`prob-marquee-track${paused ? ' paused' : ''}`}>
+                {[...problems, ...problems].map((c, i) => <ProblemCard key={i} c={c} />)}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile: accordion list */}
+          <div className="prob-mobile-track" style={{
+            background: 'rgba(5,12,24,0.78)',
+            border: '1px solid rgba(0,209,255,0.16)',
+            borderRadius: 16,
+            overflow: 'hidden',
+          }}>
+            {problems.map((c, i) => (
+              <ProblemAccordionItem
+                key={i}
+                c={c}
+                index={i}
+                isOpen={openIdx === i}
+                onToggle={() => setOpenIdx(o => o === i ? -1 : i)}
+              />
+            ))}
           </div>
         </div>
-      </div>
       </div>
     </section>
   );
