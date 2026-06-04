@@ -229,6 +229,7 @@ export default function SolutionSection() {
             {/* Dashboard panel */}
             <div
               key={activeFeature}
+              className="sol-panel"
               style={{
                 minHeight: 240, borderRadius: 16,
                 border: '1px solid rgba(0,209,255,0.2)',

@@ -71,11 +71,11 @@ export default function NavBar() {
   return (
     <nav id="main-nav" className={scrolled ? 'scrolled' : ''}
       style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, borderBottom: '1px solid transparent', background: 'transparent' }}>
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between" style={{ height: 60 }}>
-        <a href="#" className="font-display font-extrabold tracking-tight" style={{ color: 'var(--t1)', fontSize: '1.1rem' }}>
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between" style={{ height: 66 }}>
+        <a href="#" className="font-display font-extrabold tracking-tight" style={{ color: 'var(--t1)', fontSize: '1.2rem', letterSpacing: '-.02em' }}>
           pur<span style={{ color: 'var(--gold)' }}>LEAD</span>
         </a>
-        <div className="hidden md:flex items-center gap-7 text-sm font-medium" style={{ color: 'var(--t2)' }}>
+        <div className="hidden md:flex items-center gap-7 font-medium" style={{ color: 'var(--t2)', fontSize: '.9rem' }}>
           {links.map(l => l.pill ? (
             <a key={l.href} href={l.href}
                className="btn-g rounded-full text-xs px-4 py-1.5" style={{ fontWeight: 700 }}>
@@ -87,7 +87,7 @@ export default function NavBar() {
         </div>
         <div className="flex items-center gap-3">
           {/* Online indicator */}
-          <div className="hidden md:flex items-center gap-1.5" style={{ fontSize: '.72rem', color: 'rgba(34,197,94,0.85)', fontFamily: 'var(--font-mono,monospace)', letterSpacing: '.04em' }}>
+          <div className="hidden md:flex items-center gap-1.5" style={{ fontSize: '.7rem', color: 'rgba(34,197,94,0.9)', fontFamily: 'var(--font-mono,monospace)', letterSpacing: '.05em', fontWeight: 600 }}>
             <span style={{ position: 'relative', width: 7, height: 7, flexShrink: 0 }}>
               <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#22C55E', animation: 'pulseRing 2s ease-out infinite' }} />
               <span style={{ position: 'absolute', inset: 1, borderRadius: '50%', background: '#22C55E' }} />
@@ -95,7 +95,7 @@ export default function NavBar() {
             {online} active now
           </div>
           <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
-             className="btn-p hidden md:inline-flex items-center gap-1.5 text-sm px-4 py-2.5">
+             className="btn-p hidden md:inline-flex items-center gap-1.5 px-5 py-2.5" style={{ fontSize: '.85rem' }}>
             Book a Call
             <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </a>

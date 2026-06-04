@@ -277,10 +277,10 @@ export default function HeroSection() {
             <span className="word-in" style={{ transitionDelay: '.1s', color: 'var(--gold)' }}>Calls on Demand.</span>
           </h1>
 
-          {/* Typewriter */}
-          <div className="rev" style={{ marginBottom: '1rem', transitionDelay: '.05s' }}>
+          {/* Typewriter — hidden on mobile (nothing to show until JS runs) */}
+          <div className="rev hero-typewriter" style={{ marginBottom: '1rem', transitionDelay: '.05s' }}>
             <span style={{ fontSize: '.9rem', color: 'var(--t3)' }}>Currently running outbound for: </span>
-            <span id="typewriter-text" style={{ color: 'var(--acc)', fontWeight: 600 }} />
+            <span id="typewriter-text" style={{ color: 'var(--acc)', fontWeight: 600 }}>SaaS founders</span>
             <span style={{ color: 'var(--acc)', animation: 'typewrite .7s step-end infinite alternate', marginLeft: 1 }}>|</span>
           </div>
 

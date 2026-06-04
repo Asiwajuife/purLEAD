@@ -549,6 +549,8 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .prob-marquee-track { animation: none !important; transform: none !important; flex-wrap: wrap !important; width: 100% !important; gap: .75rem !important; }
   .prob-marquee-track > *:nth-child(n+7) { display: none !important; }
   .prob-marquee-track .prob-flip { width: 100% !important; flex-shrink: 1 !important; }
+  /* ── How-It-Works cards: tighter padding in 2-col mobile layout ── */
+  .how-card { padding: .875rem !important; }
   /* ── Testimonials: horizontal scroll instead of animated marquee ── */
   .testimonials-sect { overflow-x: auto !important; -webkit-overflow-scrolling: touch; padding-bottom: .75rem !important; scrollbar-width: none; }
   .testimonials-sect::-webkit-scrollbar { display: none; }
@@ -567,7 +569,8 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   img[data-nimg="fill"] { display: none !important; }
   /* ── Keep content fill images visible ── */
   .results-img-wrap img[data-nimg="fill"],
-  .guarantee-img-wrap img[data-nimg="fill"] { display: block !important; }
+  .guarantee-img-wrap img[data-nimg="fill"],
+  .hero-bg-zoom img[data-nimg="fill"] { display: block !important; }
   /* ── Hide scroll progress bar (removes RAF loop repainting on every scroll) ── */
   #scroll-progress { display: none !important; }
   /* ── Hide toast notifications (stops extra image loads + DOM mutations) ── */
@@ -576,6 +579,24 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .btn-p::after { display: none !important; }
   .live-dot { opacity: 1 !important; }
   .testimonial-track-r { display: none !important; }
+
+  /* ── iOS: prevent auto-zoom on input focus (font-size must be ≥ 16px) ── */
+  input, textarea, select { font-size: 1rem !important; }
+  /* ── Hero typewriter row: cursor blinks alone on mobile, hide it ── */
+  .hero-typewriter { display: none !important; }
+  /* ── Comparison table: restore x-scroll blocked by inline overflow:hidden ── */
+  .cmp-table-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+  /* ── Results & guarantee section images: reduce oversized min-heights ── */
+  .results-img-wrap { min-height: 200px !important; }
+  .guarantee-img-wrap { min-height: 200px !important; }
+  /* ── FreeAudit form card: tighter padding on mobile ── */
+  .audit-form-inner { padding: 1.25rem !important; }
+  /* ── Solution visual panel: tighter min-height on mobile ── */
+  .sol-panel { min-height: 160px !important; }
+  /* ── Announcement bar: smaller text on narrow screens ── */
+  #ann-bar span[style] { font-size: .72rem !important; }
+  /* ── Scroll-margin: slightly less offset for mobile nav ── */
+  section[id] { scroll-margin-top: 56px; }
 }
 
 /* ── Case study before/after grid ── */
@@ -609,6 +630,10 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   .px-6 { padding-left: 1rem !important; padding-right: 1rem !important; }
   /* Modal full-screen on mobile */
   .modal-box { padding: 1.25rem; max-height: 90vh; }
+  /* Section padding: reduce py-24 (6rem) and py-20 (5rem) on small phones */
+  section.py-24 { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+  section.py-20 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+  section.py-16 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
 }
 
 /* ── Problem reveal cards ── */

@@ -150,7 +150,7 @@ export default function Home() {
               </h2>
               <p style={{ color: '#334155', marginTop: '.5rem', fontSize: '.9375rem', maxWidth: '48ch' }}>We built this table ourselves. You should pressure-test it.</p>
             </div>
-            <div className="rev" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.07)' }}>
+            <div className="rev cmp-table-wrap" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.07)' }}>
             <div className="overflow-x-auto">
               <table className="cmp-table" style={{ minWidth: 520 }}>
                 <thead>

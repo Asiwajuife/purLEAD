@@ -110,7 +110,7 @@ export default function HowItWorksSection() {
 
         {/* Step cards + visual panel */}
         <div className="grid md:grid-cols-4 gap-8 items-start">
-          <div className="md:col-span-3 grid md:grid-cols-4 gap-4">
+          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {steps.map((step, i) => (
               <div key={step.n} className="rev-blur" style={{ transitionDelay: `${i * .08}s` }}>
               <div

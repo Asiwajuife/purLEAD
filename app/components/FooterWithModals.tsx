@@ -40,7 +40,7 @@ export default function FooterWithModals() {
       <footer style={{ background: 'linear-gradient(180deg,#071526 0%,#060F1C 100%)', borderTop: '1px solid rgba(232,184,75,0.2)', boxShadow: '0 -1px 0 rgba(0,209,255,0.06),0 -4px 40px rgba(232,184,75,.05)' }}>
         <div className="max-w-6xl mx-auto px-6 py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
-            <a href="#" className="font-display font-extrabold tracking-tight" style={{ color: 'var(--t1)', fontSize: '1rem' }}>
+            <a href="#" className="font-display font-extrabold tracking-tight" style={{ color: 'var(--t1)', fontSize: '1.1rem', letterSpacing: '-.02em' }}>
               pur<span style={{ color: 'var(--gold)' }}>LEAD</span>
             </a>
             <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm" style={{ color: 'rgba(148,163,184,0.6)' }}>

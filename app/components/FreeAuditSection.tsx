@@ -145,7 +145,7 @@ export default function FreeAuditSection() {
 
           {/* Right form */}
           <div className="rev-scale" style={{ transitionDelay: '.12s' }}>
-            <div style={{
+            <div className="audit-form-inner" style={{
               background: 'rgba(13,36,68,0.7)', border: '1px solid rgba(0,209,255,0.2)',
               borderRadius: 16, padding: '2rem', backdropFilter: 'blur(12px)',
             }}>
