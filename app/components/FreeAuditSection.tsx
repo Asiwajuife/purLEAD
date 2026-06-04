@@ -80,9 +80,9 @@ export default function FreeAuditSection() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%', background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(0,209,255,0.18)', borderRadius: 8,
-    padding: '.65rem .875rem', fontSize: '1rem', color: 'var(--t1)',
-    outline: 'none', transition: 'border-color .2s',
+    border: '1px solid rgba(0,209,255,0.2)', borderRadius: 10,
+    padding: '.7rem .9rem', fontSize: '.9375rem', color: 'var(--t1)',
+    outline: 'none', transition: 'border-color .2s, box-shadow .2s',
   };
 
   const errStyle: React.CSSProperties = {
@@ -110,9 +110,9 @@ export default function FreeAuditSection() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
 
           {/* Left prose */}
-          <div className="rev">
+          <div className="rev-blur">
             <div className="lbl">Free Audit</div>
-            <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '1rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginBottom: '1rem' }}>
               Get a free<br /><span style={{ color: 'var(--acc)' }}>outbound audit.</span>
             </h2>
             <p style={{ color: 'var(--t2)', fontSize: '.9375rem', lineHeight: 1.7, maxWidth: '42ch', marginBottom: '1.75rem' }}>
@@ -144,7 +144,7 @@ export default function FreeAuditSection() {
           </div>
 
           {/* Right form */}
-          <div className="rev" style={{ transitionDelay: '.08s' }}>
+          <div className="rev-scale" style={{ transitionDelay: '.12s' }}>
             <div style={{
               background: 'rgba(13,36,68,0.7)', border: '1px solid rgba(0,209,255,0.2)',
               borderRadius: 16, padding: '2rem', backdropFilter: 'blur(12px)',
@@ -186,18 +186,18 @@ export default function FreeAuditSection() {
                   {step === 1 && (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                       <div>
-                        <label style={labelStyle}>Full Name</label>
-                        <input style={inputStyle} value={form.name} onChange={e => set('name', e.target.value)} placeholder="Alex Johnson" />
+                        <label htmlFor="audit-name" style={labelStyle}>Full Name</label>
+                        <input id="audit-name" style={inputStyle} value={form.name} onChange={e => set('name', e.target.value)} placeholder="Alex Johnson" autoComplete="name" />
                         {errors.name && <p style={errStyle}>{errors.name}</p>}
                       </div>
                       <div>
-                        <label style={labelStyle}>Work Email</label>
-                        <input style={inputStyle} type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="alex@company.com" />
+                        <label htmlFor="audit-email" style={labelStyle}>Work Email</label>
+                        <input id="audit-email" style={inputStyle} type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="alex@company.com" autoComplete="email" />
                         {errors.email && <p style={errStyle}>{errors.email}</p>}
                       </div>
                       <div>
-                        <label style={labelStyle}>Company Name</label>
-                        <input style={inputStyle} value={form.company} onChange={e => set('company', e.target.value)} placeholder="Acme Corp" />
+                        <label htmlFor="audit-company" style={labelStyle}>Company Name</label>
+                        <input id="audit-company" style={inputStyle} value={form.company} onChange={e => set('company', e.target.value)} placeholder="Acme Corp" autoComplete="organization" />
                         {errors.company && <p style={errStyle}>{errors.company}</p>}
                       </div>
                     </div>
@@ -231,8 +231,8 @@ export default function FreeAuditSection() {
                   {step === 3 && (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                       <div>
-                        <label style={labelStyle}>Website (optional)</label>
-                        <input style={inputStyle} value={form.website} onChange={e => set('website', e.target.value)} placeholder="https://yoursite.com" />
+                        <label htmlFor="audit-website" style={labelStyle}>Website (optional)</label>
+                        <input id="audit-website" style={inputStyle} value={form.website} onChange={e => set('website', e.target.value)} placeholder="https://yoursite.com" autoComplete="url" />
                       </div>
                       <p style={{ fontSize: '.78rem', color: 'var(--t3)', lineHeight: 1.6 }}>
                         By submitting you agree to receive a one-time audit report. No spam, ever. We respect your privacy.

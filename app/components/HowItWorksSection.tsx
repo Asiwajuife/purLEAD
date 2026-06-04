@@ -73,7 +73,7 @@ export default function HowItWorksSection() {
         background: 'linear-gradient(160deg, rgba(7,15,28,0.88) 0%, rgba(10,28,53,0.83) 100%)',
       }} />
       <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="rev mb-10">
+        <div className="rev-blur mb-10">
           <div className="lbl">The Process</div>
           <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
             Up and running in <span style={{ color: 'var(--cta)' }}>30 days.</span>
@@ -82,7 +82,7 @@ export default function HowItWorksSection() {
         </div>
 
         {/* Progress track */}
-        <div className="rev how-track mb-7" style={{ transitionDelay: '.05s' }}>
+        <div className="rev-blur how-track mb-7" style={{ transitionDelay: '.07s' }}>
           {/* SVG animated connector */}
           <svg className="how-track-svg" style={{ position: 'absolute', left: '.5rem', right: '.5rem', top: '50%', transform: 'translateY(-50%)', overflow: 'visible', pointerEvents: 'none', width: 'calc(100% - 1rem)', height: 4 }} aria-hidden="true">
             <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(0,209,255,0.1)" strokeWidth="2" />
@@ -112,7 +112,7 @@ export default function HowItWorksSection() {
         <div className="grid md:grid-cols-4 gap-8 items-start">
           <div className="md:col-span-3 grid md:grid-cols-4 gap-4">
             {steps.map((step, i) => (
-              <div key={step.n} className="rev" style={{ transitionDelay: `${i * .07}s` }}>
+              <div key={step.n} className="rev-blur" style={{ transitionDelay: `${i * .08}s` }}>
               <div
                 className={`how-card${active === i ? ' how-active' : active > i ? ' how-done' : ''}`}
                 onClick={() => goTo(i)}

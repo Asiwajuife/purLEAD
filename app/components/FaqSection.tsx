@@ -20,26 +20,34 @@ export default function FaqSection() {
         <div className="grid md:grid-cols-[55%_45%] gap-12 items-start">
           {/* LEFT: heading + accordion */}
           <div>
-            <div className="rev mb-10">
+            <div className="rev-blur mb-10">
               <div className="lbl">FAQ</div>
-              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
+              <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em' }}>
                 Questions we get <span style={{ color: 'var(--acc)' }}>a lot.</span>
               </h2>
             </div>
-            <div style={{ border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
+            <div style={{ border: '1px solid rgba(0,0,0,0.09)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
               {items.map((item, i) => {
                 const isOpen = openIdx === i;
                 return (
-                  <div key={i} className="rev faq-item" style={{ borderBottom: i < items.length - 1 ? '1px solid var(--border)' : 'none', transitionDelay: `${i * .04}s` }}>
-                    <div className="faq-trigger flex items-center justify-between px-6 py-4 select-none cursor-pointer"
-                      style={{ transition: 'background .15s' }}
+                  <div key={i} className="rev-blur faq-item" style={{ borderBottom: i < items.length - 1 ? '1px solid var(--border)' : 'none', transitionDelay: `${i * .05}s` }}>
+                    <div className="faq-trigger flex items-center justify-between px-6 py-5 select-none cursor-pointer"
+                      style={{ transition: 'background .18s' }}
                       onClick={() => setOpenIdx(isOpen ? null : i)}>
-                      <span className="font-display font-semibold text-sm" style={{ color: 'var(--t1)' }}>{item.q}</span>
-                      <span className="text-lg leading-none shrink-0 ml-3"
-                        style={{ color: 'var(--acc)', transform: isOpen ? 'rotate(45deg)' : '', transition: 'transform .25s' }}>+</span>
+                      <span className="font-display font-semibold" style={{ color: 'var(--t1)', fontSize: '.9375rem', lineHeight: 1.4 }}>{item.q}</span>
+                      <span className="shrink-0 ml-4 flex items-center justify-center"
+                        style={{
+                          width: 26, height: 26, borderRadius: 6,
+                          background: isOpen ? 'rgba(0,209,255,.12)' : 'rgba(0,209,255,.06)',
+                          border: `1px solid ${isOpen ? 'rgba(0,209,255,.4)' : 'rgba(0,209,255,.18)'}`,
+                          color: 'var(--acc)',
+                          fontSize: '1.1rem', lineHeight: 1, fontWeight: 300,
+                          transform: isOpen ? 'rotate(45deg)' : '',
+                          transition: 'transform .28s cubic-bezier(.16,1,.3,1), background .2s, border-color .2s',
+                        }}>+</span>
                     </div>
                     <div className={`fa px-6 text-sm leading-relaxed${isOpen ? ' open' : ''}`}
-                      style={{ color: 'var(--t2)', paddingBottom: isOpen ? '1.25rem' : 0 }}>
+                      style={{ color: 'var(--t2)', paddingBottom: isOpen ? '1.4rem' : 0, lineHeight: 1.75 }}>
                       {item.a}
                     </div>
                   </div>

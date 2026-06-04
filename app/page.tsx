@@ -101,13 +101,13 @@ export default function Home() {
               {/* RIGHT: heading + stats */}
               <div>
                 <div className="lbl lbl-gold">Aggregate Results</div>
-                <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginTop: '.5rem', marginBottom: '1.5rem' }}>
+                <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginTop: '.5rem', marginBottom: '1.5rem' }}>
                   Numbers don&rsquo;t lie.<br /><span style={{ color: 'var(--gold)' }}>Ours don&rsquo;t either.</span>
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-6 text-center card" style={{ borderColor: 'rgba(232,184,75,.3)', background: 'linear-gradient(160deg,rgba(232,184,75,.08),rgba(13,36,68,.65))' }}>
-                    <div className="font-display font-extrabold" style={{ fontSize: '1.875rem', color: 'var(--gold)', lineHeight: 1 }}>$800K+</div>
-                    <div style={{ width: 32, height: 2, background: 'var(--gold)', borderRadius: 1, margin: '.6rem auto .5rem' }} />
+                  <div className="p-7 text-center card" style={{ borderColor: 'rgba(232,184,75,.3)', background: 'linear-gradient(160deg,rgba(232,184,75,.09),rgba(13,36,68,.68))' }}>
+                    <div className="font-display font-extrabold" style={{ fontSize: '2.25rem', color: 'var(--gold)', lineHeight: 1 }}>$800K+</div>
+                    <div style={{ width: 32, height: 2, background: 'var(--gold)', borderRadius: 1, margin: '.65rem auto .55rem' }} />
                     <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>Pipeline Generated</div>
                   </div>
                   {[
@@ -115,9 +115,9 @@ export default function Home() {
                     { count: 34,  suffix: '',  label: 'Active Clients' },
                     { count: 87,  suffix: '%', label: 'Client Retention' },
                   ].map((s, i) => (
-                    <div key={i} className="p-6 text-center card">
-                      <div className="snum" data-count={s.count} data-suffix={s.suffix} style={{ fontSize: '1.75rem' }}>0{s.suffix}</div>
-                      <div style={{ width: 32, height: 2, background: 'var(--acc)', borderRadius: 1, margin: '.6rem auto .5rem' }} />
+                    <div key={i} className="p-7 text-center card">
+                      <div className="snum" data-count={s.count} data-suffix={s.suffix}>0{s.suffix}</div>
+                      <div style={{ width: 32, height: 2, background: 'var(--acc)', borderRadius: 1, margin: '.65rem auto .55rem' }} />
                       <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>{s.label}</div>
                     </div>
                   ))}
@@ -145,12 +145,12 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
             <div className="rev mb-12">
               <div className="lbl" style={{ color: '#0F172A', borderColor: 'rgba(0,0,0,0.15)' }}>How We Compare</div>
-              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', color: '#0F172A' }}>
+              <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', color: '#0F172A' }}>
                 The honest <span style={{ color: 'var(--acc)' }}>comparison.</span>
               </h2>
               <p style={{ color: '#334155', marginTop: '.5rem', fontSize: '.9375rem', maxWidth: '48ch' }}>We built this table ourselves. You should pressure-test it.</p>
             </div>
-            <div className="rev" style={{ border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
+            <div className="rev" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.07)' }}>
             <div className="overflow-x-auto">
               <table className="cmp-table" style={{ minWidth: 520 }}>
                 <thead>
@@ -195,13 +195,13 @@ export default function Home() {
         <hr className="hdiv" />
 
         {/* Guarantee */}
-        <section className="z1 py-14" style={{ background: 'linear-gradient(160deg,#0A1C35 0%,#0E2340 60%,#0A1C35 100%)', position: 'relative' }}>
+        <section className="z1 py-20" style={{ background: 'linear-gradient(160deg,#0A1C35 0%,#0E2340 60%,#0A1C35 100%)', position: 'relative' }}>
           <div className="max-w-5xl mx-auto px-6">
             <div className="rev grid md:grid-cols-[52%_48%] gap-10 items-center">
               {/* Left: all text + cards */}
               <div>
                 <div className="lbl lbl-gold">Risk-Free Commitment</div>
-                <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginTop: '.5rem' }}>
+                <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginTop: '.5rem' }}>
                   We only win<br /><span style={{ color: 'var(--gold)' }}>when you win.</span>
                 </h2>
                 <p style={{ color: 'var(--t2)', marginTop: '.75rem', fontSize: '.9rem', maxWidth: '46ch', marginBottom: '1rem' }}>
@@ -213,7 +213,7 @@ export default function Home() {
                     { num: '100%', tag: 'Transparent Reporting',  body: "Weekly reports showing exactly what was sent, what replied, and what we're doing about it. Every campaign, every metric." },
                     { num: '0',    tag: 'Lock-in After Month 3',  body: "After the initial 3-month window, it's fully month-to-month. Our clients stay because they see results \u2014 not because they're locked in." },
                   ].map((g, i) => (
-                    <div key={i} className="gtee" style={{ padding: '.75rem 1rem' }}>
+                    <div key={i} className="gtee">
                       <div className="gtee-num" style={{ fontSize: '1.2rem', marginBottom: '.15rem' }}>{g.num}</div>
                       <div className="font-mono" style={{ fontSize: '.6rem', color: 'var(--gold)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: '.35rem' }}>{g.tag}</div>
                       <p style={{ fontSize: '.82rem', lineHeight: 1.65, color: 'var(--t2)', margin: 0 }}>{g.body}</p>
@@ -258,12 +258,12 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-6">
             <div className="rev mb-10">
               <div className="lbl">Get in Touch</div>
-              <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '.5rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginBottom: '.5rem' }}>
                 Let&rsquo;s talk <span style={{ color: 'var(--acc)' }}>pipeline.</span>
               </h2>
               <p style={{ color: 'var(--t2)', maxWidth: '42ch', fontSize: '.9375rem' }}>Have a question before booking? We&rsquo;ll get back to you within one business day.</p>
             </div>
-            <div className="rev grid md:grid-cols-3 gap-px" style={{ background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 4, overflow: 'hidden' }}>
+            <div className="rev grid md:grid-cols-3 gap-px" style={{ background: 'rgba(0,209,255,0.08)', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
               {[
                 {
                   href: 'mailto:hello@purlead.com',
@@ -307,7 +307,7 @@ export default function Home() {
         </section>
 
         {/* Final CTA */}
-        <section className="z1 py-6" style={{ position: 'relative', overflow: 'hidden' }}>
+        <section className="z1 py-16" style={{ position: 'relative', overflow: 'hidden' }}>
           <Image
             fill
             src="https://plaksha.edu.in/blog/storage/ai-image-2.jpeg"
@@ -317,32 +317,72 @@ export default function Home() {
           />
           <div aria-hidden="true" style={{
             position: 'absolute', inset: 0, zIndex: 0,
-            background: 'linear-gradient(160deg, rgba(7,21,38,0.82) 0%, rgba(10,28,53,0.76) 50%, rgba(7,21,38,0.82) 100%)',
+            background: 'linear-gradient(160deg, rgba(5,14,28,0.9) 0%, rgba(9,24,46,0.86) 50%, rgba(5,14,28,0.9) 100%)',
           }} />
-          <div className="max-w-xl mx-auto px-6 text-center" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="rev" style={{
-              background: 'rgba(13,36,68,0.7)',
-              border: '1px solid rgba(0,209,255,0.2)',
-              borderTop: '2px solid rgba(0,209,255,0.5)',
-              borderRadius: 18,
-              padding: '.875rem 1.25rem',
-              backdropFilter: 'blur(12px)',
+          <div className="max-w-3xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="rev-blur" style={{
+              background: 'rgba(9,20,40,0.88)',
+              border: '1px solid rgba(0,209,255,0.14)',
+              borderRadius: 16,
+              backdropFilter: 'blur(20px)',
+              overflow: 'hidden',
+              boxShadow: '0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.03)',
             }}>
-              <div className="lbl lbl-gold justify-center" style={{ display: 'inline-flex', marginBottom: '.4rem', fontSize: '.6rem' }}>
-                Now Accepting New Clients
+
+              {/* Status bar */}
+              <div style={{
+                borderBottom: '1px solid rgba(0,209,255,0.09)',
+                padding: '.55rem 1.25rem',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                background: 'rgba(0,209,255,0.03)',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+                  <span className="live-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block', flexShrink: 0 }} />
+                  <span className="font-mono" style={{ fontSize: '.6rem', color: 'var(--t3)', letterSpacing: '.1em', textTransform: 'uppercase' }}>Now Accepting New Clients</span>
+                </div>
+                <span className="font-mono" style={{ fontSize: '.6rem', color: 'var(--gold)', fontWeight: 700, letterSpacing: '.06em', animation: 'scarcityPulse 2.5s ease-in-out infinite' }}>3 spots remaining</span>
               </div>
-              <h2 className="font-display font-extrabold" style={{ fontSize: 'clamp(1rem,1.8vw,1.3rem)', lineHeight: 1.15, letterSpacing: '-.02em', color: 'var(--t1)', marginBottom: '.4rem' }}>
-                Your next 15 sales calls<br /><span style={{ color: 'var(--gold)' }}>are waiting.</span>
-              </h2>
-              <p style={{ fontSize: '.8rem', lineHeight: 1.55, color: 'var(--t2)', maxWidth: '38ch', margin: '0 auto .875rem' }}>
-                Book a free 30-min strategy call. We&rsquo;ll show you exactly how many meetings purLEAD can generate &mdash; and how fast.
-              </p>
-              <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
-                className="btn-p mag inline-flex items-center gap-2" style={{ fontSize: '.8rem', padding: '.6rem 1.5rem' }}>
-                Book My Free Strategy Call
-                <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </a>
-              <p className="mt-2.5 text-xs" style={{ color: 'var(--t3)' }}>No sales pressure &bull; No commitment &bull; Results or you don&rsquo;t pay month two.</p>
+
+              {/* Body */}
+              <div className="grid md:grid-cols-[1fr_220px] gap-6 items-center" style={{ padding: '1.5rem 1.25rem' }}>
+
+                {/* Left: copy */}
+                <div>
+                  <h2 className="font-display font-extrabold" style={{ fontSize: 'clamp(1.1rem,2.2vw,1.5rem)', lineHeight: 1.18, letterSpacing: '-.03em', color: 'var(--t1)', marginBottom: '.5rem' }}>
+                    Your next 15 sales calls<br /><span style={{ color: 'var(--gold)' }}>are waiting.</span>
+                  </h2>
+                  <p style={{ fontSize: '.8125rem', lineHeight: 1.7, color: 'var(--t2)', maxWidth: '52ch', marginBottom: '1.1rem' }}>
+                    Book a free 30-min strategy call. We&rsquo;ll show you exactly how many meetings purLEAD can generate &mdash; and how fast.
+                  </p>
+                  <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+                    {[['18', 'calls booked this month'], ['9.4%', 'avg reply rate'], ['11 days', 'to first booking']].map(([val, lbl]) => (
+                      <div key={lbl}>
+                        <div className="font-display" style={{ fontSize: '.95rem', fontWeight: 800, color: 'var(--acc)', lineHeight: 1 }}>{val}</div>
+                        <div className="font-mono" style={{ fontSize: '.56rem', color: 'var(--t3)', letterSpacing: '.07em', marginTop: '.15rem', textTransform: 'uppercase' }}>{lbl}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: CTA */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
+                  <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
+                    className="btn-p mag inline-flex items-center justify-center gap-2"
+                    style={{ fontSize: '.8125rem', padding: '.75rem 1.25rem', width: '100%', whiteSpace: 'nowrap' }}>
+                    Book Free Strategy Call
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </a>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
+                    {['No commitment required', 'Results or no charge month two', 'Free — no credit card'].map(item => (
+                      <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '.375rem' }}>
+                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}><path d="M2 6l3 3 5-5" stroke="#22C55E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <span style={{ fontSize: '.72rem', color: 'var(--t3)', lineHeight: 1.4 }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>

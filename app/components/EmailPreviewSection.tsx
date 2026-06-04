@@ -41,7 +41,7 @@ export default function EmailPreviewSection() {
         <div className="grid md:grid-cols-2 gap-14 items-center">
 
           {/* Left copy */}
-          <div className="rev">
+          <div className="rev-blur">
             <div className="lbl" style={{ color: '#0F172A', borderColor: 'rgba(0,0,0,0.15)' }}>What It Looks Like</div>
             <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '1.25rem', color: '#0F172A' }}>
               This lands in your<br />prospect&rsquo;s inbox &mdash;<br /><span style={{ color: 'var(--acc)' }}>and gets replies.</span>
@@ -64,7 +64,7 @@ export default function EmailPreviewSection() {
           </div>
 
           {/* Right: email mockup with reveal animation */}
-          <div className="rev" style={{ transitionDelay: '.1s' }}>
+          <div className="rev-scale" style={{ transitionDelay: '.14s' }}>
             <div className="card overflow-hidden p-0" ref={ref}>
               {/* Gmail chrome header */}
               <div className="px-4 py-3" style={{ background: '#EEF2F7', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>

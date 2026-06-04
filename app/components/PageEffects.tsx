@@ -50,7 +50,7 @@ export default function PageEffects() {
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     const observed = new WeakSet<Element>();
     function observeRevEls() {
-      document.querySelectorAll<HTMLElement>('.rev').forEach(el => {
+      document.querySelectorAll<HTMLElement>('.rev, .rev-blur, .rev-scale, .rev-slide').forEach(el => {
         if (observed.has(el)) return;
         observed.add(el);
         const r = el.getBoundingClientRect();

@@ -23,7 +23,7 @@ const testimonials: Testimonial[] = [
     imgId: '1560250097-0b93528c311a',
     name: 'James T.',
     role: 'CEO, SaaS Consulting Firm',
-    result: '📅 11 calls booked in 3 weeks',
+    result: '11 calls booked in 3 weeks',
     caseStudy: {
       context: 'A 12-person SaaS consulting firm specialising in ERP migrations for mid-market manufacturers. Relied entirely on referrals and had no outbound motion.',
       challenge: 'Pipeline had dried up after two large retainers ended simultaneously. The team needed a repeatable source of qualified conversations within 60 days to avoid a revenue gap.',
@@ -37,7 +37,7 @@ const testimonials: Testimonial[] = [
     imgId: '1573497019940-1c28c88b4f3e',
     name: 'Aisha R.',
     role: 'Founder, FinTech Advisory',
-    result: '💰 $47K pipeline in 30 days',
+    result: '$47K pipeline in 30 days',
     caseStudy: {
       context: 'Solo FinTech regulatory advisory practice serving Series A–C fintech startups. Strong word-of-mouth but no scalable way to reach net-new founders.',
       challenge: 'Previous cold outreach attempts with generic tools returned zero replies and damaged sender reputation. Needed a high-trust approach that matched the firm\'s premium positioning.',
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     imgId: '1472099645785-5658abf4ff4e',
     name: 'Marcus P.',
     role: 'Managing Director, B2B Media Group',
-    result: '📬 22% reply rate achieved',
+    result: '22% reply rate achieved',
     caseStudy: {
       context: 'A B2B media and content agency serving private equity-backed portfolio companies. Historically relied on founder network; wanted to break into new verticals.',
       challenge: 'Sales team was spending 60% of time on manual prospecting. Meetings that did happen were poorly qualified — wrong budget, wrong seniority, wrong timing.',
@@ -65,7 +65,7 @@ const testimonials: Testimonial[] = [
     imgId: '1580489944761-15a19d654956',
     name: 'Sofia L.',
     role: 'COO, Agency Network',
-    result: '📅 18 qualified calls in month 1',
+    result: '18 qualified calls in month 1',
     caseStudy: {
       context: 'A network of boutique creative agencies under a shared holding structure. Needed a centralised outbound system that could serve multiple brands simultaneously.',
       challenge: 'Each agency had tried outbound independently with inconsistent results. The holding company wanted one system that could be configured per-brand while sharing infrastructure.',
@@ -79,7 +79,7 @@ const testimonials: Testimonial[] = [
     imgId: '1507003211169-0a1dd7228f2d',
     name: 'Derek M.',
     role: 'VP Sales, Cloud Infrastructure Co.',
-    result: '💰 $120K in new pipeline',
+    result: '$120K in new pipeline',
     caseStudy: {
       context: 'A cloud infrastructure and managed services provider targeting mid-market CTOs and engineering VPs. Average deal size $40–60K ARR with 6-month sales cycle.',
       challenge: 'Existing SDR team was hitting the same prospects repeatedly. Needed a way to systematically open new enterprise accounts without adding headcount.',
@@ -93,7 +93,7 @@ const testimonials: Testimonial[] = [
     imgId: '1438761681033-6461ffad8d80',
     name: 'Rachel K.',
     role: 'Founder, B2B SaaS Startup',
-    result: '📬 Day-10 first warm replies',
+    result: 'Day-10 first warm replies',
     caseStudy: {
       context: 'An early-stage B2B SaaS product in the HR-tech space. Two-person founding team, pre-Series A, needed to validate outbound as a channel before hiring sales.',
       challenge: 'Four months spent configuring tools, writing sequences, and warming domains — with zero booked meetings. Needed an expert to take over before runway was consumed.',
@@ -144,9 +144,13 @@ function CaseStudyModal({ t, onClose }: { t: Testimonial; onClose: () => void })
           </div>
           <div style={{
             marginLeft: 'auto', background: 'rgba(34,197,94,0.08)',
-            border: '1px solid rgba(34,197,94,0.25)', borderRadius: 100,
-            padding: '.2rem .75rem', fontSize: '.68rem', color: '#22C55E', fontWeight: 600, flexShrink: 0,
-          }}>{t.result}</div>
+            border: '1px solid rgba(34,197,94,0.28)', borderRadius: 100,
+            padding: '.25rem .85rem', fontSize: '.7rem', color: '#22C55E', fontWeight: 700, flexShrink: 0,
+            display: 'inline-flex', alignItems: 'center', gap: '.35rem',
+          }}>
+            <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            {t.result}
+          </div>
         </div>
 
         {/* Sections */}
@@ -204,8 +208,8 @@ function TestimonialCard({ t, onClick }: { t: Testimonial; onClick: () => void }
       aria-label={`Read ${t.name}'s full case study`}
       style={{
         minWidth: 320, maxWidth: 340, flexShrink: 0,
-        borderLeft: '3px solid rgba(0,209,255,0.4)',
-        cursor: 'pointer', transition: 'transform .2s, box-shadow .2s',
+        borderLeft: '3px solid rgba(0,209,255,0.45)',
+        cursor: 'pointer',
       }}
     >
       <div style={{ fontSize: '1.6rem', lineHeight: 1, color: 'var(--acc)', marginBottom: '-.15rem' }}>&ldquo;</div>
@@ -214,11 +218,12 @@ function TestimonialCard({ t, onClick }: { t: Testimonial; onClick: () => void }
       </p>
       {/* Result stat pill */}
       <div style={{
-        display: 'inline-block', alignSelf: 'flex-start',
-        background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)',
-        borderRadius: 100, padding: '.2rem .75rem',
-        fontSize: '.68rem', color: '#22C55E', letterSpacing: '.03em', fontWeight: 600,
+        display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: '.35rem',
+        background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.28)',
+        borderRadius: 100, padding: '.25rem .85rem',
+        fontSize: '.7rem', color: '#22C55E', letterSpacing: '.03em', fontWeight: 700,
       }}>
+        <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
         {t.result}
       </div>
       {/* Gold stars */}
@@ -265,12 +270,12 @@ export default function TestimonialsSection() {
           background: 'rgba(7,15,28,0.70)',
         }} />
         <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="rev mb-6">
+          <div className="rev-blur mb-8">
             <div className="lbl lbl-gold">Client Results</div>
-            <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
+            <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em' }}>
               Real businesses.<br /><span style={{ color: 'var(--gold)' }}>Real pipeline.</span>
             </h2>
-            <p className="font-mono text-xs mt-3" style={{ color: 'rgba(0,209,255,0.45)', letterSpacing: '.06em' }}>
+            <p className="font-mono text-xs mt-3" style={{ color: 'rgba(0,209,255,0.5)', letterSpacing: '.08em', fontWeight: 600 }}>
               TAP ANY CARD FOR THE FULL CASE STUDY
             </p>
           </div>

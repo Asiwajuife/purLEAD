@@ -354,14 +354,14 @@ export default function WhyPurLEADSection() {
   return (
     <section className="z1 py-24 light-section">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="rev mb-10">
+        <div className="rev-blur mb-10">
           <div className="lbl">Why purLEAD</div>
           <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
             Built for businesses<br />serious about <span style={{ color: 'var(--acc)' }}>growth.</span>
           </h2>
         </div>
 
-        <div className="rev" style={{ transitionDelay: '.08s' }}>
+        <div className="rev-blur" style={{ transitionDelay: '.08s' }}>
           {/* Tab pills */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginBottom: '1.5rem' }}>
             {tabs.map((tab, i) => (

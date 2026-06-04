@@ -284,12 +284,12 @@ export default function HeroSection() {
             <span style={{ color: 'var(--acc)', animation: 'typewrite .7s step-end infinite alternate', marginLeft: 1 }}>|</span>
           </div>
 
-          <p className="rev" style={{ fontSize: '1rem', lineHeight: 1.7, maxWidth: '42ch', marginBottom: '2rem', color: 'var(--t2)' }}>
+          <p className="rev rev-blur" style={{ fontSize: '1.0625rem', lineHeight: 1.72, maxWidth: '42ch', marginBottom: '2rem', color: 'var(--t2)' }}>
             purLEAD deploys a fully done-for-you AI outbound system that fills your calendar with
             10&ndash;20 qualified sales calls every month &mdash; without hiring a single SDR.
           </p>
 
-          <div className="rev flex flex-wrap gap-3" style={{ transitionDelay: '.1s' }}>
+          <div className="rev-blur flex flex-wrap gap-3" style={{ transitionDelay: '.1s' }}>
             <a href="https://calendly.com/atanseiyeifeoluwa" target="_blank" rel="noopener noreferrer"
                className="btn-p mag inline-flex items-center gap-2 text-sm px-7 py-3.5">
               Book a Free Strategy Call
@@ -298,8 +298,8 @@ export default function HeroSection() {
             <a href="#how" className="btn-g inline-flex items-center text-sm px-7 py-3.5">See How It Works</a>
           </div>
 
-          <div className="rev flex items-center gap-4 flex-wrap" style={{ marginTop: '1.75rem', transitionDelay: '.2s' }}>
-            <div className="flex -space-x-2">
+          <div className="flex items-center gap-4 flex-wrap" style={{ marginTop: '1.75rem' }}>
+            <div className="flex -space-x-2 hero-pill" style={{ animation: 'fadeInUp .6s .2s cubic-bezier(.16,1,.3,1) both' }}>
               {['#4F46E5','#0891B2','#059669','#D97706'].map((bg, i) => (
                 <div key={i} aria-hidden="true" style={{
                   width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
@@ -309,17 +309,18 @@ export default function HeroSection() {
                 }}>{'MTSP'[i]}</div>
               ))}
             </div>
-            <p style={{ fontSize: '.85rem', color: 'var(--t2)' }}>
+            <p className="hero-pill" style={{ fontSize: '.85rem', color: 'var(--t2)', animation: 'fadeInUp .6s .3s cubic-bezier(.16,1,.3,1) both' }}>
               <span style={{ color: 'var(--gold)', fontWeight: 700 }}>47 businesses</span> already booking calls
             </p>
             {/* Live call count badge */}
-            <div className="fbadge flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full badge-gold">
+            <div className="fbadge hero-pill flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full badge-gold"
+              style={{ animation: 'fadeInUp .6s .4s cubic-bezier(.16,1,.3,1) both' }}>
               <span className="live-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)', display: 'inline-block' }} />
               <span ref={callCountRef}>0</span> calls booked today
             </div>
             {/* Email count badge */}
-            <div className="fbadge flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full"
-              style={{ background: 'rgba(0,209,255,0.07)', border: '1px solid rgba(0,209,255,0.2)', color: 'var(--acc)', animationDelay: '.4s' }}>
+            <div className="fbadge hero-pill flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full"
+              style={{ background: 'rgba(0,209,255,0.07)', border: '1px solid rgba(0,209,255,0.2)', color: 'var(--acc)', animation: 'fadeInUp .6s .5s cubic-bezier(.16,1,.3,1) both' }}>
               <span className="live-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--acc)', display: 'inline-block' }} />
               <span ref={emailCountRef}>847</span> emails sent today
             </div>
@@ -327,7 +328,7 @@ export default function HeroSection() {
 
           {/* Trust logos */}
           <div className="rev" style={{ marginTop: '1.5rem', transitionDelay: '.28s' }}>
-            <p className="font-mono" style={{ fontSize: '.58rem', color: 'var(--t3)', letterSpacing: '.12em', marginBottom: '.85rem' }}>TRUSTED BY TEAMS AT</p>
+            <p className="font-mono" style={{ fontSize: '.65rem', color: 'var(--t3)', letterSpacing: '.12em', marginBottom: '.85rem', fontWeight: 600 }}>TRUSTED BY TEAMS AT</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', alignItems: 'center' }}>
               {[
                 { name: 'Nexara', mark: 'N', shape: 'roundsq', color: '#6366f1' },
@@ -336,8 +337,8 @@ export default function HeroSection() {
                 { name: 'Quantify', mark: 'Q', shape: 'roundsq', color: '#a855f7' },
                 { name: 'PivotLab', mark: 'P', shape: 'hex', color: '#f97316' },
                 { name: 'GroveAI', mark: 'G', shape: 'circle', color: '#14b8a6' },
-              ].map(({ name, mark, shape, color }) => (
-                <div key={name} title={name} style={{ display: 'flex', alignItems: 'center', gap: '.45rem', opacity: 0.55, filter: 'grayscale(0.3)' }}>
+              ].map(({ name, mark, shape, color }, i) => (
+                <div key={name} title={name} className="trust-logo-item" style={{ display: 'flex', alignItems: 'center', gap: '.45rem', opacity: 0.65, filter: 'grayscale(0.15)', transition: 'opacity .2s', animation: `fadeInUp .5s ${.6 + i * .07}s cubic-bezier(.16,1,.3,1) both` }}>
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
                     {shape === 'circle' && <circle cx="11" cy="11" r="11" fill={color} fillOpacity="0.18" />}
                     {shape === 'circle' && <circle cx="11" cy="11" r="10.5" stroke={color} strokeOpacity="0.45" strokeWidth="1" />}
@@ -355,7 +356,7 @@ export default function HeroSection() {
         </div>
 
         {/* Dashboard mockup */}
-        <div className="rev hidden md:block" style={{ transitionDelay: '.25s' }}>
+        <div className="rev-scale hidden md:block" style={{ transitionDelay: '.25s' }}>
           <div className="card p-4" style={{ background: 'var(--surf)' }}>
             <div className="flex items-center gap-1.5 mb-3 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: 'rgba(255,59,48,.5)' }} />

@@ -184,13 +184,13 @@ export default function SolutionSection() {
   }, []);
 
   return (
-    <section className="z1 py-14" style={{ background: 'linear-gradient(160deg,var(--surf) 0%,#0B1F3A 100%)', position: 'relative', overflow: 'hidden' }}>
+    <section className="z1 py-24" style={{ background: 'linear-gradient(160deg,var(--surf) 0%,#0B1F3A 100%)', position: 'relative', overflow: 'hidden' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }} />
       <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
         <div className="grid md:grid-cols-2 gap-10 items-start">
-          <div className="rev">
+          <div className="rev-blur">
             <div className="lbl lbl-gold">The Solution</div>
-            <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '.75rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginBottom: '.75rem' }}>
               Meet purLEAD &mdash;<br />your AI outbound<br /><span style={{ color: 'var(--gold)' }}>engine.</span>
             </h2>
             <p className="rev" style={{ fontSize: '.9375rem', lineHeight: 1.6, maxWidth: '44ch', marginBottom: '.5rem', color: 'var(--t2)', transitionDelay: '.05s' }}>
@@ -225,7 +225,7 @@ export default function SolutionSection() {
             </ul>
           </div>
 
-          <div className="rev" style={{ transitionDelay: '.25s', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="rev-scale" style={{ transitionDelay: '.2s', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {/* Dashboard panel */}
             <div
               key={activeFeature}
@@ -247,7 +247,7 @@ export default function SolutionSection() {
             <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.12)' }}>
               <Image
                 src="https://media.licdn.com/dms/image/v2/D5612AQGXapinavXLpg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1700037910684?e=2147483647&v=beta&t=LjKcnA7TJmllGmxPwdmddKq0hCfKXY94WxONk7FS2AM"
-                alt=""
+                alt="AI-powered outbound lead generation dashboard"
                 width={800}
                 height={450}
                 sizes="(max-width: 768px) 100vw, 50vw"

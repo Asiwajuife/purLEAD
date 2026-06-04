@@ -56,7 +56,7 @@ export default function PricingSection() {
   const toggle = (i: number) => setOpen(prev => prev.map((v, idx) => idx === i ? !v : v));
 
   return (
-    <section id="pricing" className="z1 py-10" style={{ position: 'relative', overflow: 'hidden' }}>
+    <section id="pricing" className="z1 py-24" style={{ position: 'relative', overflow: 'hidden' }}>
       <Image
         fill
         src="https://powerinai.com/frontend/assets/images/services/ai_inbound/AI%20Call%201.webp"
@@ -69,13 +69,13 @@ export default function PricingSection() {
         background: 'linear-gradient(135deg, rgba(7,15,28,0.78) 0%, rgba(10,28,53,0.72) 60%, rgba(7,15,28,0.78) 100%)',
       }} />
       <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="rev mb-4">
+        <div className="rev-blur mb-4">
           <div className="lbl lbl-gold">Pricing</div>
-          <h2 style={{ fontSize: 'clamp(1.35rem,2.4vw,1.9rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em' }}>
+          <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em' }}>
             Transparent. Simple.<br /><span style={{ color: 'var(--gold)' }}>Built to pay for itself.</span>
           </h2>
         </div>
-        <div className="rev flex items-center gap-3 mb-6" style={{ transitionDelay: '.05s' }}>
+        <div className="rev-blur flex items-center gap-3 mb-6" style={{ transitionDelay: '.05s' }}>
           <div className="tog-wrap">
             <button className={`tog-btn${!annual ? ' active' : ''}`} onClick={() => setAnnual(false)}>Monthly</button>
             <button className={`tog-btn${annual  ? ' active' : ''}`} onClick={() => setAnnual(true)}>Annual</button>
@@ -102,9 +102,9 @@ export default function PricingSection() {
               >
                 <div>
                   <div className="font-mono text-xs mb-2" style={{ color: plan.featured ? 'var(--gold)' : 'var(--t3)', letterSpacing: '.14em', textTransform: 'uppercase' }}>{plan.name}</div>
-                  <div className="flex items-end gap-1">
-                    <span className="font-display font-extrabold" style={{ fontSize: '1.75rem', color: 'var(--t1)', lineHeight: 1 }}>{price}</span>
-                    <span className="text-sm mb-1" style={{ color: 'var(--t3)' }}>/mo</span>
+                  <div className="flex items-end gap-1.5">
+                    <span className="font-display font-extrabold" style={{ fontSize: '2rem', color: 'var(--t1)', lineHeight: 1 }}>{price}</span>
+                    <span className="text-sm mb-1" style={{ color: 'var(--t3)', fontWeight: 500 }}>/mo</span>
                   </div>
                   <div className="font-mono text-xs mt-1" style={{ color: 'var(--t3)' }}>{setup}</div>
                 </div>
@@ -161,9 +161,9 @@ export default function PricingSection() {
             );
 
             return (
-              <div key={plan.name} className="rev" style={{ transitionDelay: `${i * .1}s`, opacity: plan.featured ? 1 : .85 }}>
+              <div key={plan.name} className="rev-blur" style={{ transitionDelay: `${i * .12}s`, opacity: plan.featured ? 1 : .9 }}>
                 {plan.featured && (
-                  <div className="font-mono text-xs mb-2.5 text-center" style={{ color: 'var(--gold)', letterSpacing: '.16em', textTransform: 'uppercase' }}>&#9733; Most Popular</div>
+                  <div className="font-mono text-xs mb-3 text-center" style={{ color: 'var(--gold)', letterSpacing: '.14em', textTransform: 'uppercase', fontWeight: 700 }}>&#9733; Most Popular</div>
                 )}
                 {plan.featured
                   ? <div className="pfwrap" style={{ cursor: 'default' }}>{inner}</div>
