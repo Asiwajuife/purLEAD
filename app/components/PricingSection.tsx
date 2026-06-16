@@ -6,31 +6,31 @@ import CountdownTimer from './CountdownTimer';
 
 const plans = [
   {
-    name: 'Starter',
-    monthly: '$997', annual: '$797',
-    setupM: '+ $497 one-time setup', setupA: '+ $397 one-time setup',
-    meetings: '5–10 qualified meetings',
-    features: ['1 target vertical / ICP', 'AI-personalized sequences', 'Domain & inbox setup', 'Bi-weekly reporting', 'Reply management'],
+    name: 'Growth',
+    monthly: '$4,997', annual: '$4,248',
+    setupM: '+ $1,500 one-time onboarding', setupA: '+ $1,500 one-time onboarding',
+    meetings: '4–8 qualified meetings',
+    features: ['1 semi-dedicated SDR', '500–1,500 prospects/month', 'Email + LinkedIn outreach', 'ICP build + list sourcing', 'CRM integration', 'Weekly reporting', 'Reply management'],
     featured: false,
     cta: 'Get Started →',
     btnClass: 'btn-g',
   },
   {
-    name: 'Growth',
-    monthly: '$1,997', annual: '$1,597',
-    setupM: '+ $997 one-time setup', setupA: '+ $797 one-time setup',
-    meetings: '10–25 qualified meetings',
-    features: ['2 target verticals / ICPs', 'Advanced AI personalization', 'Multi-channel outreach', 'Weekly reporting + strategy calls', 'Full reply management', 'A/B testing & optimization'],
+    name: 'Scale',
+    monthly: '$9,997', annual: '$8,497',
+    setupM: '+ $2,500 one-time onboarding', setupA: '+ $2,500 one-time onboarding',
+    meetings: '10–20 qualified meetings',
+    features: ['Dedicated SDR + Account Manager', '1,500–3,000 prospects/month', 'Email + LinkedIn + Cold Calling', 'ICP + TAM mapping', 'CRM + A/B testing', '50–100 dials/day', 'Basic intent data', 'Weekly reporting + quarterly strategy'],
     featured: true,
     cta: 'Book a Call →',
     btnClass: 'btn-p',
   },
   {
-    name: 'Scale',
-    monthly: '$3,997', annual: '$3,197',
-    setupM: '+ $1,997 one-time setup', setupA: '+ $1,597 one-time setup',
-    meetings: '20–45 qualified meetings',
-    features: ['3+ verticals / ICPs', 'Premium AI personalization engine', 'Full multi-channel stack', 'Dedicated account strategist', 'Priority support & SLA', 'Custom integrations & CRM sync'],
+    name: 'Enterprise',
+    monthly: '$18,997', annual: '$16,147',
+    setupM: '+ $3,500 one-time onboarding', setupA: '+ $3,500 one-time onboarding',
+    meetings: '20–40+ qualified meetings',
+    features: ['2–4 dedicated SDRs + Strategist', '3,000–6,000+ prospects/month', 'All channels: email, LinkedIn, cold call', 'Full TAM mapping + ABM', 'Full CRM management', '200+ dials/day', 'Bombora / 6sense intent data', 'Direct mail campaigns', 'Weekly executive reporting'],
     featured: false,
     cta: 'Get Started →',
     btnClass: 'btn-g',
@@ -80,7 +80,7 @@ export default function PricingSection() {
             <button className={`tog-btn${!annual ? ' active' : ''}`} onClick={() => setAnnual(false)}>Monthly</button>
             <button className={`tog-btn${annual  ? ' active' : ''}`} onClick={() => setAnnual(true)}>Annual</button>
           </div>
-          <span className="save-badge">Save 20%</span>
+          <span className="save-badge">Save 15%</span>
         </div>
 
         <CountdownTimer />

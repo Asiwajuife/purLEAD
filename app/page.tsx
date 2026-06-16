@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 
 /* Above-fold — always loaded */
-import AnnouncementBar from './components/AnnouncementBar';
 import NavBar from './components/NavBar';
 import AmbientOrbs from './components/AmbientOrbs';
 import HeroSection from './components/HeroSection';
@@ -33,7 +32,6 @@ export default function Home() {
       <CustomCursor />
       <AmbientOrbs />
       <ConversionLayer />
-      <AnnouncementBar />
       <ToastProvider />
       <PageEffects />
 
@@ -83,12 +81,14 @@ export default function Home() {
 
         <hr className="hdiv" />
 
-        {/* Results Metrics */}
-        <section className="z1 py-24" style={{ background: 'linear-gradient(135deg,#0A1C35 0%,#0C2044 60%,#0A1C35 100%)', position: 'relative' }}>
-          <div className="max-w-6xl mx-auto px-6">
+        {/* Results Metrics — pro max */}
+        <section className="z1 py-24" style={{ background: 'linear-gradient(135deg,#0A1C35 0%,#0C2044 60%,#0A1C35 100%)', position: 'relative', overflow: 'hidden' }}>
+          <div aria-hidden="true" style={{ position: 'absolute', top: '50%', left: '25%', transform: 'translate(-50%,-50%)', width: 640, height: 640, background: 'radial-gradient(circle, rgba(232,184,75,0.055) 0%, transparent 65%)', pointerEvents: 'none' }} />
+          <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
             <div className="rev grid md:grid-cols-[45%_55%] gap-10 items-stretch">
-              {/* LEFT: image */}
-              <div className="results-img-wrap" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(232,184,75,0.25)', boxShadow: '0 0 60px rgba(232,184,75,0.1)', position: 'relative', minHeight: 340 }}>
+
+              {/* LEFT: image + floating $800K badge */}
+              <div className="results-img-wrap" style={{ borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(232,184,75,0.2)', boxShadow: '0 0 80px rgba(232,184,75,0.09)', position: 'relative', minHeight: 360 }}>
                 <Image
                   fill
                   src="https://media.licdn.com/dms/image/v2/D5612AQE59nh9oSZKrw/article-cover_image-shrink_720_1280/B56ZqISEuKJ8AI-/0/1763223031917?e=2147483647&v=beta&t=CFVHxen3Puq4nciKrtfvjFP5NV8ra1N-NoZPGQkLQFM"
@@ -96,33 +96,38 @@ export default function Home() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover', objectPosition: 'center top' }}
                 />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 60%, rgba(10,28,53,0.6) 100%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(7,14,26,0.18) 0%, rgba(10,28,53,0.55) 100%)' }} />
+                {/* Floating metric badge */}
+                <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', background: 'rgba(7,13,24,0.9)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(232,184,75,0.28)', borderRadius: 16, padding: '1rem 1.375rem' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, #E8B84B, transparent)', borderRadius: '16px 16px 0 0', opacity: .7 }} />
+                  <div style={{ fontFamily: 'var(--font-syne)', fontSize: '1.875rem', fontWeight: 900, lineHeight: 1, background: 'linear-gradient(135deg,#E8B84B 0%,#F5D07A 50%,#C89020 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>$800K+</div>
+                  <div className="font-mono" style={{ fontSize: '.6rem', color: 'rgba(148,163,184,0.65)', letterSpacing: '.14em', textTransform: 'uppercase', marginTop: '.3rem' }}>Pipeline Generated</div>
+                </div>
               </div>
-              {/* RIGHT: heading + stats */}
-              <div>
+
+              {/* RIGHT: heading + stat rows */}
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0 }}>
                 <div className="lbl lbl-gold">Aggregate Results</div>
-                <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginTop: '.5rem', marginBottom: '1.5rem' }}>
+                <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginTop: '.5rem', marginBottom: '1.75rem' }}>
                   Numbers don&rsquo;t lie.<br /><span style={{ color: 'var(--gold)' }}>Ours don&rsquo;t either.</span>
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-7 text-center card" style={{ borderColor: 'rgba(232,184,75,.3)', background: 'linear-gradient(160deg,rgba(232,184,75,.09),rgba(13,36,68,.68))' }}>
-                    <div className="font-display font-extrabold" style={{ fontSize: '2.25rem', color: 'var(--gold)', lineHeight: 1 }}>$800K+</div>
-                    <div style={{ width: 32, height: 2, background: 'var(--gold)', borderRadius: 1, margin: '.65rem auto .55rem' }} />
-                    <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>Pipeline Generated</div>
-                  </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '.875rem' }}>
                   {[
-                    { count: 620, suffix: '',  label: 'Meetings Booked' },
-                    { count: 34,  suffix: '',  label: 'Active Clients' },
-                    { count: 87,  suffix: '%', label: 'Client Retention' },
+                    { count: 620, suffix: '',  label: 'Meetings Booked',  color: '#00D1FF', rgb: '0,209,255' },
+                    { count: 34,  suffix: '',  label: 'Active Clients',   color: '#22C55E', rgb: '34,197,94' },
+                    { count: 87,  suffix: '%', label: 'Client Retention', color: '#E8B84B', rgb: '232,184,75' },
                   ].map((s, i) => (
-                    <div key={i} className="p-7 text-center card">
-                      <div className="snum" data-count={s.count} data-suffix={s.suffix}>0{s.suffix}</div>
-                      <div style={{ width: 32, height: 2, background: 'var(--acc)', borderRadius: 1, margin: '.65rem auto .55rem' }} />
-                      <div className="font-mono text-xs" style={{ color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.07em' }}>{s.label}</div>
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', background: `rgba(${s.rgb},0.04)`, border: `1px solid rgba(${s.rgb},0.15)`, borderRadius: 16, padding: '1.25rem 1.5rem', transition: 'border-color .3s, background .3s' }}>
+                      <div style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(1.75rem,3.5vw,2.25rem)', fontWeight: 900, lineHeight: 1, color: s.color, minWidth: '3.5ch', flexShrink: 0 }}>
+                        <span className="snum" data-count={s.count} data-suffix={s.suffix}>0{s.suffix}</span>
+                      </div>
+                      <div style={{ width: 1, height: 34, background: `rgba(${s.rgb},0.22)`, flexShrink: 0 }} />
+                      <div className="font-mono" style={{ fontSize: '.72rem', color: 'rgba(148,163,184,0.6)', textTransform: 'uppercase', letterSpacing: '.1em' }}>{s.label}</div>
                     </div>
                   ))}
                 </div>
               </div>
+
             </div>
           </div>
         </section>
@@ -194,43 +199,100 @@ export default function Home() {
 
         <hr className="hdiv" />
 
-        {/* Guarantee */}
-        <section className="z1 py-20" style={{ background: 'linear-gradient(160deg,#0A1C35 0%,#0E2340 60%,#0A1C35 100%)', position: 'relative' }}>
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="rev grid md:grid-cols-[52%_48%] gap-10 items-center">
-              {/* Left: all text + cards */}
-              <div>
+        {/* Guarantee \u2014 pro max with strategic image */}
+        <section className="z1 py-24" style={{ background: 'linear-gradient(160deg,#07111F 0%,#0A1C35 50%,#07111F 100%)', position: 'relative', overflow: 'hidden' }}>
+          <div aria-hidden="true" style={{ position: 'absolute', top: '20%', right: '8%', width: 560, height: 560, background: 'radial-gradient(circle, rgba(0,209,255,0.045) 0%, transparent 65%)', pointerEvents: 'none' }} />
+          <div aria-hidden="true" style={{ position: 'absolute', bottom: '10%', left: '4%', width: 400, height: 400, background: 'radial-gradient(circle, rgba(232,184,75,0.035) 0%, transparent 65%)', pointerEvents: 'none' }} />
+
+          <div className="max-w-6xl mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="rev grid md:grid-cols-[55%_45%] gap-12 items-center">
+
+              {/* LEFT: label + heading + 3 horizontal guarantee rows */}
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div className="lbl lbl-gold">Risk-Free Commitment</div>
-                <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginTop: '.5rem' }}>
+                <h2 style={{ fontSize: 'clamp(1.65rem,3vw,2.4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-.03em', marginTop: '.5rem', marginBottom: '.875rem' }}>
                   We only win<br /><span style={{ color: 'var(--gold)' }}>when you win.</span>
                 </h2>
-                <p style={{ color: 'var(--t2)', marginTop: '.75rem', fontSize: '.9rem', maxWidth: '46ch', marginBottom: '1rem' }}>
+                <p style={{ color: 'var(--t2)', fontSize: '.9375rem', maxWidth: '44ch', lineHeight: 1.65, marginBottom: '2rem' }}>
                   Three promises we make to every client before they sign a single thing.
                 </p>
-                <div className="flex flex-col gap-2">
-                  {[
-                    { num: '45',   tag: 'Day Guarantee',          body: "If we haven't booked your first qualified call within 45 days of launch, you don't pay for month two. No questions asked." },
-                    { num: '100%', tag: 'Transparent Reporting',  body: "Weekly reports showing exactly what was sent, what replied, and what we're doing about it. Every campaign, every metric." },
-                    { num: '0',    tag: 'Lock-in After Month 3',  body: "After the initial 3-month window, it's fully month-to-month. Our clients stay because they see results \u2014 not because they're locked in." },
-                  ].map((g, i) => (
-                    <div key={i} className="gtee">
-                      <div className="gtee-num" style={{ fontSize: '1.2rem', marginBottom: '.15rem' }}>{g.num}</div>
-                      <div className="font-mono" style={{ fontSize: '.6rem', color: 'var(--gold)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: '.35rem' }}>{g.tag}</div>
-                      <p style={{ fontSize: '.82rem', lineHeight: 1.65, color: 'var(--t2)', margin: 0 }}>{g.body}</p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '.875rem' }}>
+                  {([
+                    {
+                      num: '45', unit: ' days',
+                      tag: 'Day Guarantee',
+                      body: "If we haven't booked your first qualified call within 45 days of launch, you don't pay for month two. No questions asked.",
+                      color: '#E8B84B', rgb: '232,184,75',
+                      iconPath: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
+                    },
+                    {
+                      num: '100', unit: '%',
+                      tag: 'Transparent Reporting',
+                      body: "Weekly reports showing exactly what was sent, what replied, and what we're doing about it. Every campaign, every metric.",
+                      color: '#00D1FF', rgb: '0,209,255',
+                      iconPath: <><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></>,
+                    },
+                    {
+                      num: '0', unit: '',
+                      tag: 'Lock-in After Month 3',
+                      body: "After the initial 3-month window, it's fully month-to-month. Our clients stay because they see results \u2014 not because they're locked in.",
+                      color: '#22C55E', rgb: '34,197,94',
+                      iconPath: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></>,
+                    },
+                  ] as const).map((g, i) => (
+                    <div key={i} className="rev" style={{ transitionDelay: `${i * 0.08}s`, display: 'flex', alignItems: 'flex-start', gap: '1.25rem', background: `rgba(${g.rgb},0.04)`, border: `1px solid rgba(${g.rgb},0.15)`, borderRadius: 16, padding: '1.25rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+                      {/* Left accent bar */}
+                      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 3, background: `linear-gradient(180deg, transparent, ${g.color}, transparent)`, opacity: .5, borderRadius: '16px 0 0 16px' }} />
+                      {/* Icon badge */}
+                      <div style={{ width: 44, height: 44, borderRadius: 12, background: `rgba(${g.rgb},0.1)`, border: `1px solid rgba(${g.rgb},0.22)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: g.color, flexShrink: 0 }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{g.iconPath}</svg>
+                      </div>
+                      {/* Content */}
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '.5rem', marginBottom: '.3rem', flexWrap: 'wrap' }}>
+                          <span style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(1.375rem,2.5vw,1.75rem)', fontWeight: 900, lineHeight: 1, color: g.color }}>{g.num}<span style={{ fontSize: '.8rem', opacity: .7 }}>{g.unit}</span></span>
+                          <span className="font-mono" style={{ fontSize: '.6rem', color: g.color, letterSpacing: '.12em', textTransform: 'uppercase', fontWeight: 700, opacity: .75 }}>{g.tag}</span>
+                        </div>
+                        <p style={{ fontSize: '.8125rem', lineHeight: 1.68, color: 'var(--t2)', margin: 0 }}>{g.body}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
-              {/* Right: image */}
-              <div className="guarantee-img-wrap" style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.25)', boxShadow: '0 0 50px rgba(0,209,255,0.1)', minHeight: 380, position: 'relative' }}>
+
+              {/* RIGHT: image card with floating trust badges */}
+              <div style={{ borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(0,209,255,0.14)', boxShadow: '0 0 80px rgba(0,209,255,0.07)', position: 'relative', minHeight: 480 }}>
                 <Image
                   fill
-                  src="https://www.ringcentral.com/gb/en/blog/wp-content/uploads/2024/09/ai-powered-predictive-dialers-in-contact-centre-790x415.jpg"
-                  alt="AI-powered outbound in action"
-                  sizes="(max-width: 768px) 100vw, 42vw"
-                  style={{ objectFit: 'cover' }}
+                  src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80"
+                  alt="Partnership and trust"
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
                 />
+                {/* Overlay */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(7,14,26,0.18) 0%, rgba(7,20,44,0.62) 100%)' }} />
+
+                {/* TOP-LEFT badge: 45-Day Guarantee */}
+                <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(7,13,24,0.9)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(232,184,75,0.28)', borderRadius: 14, padding: '.875rem 1.125rem', display: 'flex', alignItems: 'center', gap: '.75rem' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, #E8B84B, transparent)', borderRadius: '14px 14px 0 0', opacity: .7 }} />
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(232,184,75,0.12)', border: '1px solid rgba(232,184,75,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#E8B84B', flexShrink: 0 }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: 'var(--font-syne)', fontSize: '1.375rem', fontWeight: 900, lineHeight: 1, color: '#E8B84B' }}>45-Day</div>
+                    <div className="font-mono" style={{ fontSize: '.57rem', color: 'rgba(148,163,184,0.6)', letterSpacing: '.12em', textTransform: 'uppercase', marginTop: '.25rem' }}>Money-Back Guarantee</div>
+                  </div>
+                </div>
+
+                {/* BOTTOM-RIGHT badge: Zero Lock-in */}
+                <div style={{ position: 'absolute', bottom: '1.5rem', right: '1.5rem', background: 'rgba(7,13,24,0.9)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(34,197,94,0.28)', borderRadius: 14, padding: '.875rem 1.125rem' }}>
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, #22C55E, transparent)', borderRadius: '0 0 14px 14px', opacity: .7 }} />
+                  <div style={{ fontFamily: 'var(--font-syne)', fontSize: '1.875rem', fontWeight: 900, lineHeight: 1, color: '#22C55E', textShadow: '0 0 20px rgba(34,197,94,0.25)' }}>$0</div>
+                  <div className="font-mono" style={{ fontSize: '.57rem', color: 'rgba(148,163,184,0.6)', letterSpacing: '.12em', textTransform: 'uppercase', marginTop: '.25rem' }}>Zero Lock-in Fees</div>
+                </div>
               </div>
+
             </div>
           </div>
         </section>
