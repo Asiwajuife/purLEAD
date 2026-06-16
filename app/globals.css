@@ -69,11 +69,12 @@ body::after {
 /* ── Ambient orbs ── */
 .orb {
   position: fixed; border-radius: 50%;
-  pointer-events: none; z-index: 0; filter: blur(120px);
+  pointer-events: none; z-index: 0; filter: blur(80px);
   animation: orbDrift 18s ease-in-out infinite alternate;
+  will-change: transform;
 }
-.orb-cyan  { width: 700px; height: 700px; top: -200px; left: -200px; background: rgba(0,209,255,0.055); animation-duration: 22s; }
-.orb-green { width: 500px; height: 500px; bottom: -150px; right: -100px; background: rgba(34,197,94,0.045); animation-duration: 28s; animation-direction: alternate-reverse; }
+.orb-cyan  { width: 560px; height: 560px; top: -160px; left: -160px; background: rgba(0,209,255,0.055); animation-duration: 22s; }
+.orb-green { width: 380px; height: 380px; bottom: -120px; right: -80px; background: rgba(34,197,94,0.045); animation-duration: 28s; animation-direction: alternate-reverse; }
 
 /* ── Scanlines ── */
 .scanlines {
@@ -220,8 +221,11 @@ section[id] { scroll-margin-top: 72px; }
   .word-in.vis { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
+/* ── Hero background zoom ── */
+.hero-bg-zoom { will-change: transform; }
+
 /* ── Ticker ── */
-.ticker-track { display: flex; gap: 3rem; animation: ticker 28s linear infinite; white-space: nowrap; }
+.ticker-track { display: flex; gap: 3rem; animation: ticker 28s linear infinite; white-space: nowrap; will-change: transform; }
 
 /* ── Reveal ── */
 /* Visible by default — JS observer is enhancement only, never gates content */
@@ -293,7 +297,13 @@ section[id] { scroll-margin-top: 72px; }
   position: relative; border-radius: 14px;
   background: linear-gradient(135deg, rgba(232,184,75,.55) 0%, rgba(232,184,75,.2) 40%, rgba(0,209,255,.1) 100%);
   padding: 1px; box-shadow: 0 24px 70px rgba(0,0,0,.4);
-  animation: pfGlowPulse 4s ease-in-out infinite;
+}
+/* GPU-friendly glow pulse: animate opacity, not box-shadow */
+.pfwrap::after {
+  content: ''; position: absolute; inset: -5px; border-radius: 17px;
+  box-shadow: 0 0 44px 6px rgba(232,184,75,.22);
+  opacity: 0; pointer-events: none;
+  animation: pfGlowOpacity 4s ease-in-out infinite;
 }
 .pfwrap::before {
   content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
@@ -430,8 +440,8 @@ section[id] { scroll-margin-top: 72px; }
 .glitch-h1 { animation: glitch1 7s infinite; }
 
 /* ── Testimonials marquee ── */
-.testimonial-track   { display: flex; gap: 1.25rem; animation: ticker 30s linear infinite; }
-.testimonial-track-r { display: flex; gap: 1.25rem; animation: ticker 36s linear infinite reverse; }
+.testimonial-track   { display: flex; gap: 1.25rem; animation: ticker 30s linear infinite; will-change: transform; }
+.testimonial-track-r { display: flex; gap: 1.25rem; animation: ticker 36s linear infinite reverse; will-change: transform; }
 .testimonials-marquee:hover .testimonial-track,
 .testimonials-marquee:hover .testimonial-track-r { animation-play-state: paused; }
 
@@ -654,6 +664,7 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
   gap: 1rem;
   width: max-content;
   animation: probScroll 40s linear infinite;
+  will-change: transform;
 }
 .prob-marquee-track.paused { animation-play-state: paused; }
 .prob-marquee-track .rev { animation: none; opacity: 1; transform: none; }
@@ -722,7 +733,7 @@ nav.scrolled { background: rgba(11,31,58,.97) !important; border-color: rgba(0,2
 }
 @keyframes fillBar       { from{transform:scaleX(0)} to{transform:scaleX(1)} }
 @keyframes gradientSlide { 0%{background-position:0% center} 50%{background-position:100% center} 100%{background-position:0% center} }
-@keyframes pfGlowPulse   { 0%,100%{box-shadow:0 24px 70px rgba(0,0,0,.4),0 0 0 0 rgba(232,184,75,0)} 50%{box-shadow:0 24px 70px rgba(0,0,0,.4),0 0 40px 4px rgba(232,184,75,.18)} }
+@keyframes pfGlowOpacity { 0%,100%{opacity:0} 50%{opacity:1} }
 @keyframes blurFadeIn    { from{opacity:0;transform:translateY(16px);filter:blur(8px)} to{opacity:1;transform:translateY(0);filter:blur(0)} }
 
 /* ── Reduced motion ── */

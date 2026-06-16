@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import dynamic from "next/dynamic";
@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     site: "@purlead",
     images: ["/og.png"],
   },
+};
+
+export const viewport: Viewport = {
   themeColor: "#0A1C35",
 };
 

@@ -53,29 +53,28 @@ export default function HeroSection() {
 
     function draw() {
       ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = 'rgba(0,209,255,.3)';
       pts.forEach(p => {
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > W) p.vx *= -1;
         if (p.y < 0 || p.y > H) p.vy *= -1;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fillStyle = 'rgba(0,209,255,.3)';
         ctx.fill();
       });
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(0,209,255,.12)';
+      ctx.lineWidth = .5;
       for (let i = 0; i < pts.length; i++) {
         for (let j = i+1; j < pts.length; j++) {
           const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 120) {
-            ctx.beginPath();
+          if (dx*dx + dy*dy < 14400) {
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.strokeStyle = `rgba(0,209,255,${0.15*(1-dist/120)})`;
-            ctx.lineWidth = .5;
-            ctx.stroke();
           }
         }
       }
+      ctx.stroke();
       if (running) rafId = requestAnimationFrame(draw);
     }
 
@@ -248,6 +247,7 @@ export default function HeroSection() {
       <div aria-hidden="true" className="hero-bg-zoom" style={{
         position: 'absolute', inset: '-5%', zIndex: 0,
         animation: 'heroBgZoom 18s ease-in-out infinite',
+        willChange: 'transform',
       }}>
         <Image
           fill
