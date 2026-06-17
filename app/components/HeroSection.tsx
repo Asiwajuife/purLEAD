@@ -23,8 +23,6 @@ export default function HeroSection() {
   const clockRef       = useRef<HTMLSpanElement>(null);
   const callsRef       = useRef<HTMLDivElement>(null);
   const countdownRef   = useRef<HTMLSpanElement>(null);
-  const callCountRef   = useRef<HTMLSpanElement>(null);
-  const emailCountRef  = useRef<HTMLSpanElement>(null);
   const twRef          = useRef<number | null>(null);
 
   /* Canvas particles (desktop only) */
@@ -182,31 +180,6 @@ export default function HeroSection() {
     };
   }, []);
 
-  /* Calls counter (0 → 3 easeOut) */
-  useEffect(() => {
-    if (window.innerWidth < 768) return;
-    const el = callCountRef.current;
-    if (!el) return;
-    const target = 3, dur = 1800, start = performance.now();
-    function frame(now: number) {
-      const p = Math.min((now - start) / dur, 1);
-      const v = Math.round((1 - Math.pow(1 - p, 3)) * target);
-      el!.textContent = String(v);
-      if (p < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }, []);
-
-  /* Email counter tick */
-  useEffect(() => {
-    if (window.innerWidth < 768) return;
-    let count = 847;
-    const id = setInterval(() => {
-      count++;
-      if (emailCountRef.current) emailCountRef.current.textContent = String(count);
-    }, 2800);
-    return () => clearInterval(id);
-  }, []);
 
   /* Countdown */
   useEffect(() => {
@@ -312,17 +285,11 @@ export default function HeroSection() {
             <p className="hero-pill" style={{ fontSize: '.85rem', color: 'var(--t2)', animation: 'fadeInUp .6s .3s cubic-bezier(.16,1,.3,1) both' }}>
               <span style={{ color: 'var(--gold)', fontWeight: 700 }}>47 businesses</span> already booking calls
             </p>
-            {/* Live call count badge */}
+            {/* Accepting clients badge */}
             <div className="fbadge hero-pill flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full badge-gold"
               style={{ animation: 'fadeInUp .6s .4s cubic-bezier(.16,1,.3,1) both' }}>
-              <span className="live-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)', display: 'inline-block' }} />
-              <span ref={callCountRef}>0</span> calls booked today
-            </div>
-            {/* Email count badge */}
-            <div className="fbadge hero-pill flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full"
-              style={{ background: 'rgba(0,209,255,0.07)', border: '1px solid rgba(0,209,255,0.2)', color: 'var(--acc)', animation: 'fadeInUp .6s .5s cubic-bezier(.16,1,.3,1) both' }}>
-              <span className="live-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--acc)', display: 'inline-block' }} />
-              <span ref={emailCountRef}>847</span> emails sent today
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)', display: 'inline-block' }} />
+              Now accepting new clients
             </div>
           </div>
 

@@ -3,9 +3,9 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 function fmt(n: number) {
-  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
-  if (n >= 1000)    return '$' + Math.round(n/1000) + 'K';
-  return '$' + n;
+  if (n >= 1000000) return '£' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '£' + Math.round(n/1000) + 'K';
+  return '£' + n;
 }
 
 function easeOut(t: number) { return 1 - Math.pow(1 - t, 3); }
@@ -28,7 +28,7 @@ export default function RoiCalculator() {
   const [deal,  setDeal]  = useState(15000);
   const [close, setClose] = useState(20);
   const [meet,  setMeet]  = useState(15);
-  const [plan,  setPlan]  = useState(1997);
+  const [plan,  setPlan]  = useState(997);
 
   const monthly = Math.round(deal * (close/100) * meet);
   const annual  = monthly * 12;
@@ -129,10 +129,10 @@ export default function RoiCalculator() {
         </div>
         <div className="rev card p-7">
           <div className="grid md:grid-cols-2 gap-x-10 gap-y-6 mb-8">
-            {slider('Avg. Deal Value',    'roi-deal',  2000, 150000, 1000, deal,  setDeal,  fmt(deal),               '$2k',     '$150k')}
-            {slider('Close Rate',         'roi-close', 5,    60,     1,    close, setClose, close + '%',             '5%',      '60%')}
-            {slider('Meetings / Month',   'roi-meet',  5,    45,     1,    meet,  setMeet,  String(meet),            '5',       '45')}
-            {slider('Monthly Plan Cost',  'roi-plan',  997,  3997,   1000, plan,  setPlan,  '$' + plan.toLocaleString(), 'Starter', 'Scale')}
+            {slider('Avg. Deal Value',    'roi-deal',  2000, 150000, 1000, deal,  setDeal,  fmt(deal),               '£2k',      '£150k')}
+            {slider('Close Rate',         'roi-close', 5,    60,     1,    close, setClose, close + '%',             '5%',       '60%')}
+            {slider('Meetings / Month',   'roi-meet',  5,    45,     1,    meet,  setMeet,  String(meet),            '5',        '45')}
+            {slider('Monthly Plan Cost',  'roi-plan',  997,  4997,   1000, plan,  setPlan,  '£' + plan.toLocaleString(), 'Launchpad', 'Scale')}
           </div>
           <hr style={{ border: 'none', borderTop: '1px solid var(--border)', marginBottom: '1.5rem' }} />
           <div className="grid grid-cols-3 gap-3">

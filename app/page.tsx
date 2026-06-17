@@ -170,7 +170,7 @@ export default function Home() {
                 <tbody>
                   {[
                     ['Time to first result',       <span className="cmp-yes">2&ndash;4 weeks</span>,         <span className="cmp-no">90+ days</span>,                   <span className="cmp-mid">4&ndash;8 weeks</span>,         <span className="cmp-mid">4&ndash;6 weeks</span>],
-                    ['Monthly cost',               <span className="cmp-yes">$997&ndash;$3,997</span>,       <span className="cmp-no">$7,000&ndash;$10,000</span>,         <span className="cmp-mid">$200&ndash;$500 tools</span>,   <span className="cmp-mid">$3,000&ndash;$8,000</span>],
+                    ['Monthly cost',               <span className="cmp-yes">£997&ndash;£4,997</span>,       <span className="cmp-no">$7,000&ndash;$10,000</span>,         <span className="cmp-mid">£200&ndash;£500 tools</span>,   <span className="cmp-mid">£3,000&ndash;£8,000</span>],
                     ['AI personalization',         <span className="cmp-yes">&#10003; Every message</span>, <span className="cmp-no">&#10007; Manual only</span>,         <span className="cmp-no">&#10007; Templates</span>,       <span className="cmp-no">&#10007; Templates</span>],
                     ['Reply management',           <span className="cmp-yes">&#10003; Fully handled</span>, <span className="cmp-yes">&#10003; Handled</span>,            <span className="cmp-no">&#10007; You handle it</span>,   <span className="cmp-mid">&#126; Partial</span>],
                     ['Reporting & transparency',   <span className="cmp-yes">&#10003; Weekly detailed</span>, <span className="cmp-mid">&#126; Varies</span>,            <span className="cmp-no">&#10007; Manual tracking</span>, <span className="cmp-no">&#10007; Usually opaque</span>],
@@ -402,7 +402,7 @@ export default function Home() {
                   <span className="live-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block', flexShrink: 0 }} />
                   <span className="font-mono" style={{ fontSize: '.6rem', color: 'var(--t3)', letterSpacing: '.1em', textTransform: 'uppercase' }}>Now Accepting New Clients</span>
                 </div>
-                <span className="font-mono" style={{ fontSize: '.6rem', color: 'var(--gold)', fontWeight: 700, letterSpacing: '.06em', animation: 'scarcityPulse 2.5s ease-in-out infinite' }}>3 spots remaining</span>
+                <span className="font-mono" style={{ fontSize: '.6rem', color: 'var(--t3)', letterSpacing: '.06em' }}>Results from day one</span>
               </div>
 
               {/* Body */}

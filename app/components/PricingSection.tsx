@@ -6,31 +6,61 @@ import CountdownTimer from './CountdownTimer';
 
 const plans = [
   {
-    name: 'Growth',
-    monthly: '$4,997', annual: '$4,248',
-    setupM: '+ $1,500 one-time onboarding', setupA: '+ $1,500 one-time onboarding',
-    meetings: '4–8 qualified meetings',
-    features: ['1 semi-dedicated SDR', '500–1,500 prospects/month', 'Email + LinkedIn outreach', 'ICP build + list sourcing', 'CRM integration', 'Weekly reporting', 'Reply management'],
+    name: 'Launchpad',
+    subtitle: 'For solo founders and early-stage B2B businesses testing outbound.',
+    monthly: '£997', annual: '£847',
+    setupM: 'No onboarding fee', setupA: 'No onboarding fee',
+    meetings: '3–6 booked calls',
+    prospects: '300–500 prospects/month',
+    channels: 'Email only',
+    features: [
+      '1 ICP defined & built',
+      'AI-personalised email sequences',
+      'Email deliverability setup',
+      'Weekly performance report',
+      'Reply management',
+    ],
     featured: false,
     cta: 'Get Started →',
     btnClass: 'btn-g',
   },
   {
-    name: 'Scale',
-    monthly: '$9,997', annual: '$8,497',
-    setupM: '+ $2,500 one-time onboarding', setupA: '+ $2,500 one-time onboarding',
-    meetings: '10–20 qualified meetings',
-    features: ['Dedicated SDR + Account Manager', '1,500–3,000 prospects/month', 'Email + LinkedIn + Cold Calling', 'ICP + TAM mapping', 'CRM + A/B testing', '50–100 dials/day', 'Basic intent data', 'Weekly reporting + quarterly strategy'],
+    name: 'Growth Engine',
+    subtitle: 'For SMBs with a proven offer and deal values above £5K.',
+    monthly: '£2,497', annual: '£2,122',
+    setupM: '+ £500 one-time onboarding', setupA: '+ £500 one-time onboarding',
+    meetings: '6–12 booked calls',
+    prospects: '800–1,500 prospects/month',
+    channels: 'Email + LinkedIn',
+    features: [
+      'Up to 2 ICPs defined & built',
+      'AI-personalised email + LinkedIn sequences',
+      'Full reply management',
+      'CRM integration (HubSpot / Salesforce / Pipedrive)',
+      'Weekly reporting + monthly strategy call',
+      'A/B sequence testing',
+    ],
     featured: true,
     cta: 'Book a Call →',
     btnClass: 'btn-p',
   },
   {
-    name: 'Enterprise',
-    monthly: '$18,997', annual: '$16,147',
-    setupM: '+ $3,500 one-time onboarding', setupA: '+ $3,500 one-time onboarding',
-    meetings: '20–40+ qualified meetings',
-    features: ['2–4 dedicated SDRs + Strategist', '3,000–6,000+ prospects/month', 'All channels: email, LinkedIn, cold call', 'Full TAM mapping + ABM', 'Full CRM management', '200+ dials/day', 'Bombora / 6sense intent data', 'Direct mail campaigns', 'Weekly executive reporting'],
+    name: 'Scale',
+    subtitle: 'For growth-stage companies ready to scale pipeline aggressively.',
+    monthly: '£4,997', annual: '£4,247',
+    setupM: '+ £1,000 one-time onboarding', setupA: '+ £1,000 one-time onboarding',
+    meetings: '15–25 booked calls',
+    prospects: '2,000–3,500 prospects/month',
+    channels: 'Email + LinkedIn + Cold Calling',
+    features: [
+      'Multi-ICP targeting',
+      'Dedicated account manager',
+      'AI-personalised sequences across all channels',
+      '50–100 dials/day',
+      'Intent signal monitoring',
+      'Full CRM management',
+      'Weekly reporting + quarterly strategy session',
+    ],
     featured: false,
     cta: 'Get Started →',
     btnClass: 'btn-g',
@@ -117,14 +147,17 @@ export default function PricingSection() {
             const body = (
               <div style={{
                 overflow: 'hidden',
-                maxHeight: isOpen ? 600 : 0,
+                maxHeight: isOpen ? 700 : 0,
                 opacity: isOpen ? 1 : 0,
                 transition: 'max-height 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease',
               }}>
                 <div style={{ paddingTop: '1rem', borderTop: `1px solid ${plan.featured ? 'rgba(232,184,75,0.2)' : 'rgba(255,255,255,0.07)'}`, marginTop: '1rem' }}>
-                  <div className="pi py-2 text-sm mb-2" style={{ color: 'var(--t2)' }}>
+                  <p style={{ fontSize: '.78rem', color: 'var(--t3)', marginBottom: '.875rem', lineHeight: 1.5 }}>{plan.subtitle}</p>
+                  <div className="pi py-1.5 text-sm mb-1" style={{ color: 'var(--t2)' }}>
                     <strong style={{ color: 'var(--t1)' }}>{plan.meetings}</strong>/month
                   </div>
+                  <div className="pi py-1" style={{ fontSize: '.78rem', color: 'var(--t3)' }}>{plan.prospects}</div>
+                  <div className="pi py-1 mb-2" style={{ fontSize: '.78rem', color: 'var(--t3)' }}>{plan.channels}</div>
                   {plan.features.map(f => <FeatureItem key={f} text={f} />)}
                   <a
                     href="https://calendly.com/atanseiyeifeoluwa"
@@ -133,20 +166,9 @@ export default function PricingSection() {
                   >{plan.cta}</a>
 
                   {plan.featured && (
-                    <div style={{ marginTop: '1rem', paddingTop: '.875rem', borderTop: '1px solid rgba(232,184,75,0.15)' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '.4rem' }}>
-                        <span className="font-mono" style={{ fontSize: '.62rem', color: 'rgba(232,184,75,0.8)', letterSpacing: '.08em' }}>AVAILABILITY</span>
-                        <span className="font-mono" style={{ fontSize: '.62rem', color: 'var(--gold)', fontWeight: 700, animation: 'scarcityPulse 2s ease-in-out infinite' }}>3 spots left</span>
-                      </div>
-                      <div style={{ height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
-                        <div style={{
-                          height: '100%', width: '80%', borderRadius: 2,
-                          background: 'linear-gradient(90deg, #E8B84B, #22C55E)',
-                          boxShadow: '0 0 8px rgba(232,184,75,0.5)',
-                          transition: isOpen ? 'width 0.8s 0.3s cubic-bezier(0.16,1,0.3,1)' : 'none',
-                        }} />
-                      </div>
-                      <p style={{ fontSize: '.65rem', color: 'var(--t3)', marginTop: '.4rem' }}>8 of 10 slots filled this month</p>
+                    <div style={{ marginTop: '1rem', paddingTop: '.875rem', borderTop: '1px solid rgba(232,184,75,0.15)', display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block', flexShrink: 0 }} />
+                      <span className="font-mono" style={{ fontSize: '.62rem', color: 'var(--t3)', letterSpacing: '.08em' }}>Now accepting new clients</span>
                     </div>
                   )}
                 </div>
